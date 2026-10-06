@@ -9,7 +9,7 @@ import pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 BODIES = ROOT / "src" / "pages"
-SITE = "https://peritomoreno360.com"
+SITE = "https://www.peritomoreno360.com"
 
 FONTS_BASE = "family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600;700"
 FONTS = {

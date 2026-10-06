@@ -4,7 +4,7 @@
 Uso:  python3 tools/build.py
 Edita el contenido en src/pages/ y la cabecera, el pie o el formulario aquí.
 """
-import pathlib, sys
+import pathlib, sys, re, html as _html, datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
@@ -53,7 +53,8 @@ FOOTER = '''<footer class="site-footer">
 </div>
 <div class="foot-cols">
 <div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
-<div><b>Más</b><a href="/flight-director">Flight Director</a><a href="/franquicias">Franquicias</a><a href="/#contacto">Contacto</a></div>
+<div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
+<div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -95,12 +96,22 @@ def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus da
 </div>
 </section>'''
 
+def faq_ld(body):
+    items = re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", body, re.S)
+    if not items:
+        return ""
+    strip = lambda t: _html.unescape(re.sub(r"<[^>]+>", "", t)).strip()
+    data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in items]}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
 def page(slug, title, desc, active, fonts, body, form=None):
     canonical = SITE + ("/" if slug == "index" else "/" + slug)
     form_html = contact(*form) if form else ""
     ld = ""
     if slug == "index": ld = f'<script type="application/ld+json">{ORG_LD}</script>'
     if slug == "flight-director": ld = f'<script type="application/ld+json">{FD_LD}</script>'
+    ld += faq_ld(body)
     robots = '<meta name="robots" content="noindex">\n' if slug == "404" else ""
     html = f'''<!doctype html>
 <html lang="es">
@@ -150,6 +161,12 @@ PAGES = [
     ("apps", "Desarrollo de apps · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?")),
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "franq", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
+    ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "franq", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),
+    ("franquicia-dark-kitchen", "Franquicia dark kitchen de burritos · Poca inversión · Bestial", "Franquicia dark kitchen: empieza solo con delivery en 15–50 m², valida tu zona con poca inversión y crece a local. Royalty del 2 % el primer año.", "franq", "base", "franquicia-dark-kitchen", ("Franquicia dark kitchen", "Franquicias", "¿Hablamos de tu dark kitchen?")),
+    ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 % · Perito Moreno 360", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "franq", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),
+    ("app-escandallos-hosteleria", "App de escandallos para hostelería · Flight Director", "Escandallos de cocina que se recalculan solos: coste por ración, food cost y margen en sala y en delivery con la comisión de la plataforma. App para restaurantes.", "fd", "fd", "app-escandallos-hosteleria", ("App de escandallos", "Flight Director", "¿Te enseñamos tus escandallos en Flight Director?", "Déjanos tus datos y te contactaremos nosotros para hacerte una demo.")),
+    ("control-food-cost-restaurante", "Cómo calcular y controlar el food cost de un restaurante · Guía", "Qué es el food cost, cómo se calcula con un ejemplo, qué porcentaje es bueno y 7 formas de controlarlo en tu restaurante.", "fd", "fd", "control-food-cost-restaurante", ("Guía food cost", "Flight Director", "¿Quieres controlar tu food cost sin Excel?", "Déjanos tus datos y te enseñamos cómo lo hace Flight Director.")),
+    ("app-cuadrantes-hosteleria", "App de cuadrantes y fichajes para hostelería · Flight Director", "Cuadrantes de turnos según la venta prevista, coste de personal antes de publicar y fichaje desde el móvil para cumplir el registro de jornada. App para restaurantes.", "fd", "fd", "app-cuadrantes-hosteleria", ("App de cuadrantes", "Flight Director", "¿Te enseñamos tus cuadrantes en Flight Director?", "Déjanos tus datos y te contactaremos nosotros para hacerte una demo.")),
     ("aviso-legal", "Aviso legal · Perito Moreno 360", "Aviso legal del sitio web de Perito Moreno 360 SL.", "", "base", "aviso-legal", None),
     ("privacidad", "Política de privacidad · Perito Moreno 360", "Política de privacidad de Perito Moreno 360 SL.", "", "base", "privacidad", None),
     ("cookies", "Política de cookies · Perito Moreno 360", "Política de cookies del sitio web de Perito Moreno 360 SL.", "", "base", "cookies", None),
@@ -158,3 +175,16 @@ PAGES = [
 
 for slug, title, desc, active, fonts, b, form in PAGES:
     page(slug, title, desc, active, fonts, body(b), form)
+
+# Sitemap y robots
+PRIORITY = {"index": "1.0", "franquicias": "0.9", "flight-director": "0.9", "aviso-legal": "0.2", "privacidad": "0.2", "cookies": "0.2"}
+today = datetime.date.today().isoformat()
+urls = []
+for slug, *_ in PAGES:
+    if slug == "404":
+        continue
+    loc = SITE + "/" + ("" if slug == "index" else slug)
+    urls.append(f"  <url><loc>{loc}</loc><lastmod>{today}</lastmod><priority>{PRIORITY.get(slug, '0.8')}</priority></url>")
+(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n", encoding="utf-8")
+(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
+print("ok sitemap", len(urls))

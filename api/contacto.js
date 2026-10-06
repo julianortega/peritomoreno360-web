@@ -2,7 +2,9 @@
 // Variables de entorno en Vercel:
 //   RESEND_API_KEY  (obligatoria)  clave de https://resend.com
 //   CONTACT_TO      (opcional)     destinatario, por defecto info@peritomoreno360.com
-//   CONTACT_FROM    (opcional)     remitente verificado en Resend, por defecto web@peritomoreno360.com
+//   CONTACT_FROM    (opcional)     remitente. Sin dominio verificado en Resend se usa onboarding@resend.dev,
+//                                  que solo puede enviar al email con el que se creó la cuenta de Resend.
+//                                  Tras verificar peritomoreno360.com: 'Web Perito Moreno 360 <web@peritomoreno360.com>'
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clip = (s, n) => String(s ?? '').trim().slice(0, n);
@@ -38,7 +40,7 @@ export default async function handler(req, res) {
   if (!key) return res.status(503).json({ error: 'sin-configurar' });
 
   const to = process.env.CONTACT_TO || 'info@peritomoreno360.com';
-  const from = process.env.CONTACT_FROM || 'Web Perito Moreno 360 <web@peritomoreno360.com>';
+  const from = process.env.CONTACT_FROM || 'Web Perito Moreno 360 <onboarding@resend.dev>';
   const fecha = new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' });
 
   const html = `

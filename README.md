@@ -13,6 +13,6 @@ Web del grupo (peritomoreno360.com): HTML estático + una función de Vercel par
 Pide nombre, correo y teléfono. Para que llegue el correo a info@, en Vercel → Project → Settings → Environment Variables:
 - `RESEND_API_KEY` — clave de resend.com (con el dominio peritomoreno360.com verificado).
 - `CONTACT_TO` (opcional) — destinatario. Por defecto `info@peritomoreno360.com`.
-- `CONTACT_FROM` (opcional) — remitente. Por defecto `Web Perito Moreno 360 <web@peritomoreno360.com>`.
+- `CONTACT_FROM` (opcional) — remitente. Por defecto `onboarding@resend.dev`, que solo envía al email dueño de la cuenta de Resend (info@). Cuando verifiques el dominio en Resend, pon `Web Perito Moreno 360 <web@peritomoreno360.com>`.
 
 Sin `RESEND_API_KEY` la web funciona, pero el formulario ofrece enviar los datos por email a info@.

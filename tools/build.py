@@ -11,6 +11,10 @@ OUT = ROOT / "site"
 BODIES = ROOT / "src" / "pages"
 SITE = "https://www.peritomoreno360.com"
 
+import json
+ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Urb. Las Dalias 9", "postalCode": "39100", "addressLocality": "Bezana", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
+FD_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Flight Director", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Gestión de locales de hostelería: escandallos, cocina, equipo y turnos, checklists y APPCC, compras y cuenta de resultados en directo.", "url": "https://www.peritomoreno360.com/flight-director", "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
+
 FONTS_BASE = "family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600;700"
 FONTS = {
     "base": FONTS_BASE,
@@ -94,6 +98,10 @@ def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus da
 def page(slug, title, desc, active, fonts, body, form=None):
     canonical = SITE + ("/" if slug == "index" else "/" + slug)
     form_html = contact(*form) if form else ""
+    ld = ""
+    if slug == "index": ld = f'<script type="application/ld+json">{ORG_LD}</script>'
+    if slug == "flight-director": ld = f'<script type="application/ld+json">{FD_LD}</script>'
+    robots = '<meta name="robots" content="noindex">\n' if slug == "404" else ""
     html = f'''<!doctype html>
 <html lang="es">
 <head>
@@ -101,6 +109,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+{robots}
 <link rel="canonical" href="{canonical}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
@@ -114,6 +123,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{FONTS[fonts]}&display=swap">
 <link rel="stylesheet" href="/assets/css/styles.css">
+{ld}
 </head>
 <body>
 {header(active, bool(form))}

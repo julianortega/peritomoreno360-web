@@ -10,9 +10,10 @@ Web del grupo (peritomoreno360.com): HTML estático + una función de Vercel par
 - `vercel.json` — publica `site/` con URLs limpias (`/apps`, `/flight-director`…).
 
 ## Formulario de contacto
-Pide nombre, correo y teléfono. Para que llegue el correo a info@, en Vercel → Project → Settings → Environment Variables:
-- `RESEND_API_KEY` — clave de resend.com (con el dominio peritomoreno360.com verificado).
-- `CONTACT_TO` (opcional) — destinatario. Por defecto `info@peritomoreno360.com`.
-- `CONTACT_FROM` (opcional) — remitente. Por defecto `onboarding@resend.dev`, que solo envía al email dueño de la cuenta de Resend (info@). Cuando verifiques el dominio en Resend, pon `Web Perito Moreno 360 <web@peritomoreno360.com>`.
+Pide nombre, correo y teléfono y envía un aviso a info@ desde el propio buzón de IONOS.
+En Vercel → Project → Settings → Environment Variables:
+- `SMTP_PASS` — contraseña del buzón info@peritomoreno360.com (obligatoria).
+- `SMTP_USER`, `SMTP_HOST`, `SMTP_PORT`, `CONTACT_TO` (opcionales) — por defecto info@peritomoreno360.com, smtp.ionos.es, 465 e info@peritomoreno360.com.
 
-Sin `RESEND_API_KEY` la web funciona, pero el formulario ofrece enviar los datos por email a info@.
+Tras añadir o cambiar una variable hay que volver a desplegar (Deployments → Redeploy).
+Sin configurar, la web funciona y el formulario ofrece enviar los datos por email a info@.

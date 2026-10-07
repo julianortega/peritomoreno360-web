@@ -4,5 +4,10 @@
   "private": true,
   "description": "Web del grupo Perito Moreno 360",
   "type": "module",
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
 }

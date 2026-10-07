@@ -70,8 +70,8 @@ h1, h2, h3, p, ul { margin: 0; }
 .nav .btn { min-height: 44px; padding: 10px 20px; font-size: 15px; }
 .nav-fd { display: inline-flex; align-items: center; gap: 8px; }
 .nav-fd img { width: 22px; height: 22px; border-radius: 6px; }
-.wheel .q-in { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.wheel .q-in small { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; line-height: 1.3; opacity: 0.85; }
+.wheel sup { font-size: 0.7em; margin-left: 1px; opacity: 0.8; }
+.wheel .q-note { position: absolute; left: 8%; right: 42%; top: 64%; text-align: center; font-size: 11px; font-weight: 500; line-height: 1.35; letter-spacing: 0.02em; opacity: 0.72; }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; background: transparent; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); }
 .nav-toggle svg { width: 22px; height: 22px; }
 
@@ -418,7 +418,7 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
   .lead { font-size: 18px; }
   .brand img { height: 48px; }
   .wheel a { font-size: 15px; }
-  .wheel .q-in small { font-size: 10px; }
+  .wheel .q-note { font-size: 9px; }
   .site-header .wrap { height: 68px; }
   .nav { top: 68px; }
   .grid-4, .grid-4-wide, .about-points { grid-template-columns: minmax(0, 1fr); }

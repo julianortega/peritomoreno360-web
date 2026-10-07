@@ -127,6 +127,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}/assets/img/pm360-logo.png">
 <meta name="theme-color" content="#F6F2EA">
+<meta name="google-site-verification" content="K6yYI_6NLHTueWK6bNe2ToRdarshQfltA1QFdewTcZE">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">

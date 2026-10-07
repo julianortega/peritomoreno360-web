@@ -44,6 +44,25 @@ def header(active, has_form=True):
 </div>
 </header>'''
 
+# Redes sociales: pon la URL cuando la tengas; mientras esté vacía se muestra el icono sin enlace.
+SOCIAL = [
+    ("Instagram", "", '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>'),
+    ("LinkedIn", "", '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>'),
+    ("Facebook", "", '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M15 8h-1.5A2.5 2.5 0 0 0 11 10.5V21M9 13h5"/>'),
+]
+
+def _social():
+    items = []
+    for name, url, path in SOCIAL:
+        svg = f'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{path}</svg>'
+        if url:
+            items.append(f'<a href="{url}" target="_blank" rel="noopener" aria-label="{name}">{svg}</a>')
+        else:
+            items.append(f'<span class="soon" title="{name} · próximamente" aria-label="{name} (próximamente)">{svg}</span>')
+    return '<div class="foot-social">' + "".join(items) + '</div>'
+
+SOCIAL_HTML = _social()
+
 FOOTER = '''<footer class="site-footer">
 <div class="wrap">
 <div class="foot-top">
@@ -52,6 +71,7 @@ FOOTER = '''<footer class="site-footer">
 <span>Perito Moreno 360 SL · CIF B-21797493</span>
 <span>Urb. Las Dalias 9, 39100 Bezana (Cantabria)</span>
 <a href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a>
+''' + SOCIAL_HTML + '''
 </div>
 <div class="foot-cols">
 <div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>

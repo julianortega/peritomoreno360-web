@@ -457,3 +457,9 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
   .extras .cap { font-size: 22px; }
   .faq summary { font-size: 17px; }
 }
+
+/* Redes sociales en el pie */
+.foot-social { display: flex; gap: 14px; margin-top: 8px; }
+.foot-social a, .foot-social span { display: inline-flex; color: var(--dark-muted); transition: color .2s; }
+.foot-social a:hover { color: #fff; }
+.foot-social .soon { opacity: 0.6; cursor: default; }

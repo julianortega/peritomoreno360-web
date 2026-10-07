@@ -3,7 +3,7 @@
 //
 // Variables de entorno en Vercel (después, Deployments → Redeploy):
 //   APPS_SCRIPT_URL    URL de la aplicación web del script (termina en /exec)
-//   APPS_SCRIPT_TOKEN  la misma CLAVE que hay en el script
+//   APPS_SCRIPT_TOKEN  (opcional) la misma CLAVE que hay en el script
 
 const clip = (s, n) => String(s ?? '').replace(/[\r\n]+/g, ' ').trim().slice(0, n);
 
@@ -38,14 +38,14 @@ export default async function handler(req, res) {
 
   const url = process.env.APPS_SCRIPT_URL;
   const token = process.env.APPS_SCRIPT_TOKEN;
-  if (!url || !token) return res.status(503).json({ error: 'sin-configurar' });
+  if (!url) return res.status(503).json({ error: 'sin-configurar' });
 
   try {
     // Apps Script responde con una redirección; fetch la sigue y devuelve el JSON final.
     const r = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ ...data, token }),
+      body: JSON.stringify(token ? { ...data, token } : data),
       redirect: 'follow'
     });
     const txt = await r.text();

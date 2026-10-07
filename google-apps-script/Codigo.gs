@@ -4,14 +4,15 @@
  * Instalación (una sola vez):
  *  1. Crea una hoja de Google Sheets, por ejemplo "Contactos web".
  *  2. Extensiones → Apps Script. Borra lo que haya y pega este archivo.
- *  3. Cambia CLAVE por la misma clave que pongas en Vercel (APPS_SCRIPT_TOKEN).
+ *  3. (Opcional) Pon una CLAVE y la misma en Vercel (APPS_SCRIPT_TOKEN).
  *  4. Implementar → Nueva implementación → Tipo: Aplicación web.
  *       Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.
  *     Autoriza los permisos y copia la URL de la aplicación web (termina en /exec).
- *  5. En Vercel: APPS_SCRIPT_URL = esa URL, APPS_SCRIPT_TOKEN = la CLAVE. Después, Redeploy.
+ *  5. En Vercel: APPS_SCRIPT_URL = esa URL (y APPS_SCRIPT_TOKEN si usas CLAVE). Después, Redeploy.
  */
 
-const CLAVE = 'PEGA_AQUI_LA_CLAVE';
+// Opcional: si pones una clave aquí, pon la misma en Vercel (APPS_SCRIPT_TOKEN).
+const CLAVE = '';
 // info@ es un grupo: incluimos también tu buzón directamente porque Gmail no muestra
 // en tu bandeja los correos que tú mismo envías a un grupo del que eres miembro.
 const DESTINO = 'info@peritomoreno360.com, julian.ortega@peritomoreno360.com';
@@ -20,7 +21,7 @@ const HOJA = 'Contactos';
 function doPost(e) {
   try {
     const d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    if (d.token !== CLAVE) return json_({ ok: false, error: 'token' });
+    if (CLAVE && d.token !== CLAVE) return json_({ ok: false, error: 'token' });
 
     const nombre = limpia_(d.nombre, 120);
     const email = limpia_(d.email, 160);

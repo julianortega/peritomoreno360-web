@@ -18,6 +18,6 @@ Instalación del script: ver las instrucciones al principio de `google-apps-scri
 
 En Vercel → Project → Settings → Environment Variables (después, Deployments → Redeploy):
 - `APPS_SCRIPT_URL` — URL de la aplicación web del script (termina en `/exec`).
-- `APPS_SCRIPT_TOKEN` — la misma CLAVE que hay en el script.
+- `APPS_SCRIPT_TOKEN` (opcional) — la misma CLAVE que haya en el script.
 
 Sin configurar, la web funciona y el formulario ofrece enviar los datos por email a info@.

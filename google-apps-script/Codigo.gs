@@ -3,7 +3,7 @@
  *
  * Instalación (una sola vez):
  *  1. Crea una hoja de Google Sheets, por ejemplo "Contactos web".
- *  2. Extensiones → Apps Script. Borra lo que haya y pega este archivo.
+ *  2. Extensiones → Apps Script. Borra lo que haya y pega este archivo. Cambia HOJA_ID por el ID de tu hoja.
  *  3. (Opcional) Pon una CLAVE y la misma en Vercel (APPS_SCRIPT_TOKEN).
  *  4. Implementar → Nueva implementación → Tipo: Aplicación web.
  *       Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.
@@ -17,6 +17,8 @@ const CLAVE = '';
 // en tu bandeja los correos que tú mismo envías a un grupo del que eres miembro.
 const DESTINO = 'info@peritomoreno360.com, julian.ortega@peritomoreno360.com';
 const HOJA = 'Contactos';
+// ID de la hoja "Contactos web" (en una aplicación web no hay hoja "activa").
+const HOJA_ID = '1RZMOGTY2ckHdPPu0vZnSqJdbL06eXdlbj0BiLHvMb9Y';
 
 function doPost(e) {
   try {
@@ -35,7 +37,7 @@ function doPost(e) {
     const fecha = Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy HH:mm');
 
     // 1) Guardar en la hoja
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = SpreadsheetApp.openById(HOJA_ID);
     let sh = ss.getSheetByName(HOJA) || ss.getSheets()[0];
     if (sh.getLastRow() === 0) {
       sh.appendRow(['Fecha', 'Nombre', 'Email', 'Teléfono', 'Interés', 'Página', 'Estado']);
@@ -74,7 +76,7 @@ function doPost(e) {
     return json_({ ok: true });
   } catch (err) {
     console.error(err);
-    return json_({ ok: false, error: 'interno' });
+    return json_({ ok: false, error: 'interno', detalle: String(err && err.message || err) });
   }
 }
 
@@ -84,4 +86,10 @@ function limpia_(s, n) {
 
 function json_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Prueba manual desde el editor (Ejecutar → probar)
+function probar() {
+  const r = doPost({ postData: { contents: JSON.stringify({ nombre: 'PRUEBA (puedes borrarla)', email: 'julian.ortega@peritomoreno360.com', telefono: '600000000', interes: 'Otro', origen: 'Prueba desde el editor' }) } });
+  console.log(r.getContent());
 }

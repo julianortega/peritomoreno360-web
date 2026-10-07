@@ -4,12 +4,15 @@
 Uso:  python3 tools/build.py
 Edita el contenido en src/pages/ y la cabecera, el pie o el formulario aquí.
 """
-import pathlib, sys, re, html as _html, datetime
+import pathlib, sys, re, html as _html, datetime, hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 BODIES = ROOT / "src" / "pages"
 SITE = "https://www.peritomoreno360.com"
+
+def _ver(rel):
+    return hashlib.md5((OUT / rel).read_bytes()).hexdigest()[:10]
 
 import json
 ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Urb. Las Dalias 9", "postalCode": "39100", "addressLocality": "Bezana", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
@@ -133,7 +136,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{FONTS[fonts]}&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/styles.css?v={_ver("assets/css/styles.css")}">
 {ld}
 </head>
 <body>
@@ -143,7 +146,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 {form_html}
 </main>
 {FOOTER}
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v={_ver("assets/js/main.js")}" defer></script>
 </body>
 </html>
 '''

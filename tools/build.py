@@ -35,7 +35,7 @@ def header(active, has_form=True):
 <nav class="nav" id="menu" aria-label="Principal">
 {a("/#grupo", "El grupo", "home")}
 {a("/#areas", "Áreas de negocio", "areas")}
-<a class="nav-fd" href="/flight-director"{' aria-current="page"' if active == "fd" else ''}><img src="/assets/img/flightdirector-icono.png" alt="" width="22" height="22">Flight Director</a>
+<a class="nav-fd" href="/flight-director"{' aria-current="page"' if active == "fd" else ''}>Flight Director<img src="/assets/img/flightdirector-icono.png" alt="" width="22" height="22"></a>
 <a class="btn btn-dark" href="{"#contacto" if has_form else "/#contacto"}">Hablemos</a>
 </nav>
 </div>

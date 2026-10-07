@@ -36,9 +36,8 @@ function doPost(e) {
 
     // 1) Guardar en la hoja
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    let sh = ss.getSheetByName(HOJA);
-    if (!sh) {
-      sh = ss.insertSheet(HOJA);
+    let sh = ss.getSheetByName(HOJA) || ss.getSheets()[0];
+    if (sh.getLastRow() === 0) {
       sh.appendRow(['Fecha', 'Nombre', 'Email', 'Teléfono', 'Interés', 'Página', 'Estado']);
       sh.setFrozenRows(1);
       sh.getRange('1:1').setFontWeight('bold');

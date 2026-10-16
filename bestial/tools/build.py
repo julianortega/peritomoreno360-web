@@ -30,6 +30,17 @@ LOCALES = [
     ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "[Horario]", "local"),
     ("Melancólicos", "Paseo de los Melancólicos, 7 · Madrid", "[Horario]", "cocina"),
 ]
+# Club de clientes (fidelización). Las altas y los sellos los gestiona Flight Director (Club → Ajustes);
+# copia aquí los mismos premios. Para otra marca: cambia nombre, enlace (…/unete/<slug>) y premios.
+CLUB = {
+    "nombre": "Club de los Luchadores",
+    "socio": "luchador",                # cómo llamamos a cada socio
+    "url": "https://flightdirector.peritomoreno360.com/unete/bestial",
+    "icono": "🌯",
+    "regalo_alta": 1,                   # sellos de regalo al unirse
+    "premios": [(6, "Totopos gratis"), (10, "Burrito gratis")],
+    "caducidad_dias": 60,
+}
 # ====================================================================
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -85,6 +96,7 @@ def header(active):
 {a("/#locales", "Locales", "locales")}
 {a("/pedir#medida", "A tu medida", "medida")}
 {a("/#hoy", "Cómo lo hacemos", "hoy")}
+{a("/club", "Club", "club")}
 {a("/#franquicias", "Franquicias", "franquicias")}
 <div class="nav-actions">
 <a class="icon-btn" href="/pedir#pedido" aria-label="Tu pedido">{svg("bag")}<span class="cart-count" data-cart-count></span></a>
@@ -105,7 +117,7 @@ def footer():
 </div>
 <div class="foot-cols">
 <div><b>Comer</b><a href="/carta">Carta</a><a href="/#locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
-<div><b>{_html.escape(MARCA)}</b><a href="/#franquicias">Franquicias</a><a href="/#hoy">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
+<div><b>{_html.escape(MARCA)}</b><a href="/club">{_html.escape(CLUB["nombre"])}</a><a href="/#franquicias">Franquicias</a><a href="/#hoy">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -192,6 +204,26 @@ def locales_html():
 <div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>''')
     return "\n".join(out)
 
+def club_card(sellos=0):
+    """Tarjeta de sellos como la de Flight Director: una casilla por sello y un regalo en cada premio."""
+    total = max(n for n, _ in CLUB["premios"])
+    premios = {n for n, _ in CLUB["premios"]}
+    cells = []
+    for k in range(1, total + 1):
+        if k <= sellos:
+            cells.append(f'<span class="st on" aria-hidden="true">{CLUB["icono"]}</span>')
+        elif k in premios:
+            cells.append(f'<span class="st gift" aria-hidden="true">🎁</span>')
+        else:
+            cells.append(f'<span class="st" aria-hidden="true">{k}</span>')
+    nxt = min(n for n, _ in CLUB["premios"])
+    label = f"Tarjeta de ejemplo con {sellos} de {total} sellos"
+    return (f'<div class="club-card" role="img" aria-label="{label}"><div class="cc-top"><span>{_html.escape(CLUB["nombre"])}</span>{brand(False)}</div>'
+            f'<div class="stamps">{"".join(cells)}</div><p class="cc-foot">{sellos} de {total} sellos · te faltan {nxt - sellos} para {_html.escape(CLUB["premios"][0][1].lower())}</p></div>')
+
+def club_premios():
+    return "".join(f'<div><b>{n}</b><span>sellos</span><p>{_html.escape(pr)}</p></div>' for n, pr in sorted(CLUB["premios"]))
+
 def data_script(obj):
     return '<script>window.CARTA=' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + ';</script>\n'
 
@@ -202,6 +234,10 @@ def tokens(s):
         "LOCALES": locales_html(), "MENU": menu_html(False), "MENU_SHOP": menu_html(True),
         "SUBNAV": subnav(), "SUBNAV_SHOP": subnav('<a href="#medida" class="on">A tu medida</a>'),
         "SOCIAL": social_links(), "APPS": "".join(f"<span>{a}</span>" for a in APPS_DELIVERY),
+        "CLUB": _html.escape(CLUB["nombre"]), "CLUB_URL": CLUB["url"], "CLUB_SOCIO": CLUB["socio"],
+        "CLUB_ICONO": CLUB["icono"], "CLUB_REGALO": str(CLUB["regalo_alta"]), "CLUB_CADUCA": str(CLUB["caducidad_dias"]),
+        "CLUB_CARD": club_card(4), "CLUB_PREMIOS": club_premios(),
+        "CLUB_TOTAL": str(max(n for n, _ in CLUB["premios"])),
         "DOMINIO_O_WEB": DOMINIO.replace("https://", "") if DOMINIO else "esta web",
     }
     return re.sub(r"\{\{([A-Z_]+)\}\}", lambda mo: rep[mo.group(1)], s)
@@ -214,6 +250,7 @@ PAGES = {
     "pedir": (f"Pide online · {MARCA_COMPLETA}", "Monta tu burrito o bowl y pide a domicilio o para recoger, sin comisiones de app.", "medida", "shop"),
     "pago": (f"Tu pedido · {MARCA_COMPLETA}", "Revisa tu pedido y tus datos de entrega.", "", "shop"),
     "nutricion": (f"Calculadora nutricional · {MARCA_COMPLETA}", "Calorías, nutrientes y alérgenos de tu burrito o bowl.", "", "calc"),
+    "club": (f"{CLUB['nombre']} · {MARCA_COMPLETA}", f"Únete gratis al {CLUB['nombre']}: cada pedido suma un sello y los sellos se convierten en comida gratis.", "club", None),
     "aviso-legal": (f"Aviso legal · {MARCA_COMPLETA}", "Aviso legal.", "", None),
     "privacidad": (f"Privacidad · {MARCA_COMPLETA}", "Política de privacidad.", "", None),
     "cookies": (f"Cookies · {MARCA_COMPLETA}", "Política de cookies.", "", None),
@@ -254,7 +291,7 @@ def main():
             head = data_script({"groups": calc["groups"], "presets": calc["presets"]})
         (OUT / f"{name}.html").write_text(page(name, body, title, desc, active, head))
     if DOMINIO:
-        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion"))
+        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club"))
         (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
         (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
     else:

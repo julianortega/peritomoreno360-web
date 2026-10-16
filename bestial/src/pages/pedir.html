@@ -1,0 +1,28 @@
+<section class="page-hero dots" style="padding:clamp(28px,4vw,44px) 0">
+<div class="wrap">
+<div><h1 class="display h-l">Pide online</h1><p>Directo de nuestra cocina, sin comisiones de app. A domicilio o para recoger.</p></div>
+<div class="mode" style="background:rgba(255,255,255,.15);min-width:300px" role="group" aria-label="Cómo lo quieres"><button type="button" data-mode="domicilio" aria-pressed="true" style="color:#fff">A domicilio</button><button type="button" data-mode="recoger" aria-pressed="false" style="color:#fff">Recoger</button></div>
+</div>
+</section>
+{{SUBNAV_SHOP}}
+<div class="wrap" style="padding-top:28px;padding-bottom:100px">
+<div class="shop">
+<div>
+<section id="medida" class="builder" data-builder="shop">
+<div class="builder-head"><div><h2 class="display">Hazlo a tu medida</h2><p style="color:#CFCAC2;font-size:14px">Desde 8,95 €. O empieza por un {{MARCA}}:</p></div><div class="presets" data-presets></div></div>
+<div class="groups" data-groups></div>
+<div class="builder-foot"><div class="sum"><span data-summary></span><br><b data-kcal></b> · <a class="link" href="/nutricion">ver nutrición</a></div><button class="btn btn-red" type="button" data-add-custom>Añadir al pedido</button></div>
+</section>
+{{MENU_SHOP}}
+</div>
+<aside id="pedido" class="cart" aria-label="Tu pedido">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><h2 class="display">Tu pedido</h2><span class="mut" style="font-weight:700" data-count></span></div>
+<div data-lines></div>
+<div class="totals"><div><span>Subtotal</span><b data-subtotal></b></div><div data-ship-row><span>Envío</span><b>[x,xx €]</b></div></div>
+<div class="total"><span style="font-weight:800">Total</span><b data-total></b></div>
+<a class="btn btn-red" href="/pago" data-checkout style="margin-top:10px">Ir a pagar</a>
+<p class="note" style="margin-top:8px">Pides directo a {{MARCA}}, a precio de local. El reparto lo hace una flota externa ([proveedor]).</p>
+</aside>
+</div>
+</div>
+<a class="cartbar" href="#pedido" data-cartbar hidden><span data-bar-count></span><span data-bar-total></span></a>

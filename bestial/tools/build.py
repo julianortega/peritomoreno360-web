@@ -40,6 +40,14 @@ CLUB = {
     "regalo_alta": 1,                   # sellos de regalo al unirse
     "premios": [(6, "Totopos gratis"), (10, "Burrito gratis")],
     "caducidad_dias": 60,
+    # Niveles por sellos acumulados desde siempre (sellos_total en Flight Director). Propuesta: ajusta a gusto.
+    # (nombre, sellos para llegar, lema, [recompensas], condición)
+    "niveles": [
+        ("Novato", 0, "Subes al ring", ["1 sello de regalo al unirte", "Totopos gratis a los 6 sellos", "Burrito gratis a los 10 sellos"], ""),
+        ("Luchador", 10, "Ya sabes pelear", ["Todo lo de Novato", "Burrito gratis el día de tu cumpleaños", "Sellos dobles todos los martes"], ""),
+        ("Campeón", 25, "Nadie te tumba", ["Todo lo de Luchador", "Guacamole extra gratis en cada pedido", "Pruebas lo nuevo antes que nadie"], ""),
+        ("Leyenda", 50, "Comes gratis cada mes", ["Todo lo de Campeón", "1 burrito gratis cada mes", "Bebida gratis en cada pedido", "Tu nombre en el muro de Leyendas"], "Sigues siendo Leyenda con 4 pedidos al mes"),
+    ],
 }
 # ====================================================================
 
@@ -62,6 +70,7 @@ ICON = {
     "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
     "bag": '<path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
     "ig": '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+    "mask": '<path d="M12 2.5c4.6 0 8 3.6 8 8.3 0 5.2-3.7 10.7-8 10.7S4 16 4 10.8C4 6.1 7.4 2.5 12 2.5Z"/><path d="M6.5 10.5c1.2-1.4 3.2-1.4 4 .4-.9 1.4-3 1.6-4-.4Zm11 0c-1.2-1.4-3.2-1.4-4 .4.9 1.4 3 1.6 4-.4Z" fill="currentColor"/><path d="M9.5 16.5c1.6 1 3.4 1 5 0"/><path d="M12 2.5v4"/>',
     "tt": '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.3 4.3 5 4.5"/>',
 }
 def svg(name, size=20):
@@ -93,11 +102,10 @@ def header(active):
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">{svg("menu", 28)}</button>
 <nav class="nav" id="menu" aria-label="Principal">
 {a("/carta", "Carta", "carta")}
-{a("/#locales", "Locales", "locales")}
-{a("/pedir#medida", "A tu medida", "medida")}
-{a("/#hoy", "Cómo lo hacemos", "hoy")}
+{a("/locales", "Locales", "locales")}
+{a("/como-lo-hacemos", "Cómo lo hacemos", "hoy")}
 {a("/club", "Club", "club")}
-{a("/#franquicias", "Franquicias", "franquicias")}
+{a("/franquicias", "Franquicias", "franquicias")}
 <div class="nav-actions">
 <a class="icon-btn" href="/pedir#pedido" aria-label="Tu pedido">{svg("bag")}<span class="cart-count" data-cart-count></span></a>
 <a class="btn btn-red" href="/pedir">Pide ahora</a>
@@ -116,8 +124,8 @@ def footer():
 <div class="social">{social_links()}</div>
 </div>
 <div class="foot-cols">
-<div><b>Comer</b><a href="/carta">Carta</a><a href="/#locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
-<div><b>{_html.escape(MARCA)}</b><a href="/club">{_html.escape(CLUB["nombre"])}</a><a href="/#franquicias">Franquicias</a><a href="/#hoy">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
+<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
+<div><b>{_html.escape(MARCA)}</b><a href="/club">{_html.escape(CLUB["nombre"])}</a><a href="/franquicias">Franquicias</a><a href="/como-lo-hacemos">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -221,8 +229,24 @@ def club_card(sellos=0):
     return (f'<div class="club-card" role="img" aria-label="{label}"><div class="cc-top"><span>{_html.escape(CLUB["nombre"])}</span>{brand(False)}</div>'
             f'<div class="stamps">{"".join(cells)}</div><p class="cc-foot">{sellos} de {total} sellos · te faltan {nxt - sellos} para {_html.escape(CLUB["premios"][0][1].lower())}</p></div>')
 
+def club_niveles():
+    out = []
+    n = len(CLUB["niveles"])
+    for i, (nom, sellos, lema, perks, cond) in enumerate(CLUB["niveles"]):
+        li = "".join(f"<li>{_html.escape(p)}</li>" for p in perks)
+        req = "Al unirte" if sellos == 0 else f"{sellos} sellos"
+        c = f'<p class="cond">{_html.escape(cond)}</p>' if cond else ""
+        top = '<span class="crown">El nivel más alto</span>' if i == n - 1 else ""
+        out.append(f'<article class="lvl lvl-{i + 1}">{top}<div class="lv-head"><span class="mask">{svg("mask", 30)}</span><span class="req">Nivel {i + 1} · {req}</span></div>'
+                   f'<h3>{_html.escape(nom)}</h3><p class="lema">{_html.escape(lema)}</p><ul>{li}</ul>{c}</article>')
+    return "".join(out)
+
 def club_premios():
     return "".join(f'<div><b>{n}</b><span>sellos</span><p>{_html.escape(pr)}</p></div>' for n, pr in sorted(CLUB["premios"]))
+
+def locales_mini():
+    return "".join(f'<a class="loc-mini" href="/locales"><b>{_html.escape(n)}</b><span>{_html.escape(d)}</span>'
+                   f'<em>{"Solo a domicilio y recogida" if t == "cocina" else "Local"}</em></a>' for n, d, h, t in LOCALES)
 
 def data_script(obj):
     return '<script>window.CARTA=' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + ';</script>\n'
@@ -231,12 +255,14 @@ def tokens(s):
     rep = {
         "MARCA": _html.escape(MARCA), "MARCA_COMPLETA": _html.escape(MARCA_COMPLETA), "CIUDAD": CIUDAD,
         "EMAIL": EMAIL, "TITULAR": TITULAR, "CIF": CIF, "DOMICILIO": DOMICILIO, "N_LOCALES": str(len(LOCALES)),
-        "LOCALES": locales_html(), "MENU": menu_html(False), "MENU_SHOP": menu_html(True),
+        "LOCALES": locales_html(), "LOCALES_MINI": locales_mini(), "GRUPO_URL": GRUPO_URL, "MENU": menu_html(False), "MENU_SHOP": menu_html(True),
         "SUBNAV": subnav(), "SUBNAV_SHOP": subnav('<a href="#medida" class="on">A tu medida</a>'),
         "SOCIAL": social_links(), "APPS": "".join(f"<span>{a}</span>" for a in APPS_DELIVERY),
         "CLUB": _html.escape(CLUB["nombre"]), "CLUB_URL": CLUB["url"], "CLUB_SOCIO": CLUB["socio"],
         "CLUB_ICONO": CLUB["icono"], "CLUB_REGALO": str(CLUB["regalo_alta"]), "CLUB_CADUCA": str(CLUB["caducidad_dias"]),
         "CLUB_CARD": club_card(4), "CLUB_PREMIOS": club_premios(),
+        "CLUB_NIVELES": club_niveles(), "CLUB_TOP": _html.escape(CLUB["niveles"][-1][0]),
+        "CLUB_TOP_SELLOS": str(CLUB["niveles"][-1][1]),
         "CLUB_TOTAL": str(max(n for n, _ in CLUB["premios"])),
         "DOMINIO_O_WEB": DOMINIO.replace("https://", "") if DOMINIO else "esta web",
     }
@@ -250,6 +276,9 @@ PAGES = {
     "pedir": (f"Pide online · {MARCA_COMPLETA}", "Monta tu burrito o bowl y pide a domicilio o para recoger, sin comisiones de app.", "medida", "shop"),
     "pago": (f"Tu pedido · {MARCA_COMPLETA}", "Revisa tu pedido y tus datos de entrega.", "", "shop"),
     "nutricion": (f"Calculadora nutricional · {MARCA_COMPLETA}", "Calorías, nutrientes y alérgenos de tu burrito o bowl.", "", "calc"),
+    "locales": (f"Locales · {MARCA_COMPLETA}", f"Nuestros locales en {CIUDAD}: dirección, horario y cómo pedir.", "locales", None),
+    "como-lo-hacemos": (f"Cómo lo hacemos · {MARCA_COMPLETA}", "Producto del día y cada burrito montado al momento, a la vista.", "hoy", None),
+    "franquicias": (f"Franquicias · {MARCA_COMPLETA}", f"Abre tu {MARCA}: 2% de royalty el primer año y 4% desde el segundo, sin letra pequeña.", "franquicias", None),
     "club": (f"{CLUB['nombre']} · {MARCA_COMPLETA}", f"Únete gratis al {CLUB['nombre']}: cada pedido suma un sello y los sellos se convierten en comida gratis.", "club", None),
     "aviso-legal": (f"Aviso legal · {MARCA_COMPLETA}", "Aviso legal.", "", None),
     "privacidad": (f"Privacidad · {MARCA_COMPLETA}", "Política de privacidad.", "", None),
@@ -291,7 +320,7 @@ def main():
             head = data_script({"groups": calc["groups"], "presets": calc["presets"]})
         (OUT / f"{name}.html").write_text(page(name, body, title, desc, active, head))
     if DOMINIO:
-        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club"))
+        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club", "locales", "como-lo-hacemos", "franquicias"))
         (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
         (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
     else:

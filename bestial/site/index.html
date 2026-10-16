@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/css/bestial.css?v=f991e12186">
+<link rel="stylesheet" href="/assets/css/bestial.css?v=0196f19b22">
 </head>
 <body>
 <a class="sr" href="#main">Saltar al contenido</a>
@@ -26,11 +26,10 @@
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <nav class="nav" id="menu" aria-label="Principal">
 <a href="/carta">Carta</a>
-<a href="/#locales">Locales</a>
-<a href="/pedir#medida">A tu medida</a>
-<a href="/#hoy">Cómo lo hacemos</a>
+<a href="/locales">Locales</a>
+<a href="/como-lo-hacemos">Cómo lo hacemos</a>
 <a href="/club">Club</a>
-<a href="/#franquicias">Franquicias</a>
+<a href="/franquicias">Franquicias</a>
 <div class="nav-actions">
 <a class="icon-btn" href="/pedir#pedido" aria-label="Tu pedido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count" data-cart-count></span></a>
 <a class="btn btn-red" href="/pedir">Pide ahora</a>
@@ -47,7 +46,7 @@
 <p>Monta el tuyo o elige una receta de la casa. En el local, a domicilio o para recoger sin colas.</p>
 <div class="ctas">
 <a class="btn btn-red" href="/pedir">Pide online</a>
-<a class="btn btn-line-w" href="#locales">Busca tu Bestial</a>
+<a class="btn btn-line-w" href="/locales">Busca tu Bestial</a>
 <a class="btn btn-line-w" href="/carta">Ver la carta</a>
 </div>
 </div>
@@ -81,61 +80,14 @@
 </div>
 </section>
 
-<section id="medida" class="sec" style="padding-top:0">
-<div class="wrap">
-<div class="band dots">
-<div style="display:flex;flex-direction:column;gap:18px">
-<h2 class="display h-l">Tu burrito. Tus reglas.</h2>
-<p class="lead" style="color:#FFE3E6">Elige burrito o bowl, la proteína, el arroz, los ingredientes y la salsa. Lo preparamos al momento, delante de ti, desde 8,95 €.</p>
-<div><a class="btn btn-white" href="/pedir#medida">Montar el mío</a></div>
-</div>
-<div class="steps"><span>1 · Formato</span><span>2 · Proteína</span><span>3 · Arroz</span><span>4 · Ingredientes</span><span>5 · Salsas</span><span>6 · Extras</span></div>
-</div>
-</div>
-</section>
-
 <section id="hoy" class="sec" style="padding-top:0">
 <div class="wrap">
-<div class="sec-head">
-<div><span class="eyebrow">Cómo lo hacemos</span><h2 class="display h-xl" style="margin-top:12px">Hecho hoy.<br><span style="color:var(--red)">Hecho ahora.</span></h2></div>
-<div style="max-width:480px;display:flex;flex-direction:column;gap:14px"><p class="lead">Nada se queda de ayer. Preparamos el producto cada día y tu burrito se monta en el momento en que lo pides. Míralo tú mismo.</p>
-<div class="apps"><span>Hecho en el día</span><span>Montado al momento</span><span>Cocina a la vista</span></div></div>
+<div class="teaser">
+<a class="teaser-img" href="/como-lo-hacemos"><img src="/assets/img/linea-montaje.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span></a>
+<div class="teaser-txt"><span class="eyebrow">Cómo lo hacemos</span><h2 class="display h-l">Hecho hoy.<br><span style="color:var(--red)">Hecho ahora.</span></h2>
+<p class="lead">Nada se queda de ayer. Preparamos el producto cada día y tu burrito se monta en el momento en que lo pides.</p>
+<div><a class="btn btn-ink" href="/como-lo-hacemos">Míralo en vídeo</a></div></div>
 </div>
-<!-- Vídeos: para añadir uno, cambia la <img> del hueco por
-     <video src="/assets/video/NOMBRE.mp4" poster="/assets/img/FOTO.jpg" autoplay muted loop playsinline></video>
-     y quita <span class="play"> y la línea «Vídeo pendiente». -->
-<div class="vid-grid">
-<figure class="vid big"><img src="/assets/img/linea-montaje.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>Un Bestial de principio a fin</b><span>De la cocina a tus manos, sin cortes ni trucos.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-<div class="side">
-<figure class="vid"><img src="/assets/img/el-salvaje.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>Recién hecho</b><span>El producto terminado, tal cual sale.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-<figure class="vid"><img src="/assets/img/galeria-guacamole.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>Guacamole del día</b><span>Preparado en el día, como todo.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-</div>
-</div>
-<div class="vid-row">
-<figure class="vid"><img src="/assets/img/galeria-cerrando.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>Nuestros cocineros</b><span>Quién está detrás de cada burrito.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-<figure class="vid"><img src="/assets/img/pollo-crunchy.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>En la plancha</b><span>El pollo crunchy, al momento.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-<figure class="vid"><img src="/assets/img/galeria-bolsa.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>La sala</b><span>El equipo que te atiende y te lo entrega.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-<figure class="vid"><img src="/assets/img/galeria-tacos.jpg" alt="" loading="lazy"><span class="live"><i></i>HOY EN COCINA</span><span class="play"></span><figcaption><b>Tacos al pase</b><span>Montados y servidos en el acto.</span><em>[Vídeo pendiente]</em></figcaption></figure>
-</div>
-<div class="follow dots">
-<div><h3 class="display" style="font-size:clamp(30px,4vw,44px)">Síguenos y míralo cada día</h3><p style="color:#FFE3E6">Subimos lo que se cocina hoy, el equipo y lo nuevo antes que nadie.</p></div>
-<div class="social" style="margin:0"><span title="Instagram · próximamente" aria-label="Instagram (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span title="TikTok · próximamente" aria-label="TikTok (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.3 4.3 5 4.5"/></svg></span></div>
-</div>
-</div>
-</section>
-
-<section id="cocina" class="sec dark">
-<div class="wrap">
-<div class="sec-head"><div><span class="eyebrow" style="color:var(--yellow)">Nuestra cocina</span><h2 class="display h-l" style="margin-top:12px">Hecho delante de ti</h2></div>
-<p class="lead">Cocina abierta y producto fresco cada día. Cortamos, cocinamos y montamos cada burrito al momento, a la vista.</p></div>
-<div class="gallery">
-<figure><div class="photo"><img src="/assets/img/galeria-cilantro.jpg" alt="Cilantro fresco" loading="lazy"></div><figcaption>Cilantro fresco</figcaption></figure>
-<figure><div class="photo"><img src="/assets/img/galeria-salsa.jpg" alt="Salsa de la casa" loading="lazy"></div><figcaption>Salsa de la casa</figcaption></figure>
-<figure><div class="photo"><img src="/assets/img/galeria-guacamole.jpg" alt="Guacamole diario" loading="lazy"></div><figcaption>Guacamole diario</figcaption></figure>
-<figure><div class="photo"><img src="/assets/img/galeria-lechuga.jpg" alt="Montado al momento" loading="lazy"></div><figcaption>Al momento</figcaption></figure>
-<figure><div class="photo"><img src="/assets/img/galeria-cerrando.jpg" alt="Burrito bien cerrado" loading="lazy"></div><figcaption>Bien cerrado</figcaption></figure>
-</div>
-<div style="height:40px"></div>
 </div>
 </section>
 
@@ -143,7 +95,7 @@
 <div class="wrap">
 <div class="sec-head"><h2 class="display h-l">Pide como quieras</h2></div>
 <div class="grid g3">
-<article class="card cream"><h3>En el local</h3><p>Cocina abierta, servicio rápido y sitio para sentarte.</p><div class="actions"><a class="link" href="#locales">Busca tu Bestial →</a></div></article>
+<article class="card cream"><h3>En el local</h3><p>Cocina abierta, servicio rápido y sitio para sentarte.</p><div class="actions"><a class="link" href="/locales">Busca tu Bestial →</a></div></article>
 <article class="card cream"><h3>A domicilio</h3><p>Pide directo en nuestra web, sin comisiones, o con tu app favorita.</p><div class="apps"><span>Uber Eats</span><span>[Glovo]</span><span>[Just Eat]</span></div><div class="actions"><a class="link" href="/pedir">Pedir online →</a></div></article>
 <article class="card cream"><h3>Pide y recoge</h3><p>Pide online y recógelo en el local sin hacer cola.</p><div class="actions"><a class="link" href="/pedir">Pedir para recoger →</a></div></article>
 </div>
@@ -152,17 +104,8 @@
 
 <section id="locales" class="sec" style="padding-top:0">
 <div class="wrap">
-<div class="sec-head"><h2 class="display h-l">Busca tu Bestial</h2><span class="mut" style="font-weight:700">4 cocinas en Madrid</span></div>
-<div class="grid g4">
-<article class="card"><span class="pill">Local</span><h3>San Germán</h3><p>Calle San Germán, 11 · Madrid</p><p class="mut">[Horario]</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Calle+San+Germán,+11,+Madrid" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>
-<article class="card"><span class="pill">Local</span><h3>Manuel Becerra</h3><p>Calle Vizconde de Matamala, 7 · Madrid</p><p class="mut">[Horario]</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Calle+Vizconde+de+Matamala,+7,+Madrid" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>
-<article class="card"><span class="pill">Local</span><h3>Majadahonda</h3><p>Av. Reyes Católicos, 8 · Majadahonda</p><p class="mut">[Horario]</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Av.+Reyes+Católicos,+8,+Majadahonda" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>
-<article class="card"><span class="pill">Solo a domicilio y recogida</span><h3>Melancólicos</h3><p>Paseo de los Melancólicos, 7 · Madrid</p><p class="mut">[Horario]</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Paseo+de+los+Melancólicos,+7,+Madrid" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>
-</div>
+<div class="sec-head"><h2 class="display h-l">Busca tu Bestial</h2><a class="link" href="/locales">Ver todos los locales →</a></div>
+<div class="loc-strip"><a class="loc-mini" href="/locales"><b>San Germán</b><span>Calle San Germán, 11 · Madrid</span><em>Local</em></a><a class="loc-mini" href="/locales"><b>Manuel Becerra</b><span>Calle Vizconde de Matamala, 7 · Madrid</span><em>Local</em></a><a class="loc-mini" href="/locales"><b>Majadahonda</b><span>Av. Reyes Católicos, 8 · Majadahonda</span><em>Local</em></a><a class="loc-mini" href="/locales"><b>Melancólicos</b><span>Paseo de los Melancólicos, 7 · Madrid</span><em>Solo a domicilio y recogida</em></a></div>
 </div>
 </section>
 
@@ -171,10 +114,10 @@
 <div class="club-home">
 <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
 <span class="eyebrow" style="color:var(--yellow)">Gratis · sin app</span>
-<h2 class="display h-l">Únete al Club de los Luchadores</h2>
-<p class="lead" style="color:#FFE3E6">Cada pedido suma un sello y los sellos se convierten en comida gratis. 1 sello de regalo solo por unirte.</p>
-<div class="club-prizes sm"><div><b>6</b><span>sellos</span><p>Totopos gratis</p></div><div><b>10</b><span>sellos</span><p>Burrito gratis</p></div></div>
-<div class="ctas"><a class="btn btn-white" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Hazte luchador</a><a class="btn btn-line-w" href="/club">Cómo funciona</a></div>
+<h2 class="display h-l">Sube al ring</h2>
+<p class="lead" style="color:#FFE3E6">Únete al Club de los Luchadores: cada pedido suma un sello, cada sello te sube de nivel y en <b style="color:var(--yellow)">Leyenda</b> comes <b style="color:var(--yellow)">un burrito gratis cada mes</b>.</p>
+<div class="lvl-chips"><span>Novato</span><span>Luchador</span><span>Campeón</span><span class="top">Leyenda</span></div>
+<div class="ctas"><a class="btn btn-yellow" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Hazte luchador gratis</a><a class="btn btn-line-w" href="/club">Ver los niveles</a></div>
 </div>
 <div class="club-card" role="img" aria-label="Tarjeta de ejemplo con 4 de 10 sellos"><div class="cc-top"><span>Club de los Luchadores</span><img src="/assets/img/logo-blanco.png" alt="Bestial Burritos &amp; Tacos" width="101" height="42"></div><div class="stamps"><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st" aria-hidden="true">5</span><span class="st gift" aria-hidden="true">🎁</span><span class="st" aria-hidden="true">7</span><span class="st" aria-hidden="true">8</span><span class="st" aria-hidden="true">9</span><span class="st gift" aria-hidden="true">🎁</span></div><p class="cc-foot">4 de 10 sellos · te faltan 2 para totopos gratis</p></div>
 </div>
@@ -183,16 +126,9 @@
 
 <section id="franquicias" class="sec" style="padding-top:0">
 <div class="wrap">
-<div class="fq">
-<div class="txt">
-<span class="eyebrow" style="color:var(--yellow)">Franquicias</span>
-<h2 class="display h-l">Abre tu Bestial</h2>
-<p class="lead" style="color:#CFCAC2">Queremos llevar Bestial a toda España y que cada franquiciado gane mucho. Sin presión y con las condiciones a la vista.</p>
-<div class="nums"><div><b>2%</b><p>Royalty el primer año</p></div><div><b>4%</b><p>Desde el segundo año, para siempre</p></div></div>
-<p class="box">¿No quieres llevarlo tú? Nosotros ponemos operaciones, RRHH, gestoría y compras. Tú solo abres la empresa y mes a mes vas creciendo con nosotros.</p>
-<div><a class="btn btn-white" href="https://www.peritomoreno360.com/franquicias" target="_blank" rel="noopener">Quiero información</a></div>
-</div>
-<div class="photo"><img src="/assets/img/franquicias.jpg" alt="Equipo preparando burritos" loading="lazy"></div>
+<div class="fq-teaser">
+<div><span class="eyebrow" style="color:var(--yellow)">Franquicias</span><h2 class="display h-l" style="margin-top:12px">Abre tu Bestial</h2><p class="lead" style="color:#CFCAC2">2% de royalty el primer año, 4% desde el segundo. Sin presión y con las condiciones a la vista.</p></div>
+<a class="btn btn-white" href="/franquicias">Ver cómo funciona</a>
 </div>
 </div>
 </section>
@@ -207,8 +143,8 @@
 <div class="social"><span title="Instagram · próximamente" aria-label="Instagram (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span title="TikTok · próximamente" aria-label="TikTok (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.3 4.3 5 4.5"/></svg></span></div>
 </div>
 <div class="foot-cols">
-<div><b>Comer</b><a href="/carta">Carta</a><a href="/#locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
-<div><b>Bestial</b><a href="/club">Club de los Luchadores</a><a href="/#franquicias">Franquicias</a><a href="/#hoy">Cómo lo hacemos</a><a href="mailto:[correo]">Contacto</a></div>
+<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
+<div><b>Bestial</b><a href="/club">Club de los Luchadores</a><a href="/franquicias">Franquicias</a><a href="/como-lo-hacemos">Cómo lo hacemos</a><a href="mailto:[correo]">Contacto</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>

@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/css/bestial.css?v=f991e12186">
+<link rel="stylesheet" href="/assets/css/bestial.css?v=0196f19b22">
 </head>
 <body>
 <a class="sr" href="#main">Saltar al contenido</a>
@@ -26,11 +26,10 @@
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <nav class="nav" id="menu" aria-label="Principal">
 <a href="/carta">Carta</a>
-<a href="/#locales">Locales</a>
-<a href="/pedir#medida">A tu medida</a>
-<a href="/#hoy">Cómo lo hacemos</a>
+<a href="/locales">Locales</a>
+<a href="/como-lo-hacemos">Cómo lo hacemos</a>
 <a href="/club" aria-current="page">Club</a>
-<a href="/#franquicias">Franquicias</a>
+<a href="/franquicias">Franquicias</a>
 <div class="nav-actions">
 <a class="icon-btn" href="/pedir#pedido" aria-label="Tu pedido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count" data-cart-count></span></a>
 <a class="btn btn-red" href="/pedir">Pide ahora</a>
@@ -39,35 +38,51 @@
 </div>
 </header>
 <main id="main">
-<section class="club-hero">
-<div class="wrap club-split">
-<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
-<span class="eyebrow" style="color:var(--yellow)">Gratis · sin descargar nada</span>
-<h1 class="display h-xl">Club de los Luchadores</h1>
-<p class="lead" style="color:#FFE3E6">Cada pedido suma un sello. Los sellos se convierten en comida gratis. Hazte luchador en un minuto y llévate 1 sello de regalo solo por unirte.</p>
-<div class="ctas"><a class="btn btn-white" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Hazte luchador</a><a class="btn btn-line-w" href="#como">Cómo funciona</a></div>
+<section class="ring">
+<img class="ring-bg" src="/assets/img/inferno.jpg" alt="" fetchpriority="high">
+<div class="wrap ring-in">
+<div class="ring-txt">
+<span class="ring-tag">Club de los Luchadores · gratis</span>
+<h1 class="display">Sube<br>al <span>ring</span></h1>
+<p class="ring-lead">Cada pedido es un golpe. Suma sellos, sube de nivel y llega a <b>Leyenda</b>: <b>un burrito gratis cada mes</b>. Para siempre que sigas peleando.</p>
+<div class="ctas"><a class="btn btn-yellow" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Hazte luchador gratis</a><a class="btn btn-line-w" href="#niveles">Ver los niveles</a></div>
+<div class="ring-facts"><span><b>1</b> sello de regalo al entrar</span><span><b>4</b> niveles</span><span><b>0 €</b> y sin app</span></div>
 </div>
+<div class="ring-card">
+<span class="badge-lvl">🌯 Nivel 3 · Campeón</span>
 <div class="club-card" role="img" aria-label="Tarjeta de ejemplo con 4 de 10 sellos"><div class="cc-top"><span>Club de los Luchadores</span><img src="/assets/img/logo-blanco.png" alt="Bestial Burritos &amp; Tacos" width="101" height="42"></div><div class="stamps"><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st on" aria-hidden="true">🌯</span><span class="st" aria-hidden="true">5</span><span class="st gift" aria-hidden="true">🎁</span><span class="st" aria-hidden="true">7</span><span class="st" aria-hidden="true">8</span><span class="st" aria-hidden="true">9</span><span class="st gift" aria-hidden="true">🎁</span></div><p class="cc-foot">4 de 10 sellos · te faltan 2 para totopos gratis</p></div>
 </div>
+</div>
+<div class="ring-ropes" aria-hidden="true"><i></i><i></i><i></i></div>
 </section>
 
-<section id="como" class="sec">
+<div class="marquee" aria-hidden="true"><span>Novato ✱ Luchador ✱ Campeón ✱ Leyenda ✱ Burrito gratis cada mes ✱ Novato ✱ Luchador ✱ Campeón ✱ Leyenda ✱ Burrito gratis cada mes ✱</span></div>
+
+<section id="niveles" class="sec">
 <div class="wrap">
-<div class="sec-head"><h2 class="display h-l">Así de fácil</h2></div>
+<div class="sec-head"><div><span class="eyebrow">Los niveles</span><h2 class="display h-xl" style="margin-top:12px">De novato<br>a <span style="color:var(--red)">leyenda</span></h2></div>
+<p class="lead" style="max-width:440px">Cuantos más sellos sumas desde que entras, más alto llegas. Cada nivel se queda con todo lo del anterior y añade más. Arriba del todo, comes gratis cada mes.</p></div>
+<div class="ladder"><article class="lvl lvl-1"><div class="lv-head"><span class="mask"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c4.6 0 8 3.6 8 8.3 0 5.2-3.7 10.7-8 10.7S4 16 4 10.8C4 6.1 7.4 2.5 12 2.5Z"/><path d="M6.5 10.5c1.2-1.4 3.2-1.4 4 .4-.9 1.4-3 1.6-4-.4Zm11 0c-1.2-1.4-3.2-1.4-4 .4.9 1.4 3 1.6 4-.4Z" fill="currentColor"/><path d="M9.5 16.5c1.6 1 3.4 1 5 0"/><path d="M12 2.5v4"/></svg></span><span class="req">Nivel 1 · Al unirte</span></div><h3>Novato</h3><p class="lema">Subes al ring</p><ul><li>1 sello de regalo al unirte</li><li>Totopos gratis a los 6 sellos</li><li>Burrito gratis a los 10 sellos</li></ul></article><article class="lvl lvl-2"><div class="lv-head"><span class="mask"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c4.6 0 8 3.6 8 8.3 0 5.2-3.7 10.7-8 10.7S4 16 4 10.8C4 6.1 7.4 2.5 12 2.5Z"/><path d="M6.5 10.5c1.2-1.4 3.2-1.4 4 .4-.9 1.4-3 1.6-4-.4Zm11 0c-1.2-1.4-3.2-1.4-4 .4.9 1.4 3 1.6 4-.4Z" fill="currentColor"/><path d="M9.5 16.5c1.6 1 3.4 1 5 0"/><path d="M12 2.5v4"/></svg></span><span class="req">Nivel 2 · 10 sellos</span></div><h3>Luchador</h3><p class="lema">Ya sabes pelear</p><ul><li>Todo lo de Novato</li><li>Burrito gratis el día de tu cumpleaños</li><li>Sellos dobles todos los martes</li></ul></article><article class="lvl lvl-3"><div class="lv-head"><span class="mask"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c4.6 0 8 3.6 8 8.3 0 5.2-3.7 10.7-8 10.7S4 16 4 10.8C4 6.1 7.4 2.5 12 2.5Z"/><path d="M6.5 10.5c1.2-1.4 3.2-1.4 4 .4-.9 1.4-3 1.6-4-.4Zm11 0c-1.2-1.4-3.2-1.4-4 .4.9 1.4 3 1.6 4-.4Z" fill="currentColor"/><path d="M9.5 16.5c1.6 1 3.4 1 5 0"/><path d="M12 2.5v4"/></svg></span><span class="req">Nivel 3 · 25 sellos</span></div><h3>Campeón</h3><p class="lema">Nadie te tumba</p><ul><li>Todo lo de Luchador</li><li>Guacamole extra gratis en cada pedido</li><li>Pruebas lo nuevo antes que nadie</li></ul></article><article class="lvl lvl-4"><span class="crown">El nivel más alto</span><div class="lv-head"><span class="mask"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c4.6 0 8 3.6 8 8.3 0 5.2-3.7 10.7-8 10.7S4 16 4 10.8C4 6.1 7.4 2.5 12 2.5Z"/><path d="M6.5 10.5c1.2-1.4 3.2-1.4 4 .4-.9 1.4-3 1.6-4-.4Zm11 0c-1.2-1.4-3.2-1.4-4 .4.9 1.4 3 1.6 4-.4Z" fill="currentColor"/><path d="M9.5 16.5c1.6 1 3.4 1 5 0"/><path d="M12 2.5v4"/></svg></span><span class="req">Nivel 4 · 50 sellos</span></div><h3>Leyenda</h3><p class="lema">Comes gratis cada mes</p><ul><li>Todo lo de Campeón</li><li>1 burrito gratis cada mes</li><li>Bebida gratis en cada pedido</li><li>Tu nombre en el muro de Leyendas</li></ul><p class="cond">Sigues siendo Leyenda con 4 pedidos al mes</p></article></div>
+</div>
+</section>
+
+<section class="sec dark">
+<div class="wrap">
+<div class="sec-head"><h2 class="display h-l">Así se pelea</h2></div>
 <div class="grid g3 club-steps">
-<article class="card cream"><span class="num">1</span><h3>Únete</h3><p>Pon tu nombre y tu teléfono. Al momento tienes tu tarjeta en el móvil y 1 sello de regalo.</p></article>
-<article class="card cream"><span class="num">2</span><h3>Suma sellos</h3><p>Cada pedido es un sello 🌯. En el local, dinos tu teléfono al pagar. Si pides a domicilio, guarda el número de pedido y te lo sumamos.</p></article>
-<article class="card cream"><span class="num">3</span><h3>Come gratis</h3><p>Al llegar a cada premio te damos un código. Enséñalo en caja y es tuyo. Al completar la tarjeta, empiezas otra.</p></article>
+<article class="card step-dark"><span class="num">1</span><h3>Entra</h3><p>Nombre y teléfono. En un minuto tienes tu tarjeta en el móvil y 1 sello de regalo.</p></article>
+<article class="card step-dark"><span class="num">2</span><h3>Suma</h3><p>Cada pedido es un sello 🌯. En el local, di tu teléfono al pagar. A domicilio, guarda el número de pedido y te lo sumamos.</p></article>
+<article class="card step-dark"><span class="num">3</span><h3>Sube</h3><p>Totopos a los 6, burrito a los 10, y cada sello te acerca al siguiente nivel. A los 50, eres Leyenda.</p></article>
 </div>
 </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec">
 <div class="wrap">
 <div class="band dots">
 <div style="display:flex;flex-direction:column;gap:18px">
-<h2 class="display h-l">Los premios</h2>
-<p class="lead">Una tarjeta de 10 sellos con dos regalos por el camino. Los premios duran 60 días desde que los consigues.</p>
+<h2 class="display h-l">La tarjeta</h2>
+<p class="lead">Además de los niveles, tu tarjeta de 10 sellos te da dos premios por el camino, y vuelve a empezar. Cada premio dura 60 días.</p>
 <div><a class="btn btn-white" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Quiero mi tarjeta</a></div>
 </div>
 <div class="club-prizes"><div><b>6</b><span>sellos</span><p>Totopos gratis</p></div><div><b>10</b><span>sellos</span><p>Burrito gratis</p></div></div>
@@ -79,11 +94,21 @@
 <div class="wrap">
 <div class="sec-head"><h2 class="display h-l">Preguntas</h2></div>
 <div class="faq">
-<details open><summary>¿Cuesta algo?</summary><p>No. Unirse al Club de los Luchadores es gratis y puedes darte de baja cuando quieras.</p></details>
-<details><summary>¿Tengo que descargar una app?</summary><p>No. Tu tarjeta es una página web personal. Guárdala en favoritos o añádela a la pantalla de inicio del móvil.</p></details>
+<details open><summary>¿Cuesta algo?</summary><p>No. Entrar al Club de los Luchadores es gratis y puedes darte de baja cuando quieras.</p></details>
+<details><summary>¿Cómo subo de nivel?</summary><p>Con los sellos que sumas desde que entras. Los premios de la tarjeta no te bajan de nivel: los sellos para subir se cuentan siempre.</p></details>
+<details><summary>¿Cómo funciona el burrito gratis de Leyenda?</summary><p>Cada mes tienes un burrito gratis en tu tarjeta. Para seguir siendo Leyenda, haz al menos 4 pedidos al mes.</p></details>
+<details><summary>¿Tengo que descargar una app?</summary><p>No. Tu tarjeta es una página web personal. Guárdala en favoritos o en la pantalla de inicio del móvil.</p></details>
 <details><summary>¿Vale en todos los locales?</summary><p>Sí, en todos los Bestial: 4 cocinas en Madrid.</p></details>
-<details><summary>¿Me vais a llenar de mensajes?</summary><p>Solo si tú quieres. Al unirte eliges si quieres recibir ofertas. Si dices que no, solo usamos tu teléfono para tu tarjeta.</p></details>
-<details><summary>¿Qué pasa si no uso un premio?</summary><p>Cada premio caduca a los 60 días. En tu tarjeta ves los que tienes y hasta cuándo valen.</p></details>
+<details><summary>¿Me vais a llenar de mensajes?</summary><p>Solo si tú quieres. Al entrar eliges si quieres recibir ofertas.</p></details>
+</div>
+</div>
+</section>
+
+<section class="sec" style="padding-top:0">
+<div class="wrap">
+<div class="final dots">
+<h2 class="display">¿Te subes al ring?</h2>
+<a class="btn btn-yellow" href="https://flightdirector.peritomoreno360.com/unete/bestial" target="_blank" rel="noopener">Hazte luchador gratis</a>
 </div>
 </div>
 </section>
@@ -98,8 +123,8 @@
 <div class="social"><span title="Instagram · próximamente" aria-label="Instagram (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span title="TikTok · próximamente" aria-label="TikTok (próximamente)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.3 4.3 5 4.5"/></svg></span></div>
 </div>
 <div class="foot-cols">
-<div><b>Comer</b><a href="/carta">Carta</a><a href="/#locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
-<div><b>Bestial</b><a href="/club">Club de los Luchadores</a><a href="/#franquicias">Franquicias</a><a href="/#hoy">Cómo lo hacemos</a><a href="mailto:[correo]">Contacto</a></div>
+<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
+<div><b>Bestial</b><a href="/club">Club de los Luchadores</a><a href="/franquicias">Franquicias</a><a href="/como-lo-hacemos">Cómo lo hacemos</a><a href="mailto:[correo]">Contacto</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>

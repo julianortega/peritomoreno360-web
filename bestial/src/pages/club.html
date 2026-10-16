@@ -1,32 +1,48 @@
-<section class="club-hero">
-<div class="wrap club-split">
-<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
-<span class="eyebrow" style="color:var(--yellow)">Gratis · sin descargar nada</span>
-<h1 class="display h-xl">{{CLUB}}</h1>
-<p class="lead" style="color:#FFE3E6">Cada pedido suma un sello. Los sellos se convierten en comida gratis. Hazte {{CLUB_SOCIO}} en un minuto y llévate {{CLUB_REGALO}} sello de regalo solo por unirte.</p>
-<div class="ctas"><a class="btn btn-white" href="{{CLUB_URL}}" target="_blank" rel="noopener">Hazte {{CLUB_SOCIO}}</a><a class="btn btn-line-w" href="#como">Cómo funciona</a></div>
+<section class="ring">
+<img class="ring-bg" src="/assets/img/inferno.jpg" alt="" fetchpriority="high">
+<div class="wrap ring-in">
+<div class="ring-txt">
+<span class="ring-tag">{{CLUB}} · gratis</span>
+<h1 class="display">Sube<br>al <span>ring</span></h1>
+<p class="ring-lead">Cada pedido es un golpe. Suma sellos, sube de nivel y llega a <b>{{CLUB_TOP}}</b>: <b>un burrito gratis cada mes</b>. Para siempre que sigas peleando.</p>
+<div class="ctas"><a class="btn btn-yellow" href="{{CLUB_URL}}" target="_blank" rel="noopener">Hazte {{CLUB_SOCIO}} gratis</a><a class="btn btn-line-w" href="#niveles">Ver los niveles</a></div>
+<div class="ring-facts"><span><b>{{CLUB_REGALO}}</b> sello de regalo al entrar</span><span><b>4</b> niveles</span><span><b>0 €</b> y sin app</span></div>
 </div>
+<div class="ring-card">
+<span class="badge-lvl">{{CLUB_ICONO}} Nivel 3 · Campeón</span>
 {{CLUB_CARD}}
 </div>
+</div>
+<div class="ring-ropes" aria-hidden="true"><i></i><i></i><i></i></div>
 </section>
 
-<section id="como" class="sec">
+<div class="marquee" aria-hidden="true"><span>Novato ✱ Luchador ✱ Campeón ✱ Leyenda ✱ Burrito gratis cada mes ✱ Novato ✱ Luchador ✱ Campeón ✱ Leyenda ✱ Burrito gratis cada mes ✱</span></div>
+
+<section id="niveles" class="sec">
 <div class="wrap">
-<div class="sec-head"><h2 class="display h-l">Así de fácil</h2></div>
+<div class="sec-head"><div><span class="eyebrow">Los niveles</span><h2 class="display h-xl" style="margin-top:12px">De novato<br>a <span style="color:var(--red)">leyenda</span></h2></div>
+<p class="lead" style="max-width:440px">Cuantos más sellos sumas desde que entras, más alto llegas. Cada nivel se queda con todo lo del anterior y añade más. Arriba del todo, comes gratis cada mes.</p></div>
+<div class="ladder">{{CLUB_NIVELES}}</div>
+</div>
+</section>
+
+<section class="sec dark">
+<div class="wrap">
+<div class="sec-head"><h2 class="display h-l">Así se pelea</h2></div>
 <div class="grid g3 club-steps">
-<article class="card cream"><span class="num">1</span><h3>Únete</h3><p>Pon tu nombre y tu teléfono. Al momento tienes tu tarjeta en el móvil y {{CLUB_REGALO}} sello de regalo.</p></article>
-<article class="card cream"><span class="num">2</span><h3>Suma sellos</h3><p>Cada pedido es un sello {{CLUB_ICONO}}. En el local, dinos tu teléfono al pagar. Si pides a domicilio, guarda el número de pedido y te lo sumamos.</p></article>
-<article class="card cream"><span class="num">3</span><h3>Come gratis</h3><p>Al llegar a cada premio te damos un código. Enséñalo en caja y es tuyo. Al completar la tarjeta, empiezas otra.</p></article>
+<article class="card step-dark"><span class="num">1</span><h3>Entra</h3><p>Nombre y teléfono. En un minuto tienes tu tarjeta en el móvil y {{CLUB_REGALO}} sello de regalo.</p></article>
+<article class="card step-dark"><span class="num">2</span><h3>Suma</h3><p>Cada pedido es un sello {{CLUB_ICONO}}. En el local, di tu teléfono al pagar. A domicilio, guarda el número de pedido y te lo sumamos.</p></article>
+<article class="card step-dark"><span class="num">3</span><h3>Sube</h3><p>Totopos a los 6, burrito a los 10, y cada sello te acerca al siguiente nivel. A los {{CLUB_TOP_SELLOS}}, eres {{CLUB_TOP}}.</p></article>
 </div>
 </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec">
 <div class="wrap">
 <div class="band dots">
 <div style="display:flex;flex-direction:column;gap:18px">
-<h2 class="display h-l">Los premios</h2>
-<p class="lead">Una tarjeta de {{CLUB_TOTAL}} sellos con dos regalos por el camino. Los premios duran {{CLUB_CADUCA}} días desde que los consigues.</p>
+<h2 class="display h-l">La tarjeta</h2>
+<p class="lead">Además de los niveles, tu tarjeta de {{CLUB_TOTAL}} sellos te da dos premios por el camino, y vuelve a empezar. Cada premio dura {{CLUB_CADUCA}} días.</p>
 <div><a class="btn btn-white" href="{{CLUB_URL}}" target="_blank" rel="noopener">Quiero mi tarjeta</a></div>
 </div>
 <div class="club-prizes">{{CLUB_PREMIOS}}</div>
@@ -38,11 +54,21 @@
 <div class="wrap">
 <div class="sec-head"><h2 class="display h-l">Preguntas</h2></div>
 <div class="faq">
-<details open><summary>¿Cuesta algo?</summary><p>No. Unirse al {{CLUB}} es gratis y puedes darte de baja cuando quieras.</p></details>
-<details><summary>¿Tengo que descargar una app?</summary><p>No. Tu tarjeta es una página web personal. Guárdala en favoritos o añádela a la pantalla de inicio del móvil.</p></details>
+<details open><summary>¿Cuesta algo?</summary><p>No. Entrar al {{CLUB}} es gratis y puedes darte de baja cuando quieras.</p></details>
+<details><summary>¿Cómo subo de nivel?</summary><p>Con los sellos que sumas desde que entras. Los premios de la tarjeta no te bajan de nivel: los sellos para subir se cuentan siempre.</p></details>
+<details><summary>¿Cómo funciona el burrito gratis de {{CLUB_TOP}}?</summary><p>Cada mes tienes un burrito gratis en tu tarjeta. Para seguir siendo {{CLUB_TOP}}, haz al menos 4 pedidos al mes.</p></details>
+<details><summary>¿Tengo que descargar una app?</summary><p>No. Tu tarjeta es una página web personal. Guárdala en favoritos o en la pantalla de inicio del móvil.</p></details>
 <details><summary>¿Vale en todos los locales?</summary><p>Sí, en todos los {{MARCA}}: {{N_LOCALES}} cocinas en {{CIUDAD}}.</p></details>
-<details><summary>¿Me vais a llenar de mensajes?</summary><p>Solo si tú quieres. Al unirte eliges si quieres recibir ofertas. Si dices que no, solo usamos tu teléfono para tu tarjeta.</p></details>
-<details><summary>¿Qué pasa si no uso un premio?</summary><p>Cada premio caduca a los {{CLUB_CADUCA}} días. En tu tarjeta ves los que tienes y hasta cuándo valen.</p></details>
+<details><summary>¿Me vais a llenar de mensajes?</summary><p>Solo si tú quieres. Al entrar eliges si quieres recibir ofertas.</p></details>
+</div>
+</div>
+</section>
+
+<section class="sec" style="padding-top:0">
+<div class="wrap">
+<div class="final dots">
+<h2 class="display">¿Te subes al ring?</h2>
+<a class="btn btn-yellow" href="{{CLUB_URL}}" target="_blank" rel="noopener">Hazte {{CLUB_SOCIO}} gratis</a>
 </div>
 </div>
 </section>

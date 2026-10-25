@@ -416,3 +416,15 @@ article.cat{cursor:default}
 @media (max-width:700px){.cat-madrid{grid-template-columns:1fr}}
 .teaser.rev{grid-template-columns:1fr 1.1fr}.teaser.rev .teaser-img{order:2}.teaser.rev .teaser-img img{filter:none}
 @media (max-width:860px){.teaser.rev{grid-template-columns:1fr}.teaser.rev .teaser-img{order:0}}
+
+/* Página de cada local */
+.loc-page{align-items:stretch}
+.loc-map{border-radius:var(--r);overflow:hidden;background:var(--cream-2);min-height:360px}
+.loc-map iframe{display:block;width:100%;height:100%;min-height:360px;border:0}
+.loc-page .h-l{font-size:clamp(36px,4vw,56px)}
+.loc-modos{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.loc-modos li{padding-left:24px;position:relative;font-weight:600}
+.loc-modos li::before{content:"✱";position:absolute;left:0;color:var(--red)}
+.loc-strip-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.loc-page{grid-template-columns:1fr}.loc-strip-3{grid-template-columns:1fr}}
+@media (max-width:520px){.loc-h1{font-size:clamp(40px,11vw,56px)}}

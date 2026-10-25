@@ -31,6 +31,19 @@ LOCALES = [
     ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "Abrimos muy pronto", "pronto"),
     ("San Germán", "Calle San Germán, 11 · Madrid", "Abrimos muy pronto", "pronto"),
 ]
+# SEO de cada local: página propia en /locales/<slug>. Zona = barrio o municipio por el que la gente busca.
+# (slug, zona, código postal, localidad, texto propio de la página)
+LOCALES_SEO = {
+    "Melancólicos": ("melancolicos", "Arganzuela", "28005", "Madrid",
+        "Nuestra cocina de Melancólicos, junto a Madrid Río, prepara cada día los burritos, bowls y tacos que llegan a domicilio por Arganzuela y alrededores. No tiene sala: pídelo a casa o pasa a recogerlo sin esperar."),
+    "Manuel Becerra": ("manuel-becerra", "Manuel Becerra", "28028", "Madrid",
+        "A un paso de la plaza de Manuel Becerra, en la calle Vizconde de Matamala. Cocina abierta, tu burrito montado delante de ti y sitio para comer. También a domicilio y para recoger."),
+    "Majadahonda": ("majadahonda", "Majadahonda", "28220", "Majadahonda",
+        "Estamos montando nuestro local en la avenida Reyes Católicos. Muy pronto podrás comer aquí, pedir para recoger y recibir tu burrito a domicilio en Majadahonda."),
+    "San Germán": ("san-german", "Tetuán", "28020", "Madrid",
+        "Estamos montando nuestro local en la calle San Germán. Muy pronto podrás comer aquí, pedir para recoger y recibir tu burrito a domicilio por Tetuán."),
+}
+PRECIO = "€"                            # rango de precios para Google (€, €€…)
 # Club de clientes (fidelización). Las altas y los sellos los gestiona Flight Director (Club → Ajustes);
 # copia aquí los mismos premios. Para otra marca: cambia nombre, enlace (…/unete/<slug>) y premios.
 CLUB = {
@@ -135,9 +148,14 @@ def footer():
 </div>
 </footer>'''
 
-def page(name, body, title, desc, active, extra_head=""):
-    canon = f'<link rel="canonical" href="{DOMINIO}/{"" if name == "index" else name}">\n' if DOMINIO else ""
-    og_img = f'<meta property="og:image" content="{DOMINIO}/assets/img/hero-burritos.jpg">\n' if DOMINIO else ""
+NOINDEX = {"pago", "404"}
+
+def page(name, body, title, desc, active, extra_head="", img="hero-burritos"):
+    path = "" if name == "index" else name
+    canon = f'<link rel="canonical" href="{DOMINIO}/{path}">\n<meta property="og:url" content="{DOMINIO}/{path}">\n' if DOMINIO else ""
+    og_img = f'<meta property="og:image" content="{DOMINIO}/assets/img/{img}.jpg">\n' if DOMINIO else ""
+    robots = '<meta name="robots" content="noindex">\n' if name in NOINDEX else ""
+    ld = ld_script(jsonld(name))
     return f'''<!doctype html>
 <html lang="es">
 <head>
@@ -148,14 +166,17 @@ def page(name, body, title, desc, active, extra_head=""):
 {canon}<meta property="og:title" content="{_html.escape(title)}">
 <meta property="og:description" content="{_html.escape(desc)}">
 <meta property="og:type" content="website">
-{og_img}<meta name="theme-color" content="#D11F32">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="{_html.escape(MARCA_COMPLETA)}">
+<meta name="twitter:card" content="summary_large_image">
+{robots}{og_img}<meta name="theme-color" content="#D11F32">
 <link rel="icon" href="/assets/img/favicon.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="/assets/css/bestial.css?v={ver("assets/css/bestial.css")}">
-{extra_head}</head>
+{ld}{extra_head}</head>
 <body>
 <a class="sr" href="#main">Saltar al contenido</a>
 {header(active)}
@@ -214,6 +235,12 @@ def aviso_pedidos():
     return (f'<div class="soon-bar"><div class="wrap"><b>Muy pronto</b><span>Los pedidos online llegan en unos días. '
             f'Ya puedes montar tu burrito y ver precios; para pedir hoy, usa {apps} o ven a tu {_html.escape(MARCA)}.</span></div></div>')
 
+def slug(nombre):
+    return LOCALES_SEO[nombre][0]
+
+def maps_q(dir_):
+    return dir_.replace(" · ", ", ").replace(" ", "+")
+
 def locales_html():
     out = []
     for nombre, dir_, horario, tipo in LOCALES:
@@ -221,10 +248,10 @@ def locales_html():
         badge = BADGE[tipo]
         if tipo == "pronto":
             out.append(f'''<article class="card soon"><span class="pill">{badge}</span><h3>{_html.escape(nombre)}</h3><p>{_html.escape(dir_)}</p><p class="soon-txt">🚧 Estamos en obras. {horario}.</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query={dir_.replace(" · ", ", ").replace(" ", "+")}" target="_blank" rel="noopener">Dónde estará →</a></div></article>''')
+<div class="actions"><a class="link" href="/locales/{slug(nombre)}">Ver el local →</a><a class="link" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">Dónde estará →</a></div></article>''')
             continue
         out.append(f'''<article class="card"><span class="pill">{badge}</span><h3>{_html.escape(nombre)}</h3><p>{_html.escape(dir_)}</p><p class="mut">{horario}</p>
-<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>''')
+<div class="actions"><a class="link" href="/locales/{slug(nombre)}">Ver el local →</a><a class="link" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">Cómo llegar →</a></div></article>''')
     return "\n".join(out)
 
 def club_card(sellos=0):
@@ -260,8 +287,125 @@ def club_premios():
     return "".join(f'<div><b>{n}</b><span>sellos</span><p>{_html.escape(pr)}</p></div>' for n, pr in sorted(CLUB["premios"]))
 
 def locales_mini():
-    return "".join(f'<a class="loc-mini" href="/locales"><b>{_html.escape(n)}</b><span>{_html.escape(d)}</span>'
+    return "".join(f'<a class="loc-mini" href="/locales/{slug(n)}"><b>{_html.escape(n)}</b><span>{_html.escape(d)}</span>'
                    f'<em>{BADGE[t]}</em></a>' for n, d, h, t in LOCALES)
+
+def ld_script(obj):
+    if not obj:
+        return ""
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + '</script>\n'
+
+# ---------- datos estructurados (schema.org) para Google ----------
+def url(path=""):
+    return f"{DOMINIO}/{path}"
+
+def org():
+    o = {"@type": "Organization", "@id": url("#marca"), "name": MARCA_COMPLETA, "url": url(), "logo": url("assets/img/logo-negro.png"),
+         "parentOrganization": {"@type": "Organization", "name": "Perito Moreno 360", "url": GRUPO_URL}}
+    same = [u for u in (INSTAGRAM, TIKTOK) if u]
+    if same:
+        o["sameAs"] = same
+    return o
+
+def restaurante(nombre, dir_, horario, tipo):
+    sl, zona, cp, localidad, _ = LOCALES_SEO[nombre]
+    calle = dir_.split(" · ")[0]
+    r = {"@type": "Restaurant", "@id": url(f"locales/{sl}#local"), "name": f"{MARCA_COMPLETA} {nombre}", "url": url(f"locales/{sl}"),
+         "image": url("assets/img/hero-burritos.jpg"), "servesCuisine": ["Mexicana", "Tex-Mex"], "priceRange": PRECIO,
+         "address": {"@type": "PostalAddress", "streetAddress": calle, "postalCode": cp, "addressLocality": localidad,
+                     "addressRegion": "Comunidad de Madrid", "addressCountry": "ES"},
+         "areaServed": zona, "hasMenu": url("carta"), "acceptsReservations": False, "brand": {"@id": url("#marca")}}
+    if tipo == "cocina":
+        r["description"] = "Cocina solo para pedidos a domicilio y para recoger."
+    return r
+
+def carta_ld():
+    secs = []
+    for sid, title, sub, items in PRODUCTS:
+        secs.append({"@type": "MenuSection", "name": m(title), "hasMenuItem": [
+            {"@type": "MenuItem", "name": m(n), **({"description": d} if d else {}),
+             "offers": {"@type": "Offer", "price": f"{pr:.2f}", "priceCurrency": "EUR"}} for _, n, d, pr, _ in items]})
+    return {"@type": "Menu", "@id": url("carta#menu"), "name": f"Carta de {MARCA_COMPLETA}", "url": url("carta"), "inLanguage": "es", "hasMenuSection": secs}
+
+def migas(*pares):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": url(p)} for i, (n, p) in enumerate(pares)]}
+
+def jsonld(name):
+    abiertos = [l for l in LOCALES if l[3] != "pronto"]
+    g = []
+    if name == "index":
+        g = [{"@type": "WebSite", "@id": url("#web"), "name": MARCA_COMPLETA, "url": url(), "inLanguage": "es"}, org()] + [restaurante(*l) for l in abiertos]
+    elif name == "carta":
+        g = [carta_ld(), migas(("Inicio", ""), ("Carta", "carta"))]
+    elif name == "locales":
+        g = [org()] + [restaurante(*l) for l in abiertos] + [migas(("Inicio", ""), ("Locales", "locales"))]
+    elif name == "catering":
+        g = [{"@type": "Service", "name": f"Catering de burritos y tacos en {CIUDAD}", "serviceType": "Catering",
+              "provider": {"@id": url("#marca")}, "areaServed": {"@type": "AdministrativeArea", "name": f"Comunidad de {CIUDAD}"},
+              "description": "Servicio completo (montaje, servicio y recogida) o solo entrega de bandejas listas para servir.", "url": url("catering")},
+             org(), migas(("Inicio", ""), ("Catering", "catering"))]
+    elif name.startswith("locales/"):
+        l = next(l for l in LOCALES if f"locales/{slug(l[0])}" == name)
+        g = ([restaurante(*l)] if l[3] != "pronto" else []) + [migas(("Inicio", ""), ("Locales", "locales"), (l[0], name))]
+    elif name in ("club", "franquicias", "como-lo-hacemos", "pedir", "nutricion"):
+        g = [migas(("Inicio", ""), (PAGES[name][0].split(" · ")[0], name))]
+    return {"@context": "https://schema.org", "@graph": g} if g else None
+
+# ---------- páginas de cada local ----------
+def local_page(nombre, dir_, horario, tipo):
+    sl, zona, cp, localidad, texto = LOCALES_SEO[nombre]
+    q = maps_q(dir_)
+    if tipo == "cocina":
+        h1, title = f"Burritos a domicilio en {zona}", f"Burritos y tacos a domicilio en {zona} · {MARCA} {nombre}"
+        desc = f"Burritos, bowls y tacos a domicilio en {zona} ({CIUDAD}) desde nuestra cocina de {nombre}. Pide online o recoge sin esperar."
+        modos = '<li>A domicilio por la zona</li><li>Pide y recoge sin colas</li><li>Sin sala para comer</li>'
+    elif tipo == "pronto":
+        h1, title = f"Burritos y tacos en {zona}", f"{MARCA} en {zona}: abrimos muy pronto · {MARCA_COMPLETA}"
+        desc = f"Muy pronto abrimos {MARCA} en {dir_.split(' · ')[0]} ({zona}): burritos, bowls y tacos recién hechos para comer aquí, recoger o a domicilio."
+        modos = '<li>Comer aquí</li><li>Pide y recoge</li><li>A domicilio por la zona</li>'
+    else:
+        h1, title = f"Burritos y tacos en {zona}", f"Burritos y tacos en {zona}, {CIUDAD} · {MARCA} {nombre}"
+        desc = f"{MARCA} {nombre}: burritos, bowls y tacos recién hechos en {dir_.split(' · ')[0]}. Ven a comer, recoge sin colas o pide a domicilio."
+        modos = '<li>Come aquí, con cocina abierta</li><li>Pide y recoge sin colas</li><li>A domicilio por la zona</li>'
+    soon = tipo == "pronto"
+    hor = f'<p class="soon-txt">🚧 Estamos en obras. {horario}.</p>' if soon else f'<p><b>Horario</b><br>{horario}</p>'
+    cta = (f'<a class="btn btn-white" href="{CLUB["url"]}" target="_blank" rel="noopener">Únete al club mientras</a>' if soon
+           else '<a class="btn btn-white" href="/pedir">Pide online</a>')
+    otros = "".join(f'<a class="loc-mini" href="/locales/{slug(n)}"><b>{_html.escape(n)}</b><span>{_html.escape(d)}</span><em>{BADGE[t]}</em></a>'
+                    for n, d, h, t in LOCALES if n != nombre)
+    body = f'''<section class="page-hero dots">
+<div class="wrap">
+<div><a href="/locales" style="font-weight:700">← Todos los locales</a><h1 class="display h-xl loc-h1" style="margin-top:8px">{_html.escape(h1)}</h1><p>{_html.escape(MARCA)} {_html.escape(nombre)} · {_html.escape(dir_)}</p></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">{cta}<a class="btn btn-line-w" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">{"Dónde estará" if soon else "Cómo llegar"}</a></div>
+</div>
+</section>
+<section class="sec">
+<div class="wrap split loc-page">
+<div class="loc-map"><iframe title="Mapa de {_html.escape(MARCA)} {_html.escape(nombre)}" src="https://www.google.com/maps?q={q}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<div class="card{" soon" if soon else ""}" style="gap:16px"><span class="pill">{BADGE[tipo]}</span><h2 class="display h-l">{_html.escape(MARCA)} {_html.escape(nombre)}</h2>
+<p class="lead">{_html.escape(texto)}</p>
+<p><b>Dirección</b><br>{_html.escape(dir_.replace(" · ", ", "))}, {cp}</p>{hor}
+<ul class="loc-modos">{modos}</ul></div>
+</div>
+</section>
+<section class="sec" style="padding-top:0">
+<div class="wrap">
+<div class="sec-head"><h2 class="display h-l">Qué pedir</h2><a class="link" href="/carta">Ver toda la carta →</a></div>
+<div class="grid g3">
+<a class="cat" href="/carta#bestiales"><img src="/assets/img/cat-bestiales.jpg" alt="" loading="lazy"><h3>Los {_html.escape(MARCA)}es</h3><p>El Salvaje, La Indómita, El Jabalí e Inferno.</p></a>
+<a class="cat" href="/carta#tacos"><img src="/assets/img/cat-tacos.jpg" alt="" loading="lazy"><h3>Tacos y quesadillas</h3><p>Tortilla de maíz y carne jugosa, al momento.</p></a>
+<a class="cat" href="/catering"><img src="/assets/img/catering.jpg" alt="" loading="lazy"><h3>Catering</h3><p>Bandejas para tu oficina o tu evento en todo {CIUDAD}.</p></a>
+</div>
+</div>
+</section>
+<section class="sec" style="padding-top:0">
+<div class="wrap">
+<div class="sec-head"><h2 class="display h-l">Otros locales</h2></div>
+<div class="loc-strip loc-strip-3">{otros}</div>
+</div>
+</section>'''
+    return title, desc, body
 
 def data_script(obj):
     return '<script>window.CARTA=' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + ';</script>\n'
@@ -285,13 +429,13 @@ def tokens(s):
 
 PAGES = {
     # nombre: (título, descripción, activo, datos para JS)
-    "index": (f"{MARCA_COMPLETA} · Burritos y tacos hechos al momento en {CIUDAD}",
+    "index": (f"{MARCA_COMPLETA} · Burritos, bowls y tacos en {CIUDAD}",
               f"Burritos, bowls y tacos recién hechos. Monta el tuyo, pide online sin comisiones o ven a uno de nuestros locales en {CIUDAD}.", "home", None),
-    "carta": (f"Carta · {MARCA_COMPLETA}", "Burritos, bowls, tacos, quesadillas, nachos, bebidas y postres con sus precios.", "carta", None),
-    "pedir": (f"Pide online · {MARCA_COMPLETA}", "Monta tu burrito o bowl y pide a domicilio o para recoger, sin comisiones de app.", "medida", "shop"),
+    "carta": (f"Carta de burritos, bowls y tacos · {MARCA_COMPLETA}", f"La carta de {MARCA} en {CIUDAD}: burritos, bowls, tacos, quesadillas, nachos, bebidas y postres con sus precios.", "carta", None),
+    "pedir": (f"Burritos a domicilio en {CIUDAD} · Pide online · {MARCA}", f"Monta tu burrito o bowl y pide a domicilio en {CIUDAD} o para recoger, directo y sin comisiones de app.", "medida", "shop"),
     "pago": (f"Tu pedido · {MARCA_COMPLETA}", "Revisa tu pedido y tus datos de entrega.", "", "shop"),
     "nutricion": (f"Calculadora nutricional · {MARCA_COMPLETA}", "Calorías, nutrientes y alérgenos de tu burrito o bowl.", "", "calc"),
-    "locales": (f"Locales · {MARCA_COMPLETA}", f"Nuestros locales en {CIUDAD}: dirección, horario y cómo pedir.", "locales", None),
+    "locales": (f"Burritos y tacos en {CIUDAD}: locales · {MARCA_COMPLETA}", f"Burritos y tacos en {CIUDAD}: nuestros locales de " + ", ".join(f"{n} ({LOCALES_SEO[n][1]})" if LOCALES_SEO[n][1] != n else n for n, *_ in LOCALES) + ", con dirección, horario y cómo pedir.", "locales", None),
     "como-lo-hacemos": (f"Cómo lo hacemos · {MARCA_COMPLETA}", "Producto del día y cada burrito montado al momento, a la vista.", "hoy", None),
     "franquicias": (f"Franquicias · {MARCA_COMPLETA}", f"Abre tu {MARCA}: 2% de royalty el primer año y 4% desde el segundo, sin letra pequeña.", "franquicias", None),
     "catering": (f"Catering en {CIUDAD} · {MARCA_COMPLETA}", f"Catering de burritos y tacos en todo {CIUDAD}: servicio completo o solo entrega, en bandejas listas para servir.", "catering", None),
@@ -334,9 +478,15 @@ def main():
             head = data_script({"groups": shop["groups"], "presets": shop["presets"], "base": shop["base"], "products": products_json()})
         elif data == "calc":
             head = data_script({"groups": calc["groups"], "presets": calc["presets"]})
-        (OUT / f"{name}.html").write_text(page(name, body, title, desc, active, head))
+        (OUT / f"{name}.html").write_text(page(name, body, title, desc, active, head, "catering" if name == "catering" else "hero-burritos"))
+    (OUT / "locales").mkdir(exist_ok=True)
+    for f in (OUT / "locales").glob("*.html"):
+        f.unlink()
+    for l in LOCALES:
+        title, desc, body = local_page(*l)
+        (OUT / "locales" / f"{slug(l[0])}.html").write_text(page(f"locales/{slug(l[0])}", body, title, desc, "locales"))
     if DOMINIO:
-        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club", "locales", "como-lo-hacemos", "catering", "franquicias"))
+        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club", "locales", "como-lo-hacemos", "catering", "franquicias") + tuple(f"locales/{slug(l[0])}" for l in LOCALES))
         (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
         (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
     else:
@@ -344,7 +494,7 @@ def main():
         sm = OUT / "sitemap.xml"
         if sm.exists():
             sm.unlink()
-    print(f"ok · {len(PAGES)} páginas · marca «{MARCA}» · dominio {DOMINIO or '(sin dominio)'}")
+    print(f"ok · {len(PAGES) + len(LOCALES)} páginas · marca «{MARCA}» · dominio {DOMINIO or '(sin dominio)'}")
 
 if __name__ == "__main__":
     main()

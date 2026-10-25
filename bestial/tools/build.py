@@ -106,6 +106,7 @@ def header(active):
 {a("/locales", "Locales", "locales")}
 {a("/como-lo-hacemos", "Cómo lo hacemos", "hoy")}
 {a("/club", "Club", "club")}
+{a("/catering", "Catering", "catering")}
 {a("/franquicias", "Franquicias", "franquicias")}
 <div class="nav-actions">
 <a class="icon-btn" href="/pedir#pedido" aria-label="Tu pedido">{svg("bag")}<span class="cart-count" data-cart-count></span></a>
@@ -125,7 +126,7 @@ def footer():
 <div class="social">{social_links()}</div>
 </div>
 <div class="foot-cols">
-<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/nutricion">Nutrición y alérgenos</a></div>
+<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/catering">Catering</a><a href="/nutricion">Nutrición y alérgenos</a></div>
 <div><b>{_html.escape(MARCA)}</b><a href="/club">{_html.escape(CLUB["nombre"])}</a><a href="/franquicias">Franquicias</a><a href="/como-lo-hacemos">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
@@ -293,6 +294,7 @@ PAGES = {
     "locales": (f"Locales · {MARCA_COMPLETA}", f"Nuestros locales en {CIUDAD}: dirección, horario y cómo pedir.", "locales", None),
     "como-lo-hacemos": (f"Cómo lo hacemos · {MARCA_COMPLETA}", "Producto del día y cada burrito montado al momento, a la vista.", "hoy", None),
     "franquicias": (f"Franquicias · {MARCA_COMPLETA}", f"Abre tu {MARCA}: 2% de royalty el primer año y 4% desde el segundo, sin letra pequeña.", "franquicias", None),
+    "catering": (f"Catering en {CIUDAD} · {MARCA_COMPLETA}", f"Catering de burritos y tacos en todo {CIUDAD}: servicio completo o solo entrega, en bandejas listas para servir.", "catering", None),
     "club": (f"{CLUB['nombre']} · {MARCA_COMPLETA}", f"Únete gratis al {CLUB['nombre']}: cada pedido suma un sello y los sellos se convierten en comida gratis.", "club", None),
     "aviso-legal": (f"Aviso legal · {MARCA_COMPLETA}", "Aviso legal.", "", None),
     "privacidad": (f"Privacidad · {MARCA_COMPLETA}", "Política de privacidad.", "", None),
@@ -334,7 +336,7 @@ def main():
             head = data_script({"groups": calc["groups"], "presets": calc["presets"]})
         (OUT / f"{name}.html").write_text(page(name, body, title, desc, active, head))
     if DOMINIO:
-        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club", "locales", "como-lo-hacemos", "franquicias"))
+        urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in ("index", "carta", "pedir", "nutricion", "club", "locales", "como-lo-hacemos", "catering", "franquicias"))
         (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
         (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
     else:

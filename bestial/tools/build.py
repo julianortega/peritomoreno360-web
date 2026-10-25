@@ -23,11 +23,12 @@ CIF = "[CIF]"
 DOMICILIO = "[Domicilio]"
 GRUPO_URL = "https://www.peritomoreno360.com"
 APPS_DELIVERY = ["Uber Eats", "[Glovo]", "[Just Eat]"]
-# Locales (de Flight Director). Horarios pendientes.
+PEDIDOS_ONLINE = False                  # False = cartel «muy pronto» en Pide online y Pago (el montador se puede usar igual)
+# Locales (de Flight Director). Horarios pendientes. Tipo: "local", "cocina" (solo reparto) o "pronto" (en obras).
 LOCALES = [
     ("San Germán", "Calle San Germán, 11 · Madrid", "[Horario]", "local"),
     ("Manuel Becerra", "Calle Vizconde de Matamala, 7 · Madrid", "[Horario]", "local"),
-    ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "[Horario]", "local"),
+    ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "Abrimos muy pronto", "pronto"),   # "pronto" = en obras
     ("Melancólicos", "Paseo de los Melancólicos, 7 · Madrid", "[Horario]", "cocina"),
 ]
 # Club de clientes (fidelización). Las altas y los sellos los gestiona Flight Director (Club → Ajustes);
@@ -203,11 +204,24 @@ def products_json():
             d[pid] = {"name": m(name), "price": price}
     return d
 
+BADGE = {"local": "Local", "cocina": "Solo a domicilio y recogida", "pronto": "🚧 Próximamente"}
+
+def aviso_pedidos():
+    if PEDIDOS_ONLINE:
+        return ""
+    apps = ", ".join(a for a in APPS_DELIVERY if not a.startswith("["))
+    return (f'<div class="soon-bar"><div class="wrap"><b>Muy pronto</b><span>Los pedidos online llegan en unos días. '
+            f'Ya puedes montar tu burrito y ver precios; para pedir hoy, usa {apps} o ven a tu {_html.escape(MARCA)}.</span></div></div>')
+
 def locales_html():
     out = []
     for nombre, dir_, horario, tipo in LOCALES:
         q = dir_.replace(" · ", ", ").replace(" ", "+")
-        badge = "Solo a domicilio y recogida" if tipo == "cocina" else "Local"
+        badge = BADGE[tipo]
+        if tipo == "pronto":
+            out.append(f'''<article class="card soon"><span class="pill">{badge}</span><h3>{_html.escape(nombre)}</h3><p>{_html.escape(dir_)}</p><p class="soon-txt">🚧 Estamos en obras. {horario}.</p>
+<div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query={dir_.replace(" · ", ", ").replace(" ", "+")}" target="_blank" rel="noopener">Dónde estará →</a></div></article>''')
+            continue
         out.append(f'''<article class="card"><span class="pill">{badge}</span><h3>{_html.escape(nombre)}</h3><p>{_html.escape(dir_)}</p><p class="mut">{horario}</p>
 <div class="actions"><a class="link" href="https://www.google.com/maps/search/?api=1&query={q}" target="_blank" rel="noopener">Cómo llegar →</a><a class="link" href="/pedir">Pedir →</a></div></article>''')
     return "\n".join(out)
@@ -246,7 +260,7 @@ def club_premios():
 
 def locales_mini():
     return "".join(f'<a class="loc-mini" href="/locales"><b>{_html.escape(n)}</b><span>{_html.escape(d)}</span>'
-                   f'<em>{"Solo a domicilio y recogida" if t == "cocina" else "Local"}</em></a>' for n, d, h, t in LOCALES)
+                   f'<em>{BADGE[t]}</em></a>' for n, d, h, t in LOCALES)
 
 def data_script(obj):
     return '<script>window.CARTA=' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + ';</script>\n'
@@ -255,7 +269,7 @@ def tokens(s):
     rep = {
         "MARCA": _html.escape(MARCA), "MARCA_COMPLETA": _html.escape(MARCA_COMPLETA), "CIUDAD": CIUDAD,
         "EMAIL": EMAIL, "TITULAR": TITULAR, "CIF": CIF, "DOMICILIO": DOMICILIO, "N_LOCALES": str(len(LOCALES)),
-        "LOCALES": locales_html(), "LOCALES_MINI": locales_mini(), "GRUPO_URL": GRUPO_URL, "MENU": menu_html(False), "MENU_SHOP": menu_html(True),
+        "LOCALES": locales_html(), "AVISO_PEDIDOS": aviso_pedidos(), "LOCALES_MINI": locales_mini(), "GRUPO_URL": GRUPO_URL, "MENU": menu_html(False), "MENU_SHOP": menu_html(True),
         "SUBNAV": subnav(), "SUBNAV_SHOP": subnav('<a href="#medida" class="on">A tu medida</a>'),
         "SOCIAL": social_links(), "APPS": "".join(f"<span>{a}</span>" for a in APPS_DELIVERY),
         "CLUB": _html.escape(CLUB["nombre"]), "CLUB_URL": CLUB["url"], "CLUB_SOCIO": CLUB["socio"],

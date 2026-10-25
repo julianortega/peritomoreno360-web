@@ -390,3 +390,12 @@ section{scroll-margin-top:90px}
 .lvl h3{font-size:clamp(32px,2.6vw,44px)}
 .lvl-4 h3{font-size:clamp(36px,3.2vw,54px)}
 .badge-lvl{right:auto;left:2%;top:-22px;transform:rotate(-8deg)}
+
+/* Próximamente */
+.soon-bar{background:var(--yellow);color:var(--ink);border-bottom:4px solid var(--ink)}
+.soon-bar .wrap{display:flex;align-items:center;gap:14px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.soon-bar b{background:var(--ink);color:var(--yellow);font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;padding:4px 12px;border-radius:8px;transform:rotate(-2deg)}
+.soon-bar span{font-weight:700;font-size:15px;flex:1;min-width:240px}
+.card.soon{border:3px dashed var(--ink);background:repeating-linear-gradient(-45deg,#FFF6EC 0 18px,#FFF1DC 18px 36px)}
+.card.soon .pill{background:var(--yellow);color:var(--ink)}
+.soon-txt{font-weight:800}

@@ -26,10 +26,10 @@ APPS_DELIVERY = ["Uber Eats", "[Glovo]", "[Just Eat]"]
 PEDIDOS_ONLINE = False                  # False = cartel «muy pronto» en Pide online y Pago (el montador se puede usar igual)
 # Locales (de Flight Director). Horarios pendientes. Tipo: "local", "cocina" (solo reparto) o "pronto" (en obras).
 LOCALES = [
-    ("San Germán", "Calle San Germán, 11 · Madrid", "[Horario]", "local"),
-    ("Manuel Becerra", "Calle Vizconde de Matamala, 7 · Madrid", "[Horario]", "local"),
-    ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "Abrimos muy pronto", "pronto"),   # "pronto" = en obras
     ("Melancólicos", "Paseo de los Melancólicos, 7 · Madrid", "[Horario]", "cocina"),
+    ("Manuel Becerra", "Calle Vizconde de Matamala, 7 · Madrid", "[Horario]", "local"),
+    ("Majadahonda", "Av. Reyes Católicos, 8 · Majadahonda", "Abrimos muy pronto", "pronto"),
+    ("San Germán", "Calle San Germán, 11 · Madrid", "Abrimos muy pronto", "pronto"),
 ]
 # Club de clientes (fidelización). Las altas y los sellos los gestiona Flight Director (Club → Ajustes);
 # copia aquí los mismos premios. Para otra marca: cambia nombre, enlace (…/unete/<slug>) y premios.

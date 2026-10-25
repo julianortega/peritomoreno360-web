@@ -131,7 +131,7 @@
         var on = sel[g.key].indexOf(it.id) >= 0;
         var meta = kind === 'shop'
           ? ((it.price ? '+' + eur(it.price) + ' · ' : (g.key === 'formato' || g.key === 'arroz' || g.key === 'proteina' || g.key === 'picante' ? 'Incluido · ' : '')) + Math.round(it.v[0]) + ' kcal')
-          : ((it.g ? it.g + ' g · ' : '') + Math.round(it.v[0]) + ' kcal');
+          : ((it.u ? it.u + ' · ' : it.g ? it.g + ' g · ' : '') + Math.round(it.v[0]) + ' kcal');
         if (g.key === 'picante') meta = 'Incluido';
         return '<button type="button" class="chip" data-g="' + gi + '" data-opt="' + esc(it.id) + '" aria-pressed="' + on + '">' + esc(it.name) + '<small>' + meta + '</small></button>';
       }).join('');

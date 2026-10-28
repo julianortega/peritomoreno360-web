@@ -15,7 +15,7 @@ def _ver(rel):
     return hashlib.md5((OUT / rel).read_bytes()).hexdigest()[:10]
 
 import json
-ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Urb. Las Dalias 9", "postalCode": "39100", "addressLocality": "Bezana", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
+ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Barrio El Urro 86, portal B", "postalCode": "39130", "addressLocality": "Marina de Cudeyo", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
 FD_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Flight Director", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Gestión de locales de hostelería: escandallos, cocina, equipo y turnos, checklists y APPCC, compras y cuenta de resultados en directo.", "url": "https://www.peritomoreno360.com/flight-director", "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
 
 FONTS_BASE = "family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600;700"
@@ -69,7 +69,7 @@ FOOTER = '''<footer class="site-footer">
 <div class="foot-brand">
 <b>Perito Moreno 360</b>
 <span>Perito Moreno 360 SL · CIF B-21797493</span>
-<span>Urb. Las Dalias 9, 39100 Bezana (Cantabria)</span>
+<span>Barrio El Urro 86, portal B, 39130 Elechas, Marina de Cudeyo (Cantabria)</span>
 <a href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a>
 ''' + SOCIAL_HTML + '''
 </div>
@@ -77,7 +77,7 @@ FOOTER = '''<footer class="site-footer">
 <div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
 <div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
-<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
+<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
@@ -191,6 +191,7 @@ PAGES = [
     ("control-food-cost-restaurante", "Cómo calcular y controlar el food cost de un restaurante · Guía", "Qué es el food cost, cómo se calcula con un ejemplo, qué porcentaje es bueno y 7 formas de controlarlo en tu restaurante.", "fd", "fd", "control-food-cost-restaurante", ("Guía food cost", "Flight Director", "¿Quieres controlar tu food cost sin Excel?", "Déjanos tus datos y te enseñamos cómo lo hace Flight Director.")),
     ("app-cuadrantes-hosteleria", "App de cuadrantes y fichajes para hostelería · Flight Director", "Cuadrantes de turnos según la venta prevista, coste de personal antes de publicar y fichajes para el registro de jornada. App para restaurantes.", "fd", "fd", "app-cuadrantes-hosteleria", ("App de cuadrantes", "Flight Director", "¿Te enseñamos tus cuadrantes en Flight Director?", "Déjanos tus datos y te contactaremos nosotros para hacerte una demo.")),
     ("aviso-legal", "Aviso legal · Perito Moreno 360", "Aviso legal del sitio web de Perito Moreno 360 SL.", "", "base", "aviso-legal", None),
+    ("condiciones-contratacion", "Condiciones de contratación · Perito Moreno 360", "Condiciones de contratación de los servicios de Perito Moreno 360 SL: precios, forma de pago, plazos, desistimiento y devoluciones.", "", "base", "condiciones-contratacion", None),
     ("privacidad", "Política de privacidad · Perito Moreno 360", "Política de privacidad de Perito Moreno 360 SL.", "", "base", "privacidad", None),
     ("cookies", "Política de cookies · Perito Moreno 360", "Política de cookies del sitio web de Perito Moreno 360 SL.", "", "base", "cookies", None),
     ("404", "Página no encontrada · Perito Moreno 360", "La página que buscas no existe.", "", "base", "404", None),

@@ -15,14 +15,21 @@ MARCA_COMPLETA = "Bestial Burritos & Tacos"
 CIUDAD = "Madrid"
 DOMINIO = ""                            # p. ej. "https://www.bestialburritos.com" (vacío mientras no haya dominio)
 LOGO = "logo"                           # "logo" usa assets/img/logo-negro.png y logo-blanco.png; "" usa el nombre en texto
-EMAIL = "[correo]"                      # p. ej. "hola@bestialburritos.com"
+EMAIL = "julian.ortega@peritomoreno360.com"  # contacto de la web (aviso legal, privacidad, pedidos)
 INSTAGRAM = ""                          # URL completa; vacío = icono sin enlace
 TIKTOK = ""
-TITULAR = "[Razón social]"             # empresa que opera la web (aviso legal y pie)
-CIF = "[CIF]"
-DOMICILIO = "[Domicilio]"
+TITULAR = "Formentera Brands S.L."      # empresa titular de la web (aviso legal y pie)
+CIF = "B93776763"
+DOMICILIO = "Urb. Las Dalias 9, 39100 Bezana (Cantabria)"
+# Sociedades que venden en cada local: cada pedido online lo vende y factura la del local que lo prepara.
+# (razón social, CIF, domicilio social). Un local que no esté en SOCIEDAD_LOCAL no acepta pedidos desde esta web.
+SOCIEDADES = {
+    "formentera": ("Formentera Brands S.L.", "B93776763", "Urb. Las Dalias 9, 39100 Bezana (Cantabria)"),
+    "simbasona": ("Simbasona S.L.", "B05816426", "Calle Zuloaga 14, 3º D, 28222 Majadahonda (Madrid)"),
+}
+SOCIEDAD_LOCAL = {"Melancólicos": "formentera", "Majadahonda": "simbasona"}
 GRUPO_URL = "https://www.peritomoreno360.com"
-APPS_DELIVERY = ["Uber Eats", "[Glovo]", "[Just Eat]"]
+APPS_DELIVERY = ["Uber Eats"]
 PEDIDOS_ONLINE = False                  # False = cartel «muy pronto» en Pide online y Pago (el montador se puede usar igual)
 # Locales (de Flight Director). Horarios pendientes. Tipo: "local", "cocina" (solo reparto) o "pronto" (en obras).
 LOCALES = [
@@ -141,7 +148,7 @@ def footer():
 <div class="foot-cols">
 <div><b>Comer</b><a href="/carta">Carta</a><a href="/locales">Locales</a><a href="/pedir">Pedir online</a><a href="/catering">Catering</a><a href="/nutricion">Nutrición y alérgenos</a></div>
 <div><b>{_html.escape(MARCA)}</b><a href="/club">{_html.escape(CLUB["nombre"])}</a><a href="/franquicias">Franquicias</a><a href="/como-lo-hacemos">Cómo lo hacemos</a><a href="mailto:{EMAIL}">Contacto</a></div>
-<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
+<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
 <div class="foot-bottom"><span>© <span data-year>2026</span> {_html.escape(MARCA_COMPLETA)} · {TITULAR} · {CIF}</span><a href="{GRUPO_URL}" target="_blank" rel="noopener">Una marca de Perito Moreno 360</a></div>
@@ -234,6 +241,29 @@ def aviso_pedidos():
     apps = ", ".join(a for a in APPS_DELIVERY if not a.startswith("["))
     return (f'<div class="soon-bar"><div class="wrap"><b>Muy pronto</b><span>Los pedidos online llegan en unos días. '
             f'Ya puedes montar tu burrito y ver precios; para pedir hoy, usa {apps} o ven a tu {_html.escape(MARCA)}.</span></div></div>')
+
+def vendedores_html():
+    """Qué sociedad vende en cada local (aviso legal, condiciones y privacidad)."""
+    out = []
+    for nombre, dir_, _h, _t in LOCALES:
+        k = SOCIEDAD_LOCAL.get(nombre)
+        if not k:
+            continue
+        rs, cif, dom = SOCIEDADES[k]
+        out.append(f'<li><b>{_html.escape(MARCA)} {_html.escape(nombre)}</b> ({_html.escape(dir_.replace(" · ", ", "))}): '
+                   f'{_html.escape(rs)}, CIF {cif}, con domicilio social en {_html.escape(dom)}.</li>')
+    return "<ul>" + "".join(out) + "</ul>"
+
+def locales_pedidos():
+    return " y ".join(n for n, *_ in LOCALES if n in SOCIEDAD_LOCAL)
+
+def vende(nombre):
+    k = SOCIEDAD_LOCAL.get(nombre)
+    if not k:
+        return ""
+    rs, cif, _d = SOCIEDADES[k]
+    return (f'<p class="mut" style="font-size:14px">Local operado por {_html.escape(rs)} (CIF {cif}), '
+            f'que vende y factura los pedidos de este local.</p>')
 
 def slug(nombre):
     return LOCALES_SEO[nombre][0]
@@ -385,7 +415,7 @@ def local_page(nombre, dir_, horario, tipo):
 <div class="loc-map"><iframe title="Mapa de {_html.escape(MARCA)} {_html.escape(nombre)}" src="https://www.google.com/maps?q={q}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 <div class="card{" soon" if soon else ""}" style="gap:16px"><span class="pill">{BADGE[tipo]}</span><h2 class="display h-l">{_html.escape(MARCA)} {_html.escape(nombre)}</h2>
 <p class="lead">{_html.escape(texto)}</p>
-<p><b>Dirección</b><br>{_html.escape(dir_.replace(" · ", ", "))}, {cp}</p>{hor}
+<p><b>Dirección</b><br>{_html.escape(dir_.replace(" · ", ", "))}, {cp}</p>{hor}{vende(nombre)}
 <ul class="loc-modos">{modos}</ul></div>
 </div>
 </section>
@@ -424,6 +454,7 @@ def tokens(s):
         "CLUB_TOP_SELLOS": str(CLUB["niveles"][-1][1]),
         "CLUB_TOTAL": str(max(n for n, _ in CLUB["premios"])),
         "DOMINIO_O_WEB": DOMINIO.replace("https://", "") if DOMINIO else "esta web",
+        "VENDEDORES": vendedores_html(), "LOCALES_PEDIDOS": locales_pedidos(),
     }
     return re.sub(r"\{\{([A-Z_]+)\}\}", lambda mo: rep[mo.group(1)], s)
 
@@ -443,6 +474,7 @@ PAGES = {
     "aviso-legal": (f"Aviso legal · {MARCA_COMPLETA}", "Aviso legal.", "", None),
     "privacidad": (f"Privacidad · {MARCA_COMPLETA}", "Política de privacidad.", "", None),
     "cookies": (f"Cookies · {MARCA_COMPLETA}", "Política de cookies.", "", None),
+    "condiciones-contratacion": (f"Condiciones de contratación · {MARCA_COMPLETA}", "Condiciones de los pedidos online: precios, pago, entrega y cancelaciones.", "", None),
     "404": (f"Página no encontrada · {MARCA_COMPLETA}", "Esta página no existe.", "", None),
 }
 

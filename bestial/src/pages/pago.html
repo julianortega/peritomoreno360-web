@@ -12,13 +12,14 @@
 <label class="check"><input type="checkbox" id="p-club" checked> Soy del {{CLUB}}: suma el sello a este teléfono</label>
 <div class="field" data-only="domicilio"><label for="p-dir">Dirección de entrega</label><input id="p-dir" autocomplete="street-address"></div>
 <div class="field"><label for="p-nota">Notas para la cocina (alergias, sin cebolla…)</label><textarea id="p-nota" rows="3"></textarea></div>
-<p class="notice">Muy pronto podrás pagar aquí con tarjeta y seguir tu pedido en directo. [Pendiente: pasarela de pago y flota de reparto.] Mientras, pide en nuestra app de reparto o ven a vernos.</p>
+<p class="notice">Muy pronto podrás pagar aquí con tarjeta y seguir tu pedido en directo. Mientras, pide en nuestra app de reparto o ven a vernos.</p>
+<p class="mut" style="font-size:14px">Al pagar aceptas las <a class="link" href="/condiciones-contratacion">condiciones de contratación</a> y nos das tus datos para preparar y entregar el pedido, como explicamos en la <a class="link" href="/privacidad">política de privacidad</a>.</p>
 <button class="btn btn-red" type="button" disabled>Pagar · <span data-total></span></button>
 </form>
 <aside class="cart" aria-label="Resumen">
 <h2 class="display">Resumen</h2>
 <div data-lines></div>
-<div class="totals"><div><span>Subtotal</span><b data-subtotal></b></div><div data-ship-row><span>Envío</span><b>[x,xx €]</b></div></div>
+<div class="totals"><div><span>Subtotal</span><b data-subtotal></b></div><div data-ship-row><span>Envío</span><b>Según la dirección</b></div></div>
 <div class="total"><span style="font-weight:800">Total</span><b data-total></b></div>
 </aside>
 </div>

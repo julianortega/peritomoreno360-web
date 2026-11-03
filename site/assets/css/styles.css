@@ -463,3 +463,17 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 .foot-social a, .foot-social span { display: inline-flex; color: var(--dark-muted); transition: color .2s; }
 .foot-social a:hover { color: #fff; }
 .foot-social .soon { opacity: 0.6; cursor: default; }
+
+/* Pantallas de Flight Director (2026-11): en el móvil la ventana crece y la barra lateral se esconde */
+@media (max-width: 1180px) { .fd-row .fdw, .fd-row.rev .fdw { order: 2; } }
+@media (max-width: 860px) {
+  .fdw { height: auto !important; }
+  .fdw-side { display: none !important; }
+  .fdw-main { overflow: visible !important; }
+  .fdw-main [style*="repeat(4, minmax(0, 1fr))"], .fdw-main [style*="grid-template-columns: 1fr 1fr 1.5fr"], .fdw-main [style*="grid-template-columns: 1.15fr 1fr"], .fdw-main [style*="grid-template-columns: 1.2fr 1fr"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .fdw-main [style*="grid-template-columns: 1fr 190px"] { grid-template-columns: minmax(0, 1fr) !important; }
+}
+@media (max-width: 520px) {
+  .fdw-main [style*="grid-template-columns: 1fr 1fr 1.5fr"], .fdw-main [style*="grid-template-columns: 1.15fr 1fr"], .fdw-main [style*="grid-template-columns: 1.2fr 1fr"], .fdw-main [style*="grid-template-columns: 1fr 1fr; gap: 6px"] { grid-template-columns: minmax(0, 1fr) !important; }
+  .fdw-main { overflow-x: auto !important; }
+}

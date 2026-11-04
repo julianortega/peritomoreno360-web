@@ -477,3 +477,11 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
   .fdw-main [style*="grid-template-columns: 1fr 1fr 1.5fr"], .fdw-main [style*="grid-template-columns: 1.15fr 1fr"], .fdw-main [style*="grid-template-columns: 1.2fr 1fr"], .fdw-main [style*="grid-template-columns: 1fr 1fr; gap: 6px"] { grid-template-columns: minmax(0, 1fr) !important; }
   .fdw-main { overflow-x: auto !important; }
 }
+
+/* Medios de pago y moneda (requisitos de Getnet) */
+.price-card .moneda { font-size: 13px; letter-spacing: .04em; color: var(--muted); margin-top: -8px; }
+.price-card.inv .moneda { color: var(--dark-muted); }
+.pago-info { display: flex; flex-direction: column; gap: 16px; }
+.pagos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.pagos .pago-logo { width: 56px; height: 35px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+.site-footer .pagos { color: var(--dark-muted); padding: 0 0 24px; }

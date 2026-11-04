@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css?v=b68157b4a6">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20ff63687e">
 
 </head>
 <body>
@@ -75,15 +75,18 @@
 <section id="tarifas" class="wrap section-tight stack" style="gap:40px">
 <div class="sec-head">
 <h2 class="h2-s">Tarifas claras</h2>
-<p>Tres pasos y ninguna sorpresa. IVA no incluido.</p>
+<p>Tres pasos y ninguna sorpresa. Precios en euros (EUR), IVA no incluido.</p>
 </div>
 <div class="grid-3">
 <article class="price-card"><span class="num" style="color:var(--muted)">01</span><h3>Estudio de necesidades</h3><span class="big">Sin coste</span><p>Nos reunimos contigo, entendemos tu negocio y definimos qué app necesitas.</p></article>
-<article class="price-card"><span class="num" style="color:var(--muted)">02</span><h3>Módulo de demostración</h3><span class="big">250 €</span><p>El módulo que tú elijas, funcionando, para comprobar que es lo que buscas.</p></article>
-<article class="price-card inv"><span class="num" style="color:var(--dark-muted)">03</span><h3>App completa</h3><span class="big">Máx. 5.000 €</span><p>Precio según el estudio de necesidades, pero nunca más de 5.000 €.</p></article>
+<article class="price-card"><span class="num" style="color:var(--muted)">02</span><h3>Módulo de demostración</h3><span class="big">250 €</span><span class="moneda">EUR · IVA no incluido</span><p>El módulo que tú elijas, funcionando, para comprobar que es lo que buscas.</p></article>
+<article class="price-card inv"><span class="num" style="color:var(--dark-muted)">03</span><h3>App completa</h3><span class="big">Máx. 5.000 €</span><span class="moneda">EUR · IVA no incluido</span><p>Precio según el estudio de necesidades, pero nunca más de 5.000 €.</p></article>
 </div>
-<div class="row-line"><span>Mantenimiento, alojamiento y soporte</span><b>75 €/mes</b></div>
-<p class="intro">Pago con tarjeta, Bizum o transferencia. Consulta las <a href="/condiciones-contratacion">condiciones de contratación</a>.</p>
+<div class="row-line"><span>Mantenimiento, alojamiento y soporte</span><b>75 € al mes (EUR, IVA no incluido)</b></div>
+<div class="pago-info">
+<p class="intro">Pago con tarjeta (Visa o Mastercard), Bizum o transferencia, siempre en euros (EUR). Antes de pagar aceptas las <a href="/condiciones-contratacion">condiciones de contratación</a>, con las políticas de <a href="/condiciones-contratacion#envio">entrega</a>, <a href="/condiciones-contratacion#desistimiento">desistimiento</a> y <a href="/condiciones-contratacion#devoluciones">devoluciones</a>.</p>
+<div class="pagos" aria-label="Medios de pago aceptados"><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Visa"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Mastercard"><rect width="64" height="40" rx="6" fill="#fff"/><circle cx="26" cy="20" r="11" fill="#EB001B"/><circle cx="38" cy="20" r="11" fill="#F79E1B"/><path d="M32 10.8a11 11 0 0 1 0 18.4 11 11 0 0 1 0-18.4z" fill="#FF5F00"/></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Bizum"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="26" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#05C3DD">bizum</text></svg><span>Pago seguro con tarjeta o Bizum · Precios en euros (EUR)</span></div>
+</div>
 </section>
 
 <section class="wrap section-tight stack" style="gap:40px">
@@ -119,7 +122,7 @@
 <option>Otro</option>
 </select></div>
 <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
-<label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label>
+<label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label><label class="check"><input type="checkbox" name="acepto_condiciones" required><span>He leído y acepto las <a href="/condiciones-contratacion" target="_blank">condiciones de contratación</a>, incluidas las políticas de entrega, <a href="/condiciones-contratacion#desistimiento" target="_blank">desistimiento</a> y <a href="/condiciones-contratacion#devoluciones" target="_blank">devoluciones</a>.</span></label>
 <p class="form-note">No hace falta que nos llames: te contactaremos nosotros por teléfono o por correo.</p>
 <button class="btn btn-dark" type="submit">Quiero que me contactéis</button>
 <p class="form-status" role="status" aria-live="polite"></p>
@@ -146,9 +149,10 @@
 <div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
 <div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
-<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
+<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
+<div class="pagos" aria-label="Medios de pago aceptados"><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Visa"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Mastercard"><rect width="64" height="40" rx="6" fill="#fff"/><circle cx="26" cy="20" r="11" fill="#EB001B"/><circle cx="38" cy="20" r="11" fill="#F79E1B"/><path d="M32 10.8a11 11 0 0 1 0 18.4 11 11 0 0 1 0-18.4z" fill="#FF5F00"/></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Bizum"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="26" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#05C3DD">bizum</text></svg><span>Pago seguro con tarjeta o Bizum · Precios en euros (EUR)</span></div>
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
 </div>
 </footer>

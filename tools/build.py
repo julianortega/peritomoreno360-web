@@ -63,6 +63,14 @@ def _social():
 
 SOCIAL_HTML = _social()
 
+
+# Medios de pago aceptados (lo pide Getnet: logotipos de Visa y Mastercard y moneda visibles).
+PAGOS = ('<div class="pagos" aria-label="Medios de pago aceptados">'
+    '<svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Visa"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg>'
+    '<svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Mastercard"><rect width="64" height="40" rx="6" fill="#fff"/><circle cx="26" cy="20" r="11" fill="#EB001B"/><circle cx="38" cy="20" r="11" fill="#F79E1B"/><path d="M32 10.8a11 11 0 0 1 0 18.4 11 11 0 0 1 0-18.4z" fill="#FF5F00"/></svg>'
+    '<svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Bizum"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="26" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#05C3DD">bizum</text></svg>'
+    '<span>Pago seguro con tarjeta o Bizum · Precios en euros (EUR)</span></div>')
+
 FOOTER = '''<footer class="site-footer">
 <div class="wrap">
 <div class="foot-top">
@@ -77,18 +85,23 @@ FOOTER = '''<footer class="site-footer">
 <div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
 <div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
-<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
+<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
+''' + PAGOS + '''
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
 </div>
 </footer>'''
 
-def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros."):
+def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros.", condiciones=False):
     options = ["Hostelería", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Trabajar con vosotros", "Otro"]
     opts = "\n".join(
         f'<option{" selected" if o == interes_default else ""}>{o}</option>' for o in options
     )
+    cond_html = ('<label class="check"><input type="checkbox" name="acepto_condiciones" required><span>He leído y acepto las '
+                 '<a href="/condiciones-contratacion" target="_blank">condiciones de contratación</a>, incluidas las políticas de entrega, '
+                 '<a href="/condiciones-contratacion#desistimiento" target="_blank">desistimiento</a> y '
+                 '<a href="/condiciones-contratacion#devoluciones" target="_blank">devoluciones</a>.</span></label>') if condiciones else ""
     return f'''<section id="contacto" class="wrap section-tight">
 <div class="contact-box">
 <div class="stack-s">
@@ -105,7 +118,7 @@ def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus da
 {opts}
 </select></div>
 <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
-<label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label>
+<label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label>{cond_html}
 <p class="form-note">No hace falta que nos llames: te contactaremos nosotros por teléfono o por correo.</p>
 <button class="btn btn-dark" type="submit">Quiero que me contactéis</button>
 <p class="form-status" role="status" aria-live="polite"></p>
@@ -174,14 +187,14 @@ def page(slug, title, desc, active, fonts, body, form=None):
     print("ok", slug)
 
 def body(name):
-    return (BODIES / f"{name}.html").read_text(encoding="utf-8")
+    return (BODIES / f"{name}.html").read_text(encoding="utf-8").replace("{{PAGOS}}", PAGOS)
 
 PAGES = [
     ("index", "Perito Moreno 360 · Grupo empresarial", "Grupo empresarial con marcas de restauración, consultoría de operaciones, mantenimiento y desarrollo de apps a medida.", "home", "base", "index", ("Inicio", "Otro")),
     ("hosteleria", "Hostelería · Perito Moreno 360", "Marcas propias de restauración organizada: Bestial Burritos & Tacos, La Sardinera y Lolita Bakery.", "areas", "brands", "hosteleria", ("Hostelería", "Hostelería")),
     ("operaciones", "Operaciones · Perito Moreno 360", "Estudiamos tu empresa a fondo para hacerla más eficiente: manuales de operaciones, puntos débiles detectados y apoyo mensual.", "areas", "base", "operaciones", ("Operaciones", "Operaciones", "¿Quieres que tu empresa funcione mejor?")),
     ("mantenimiento", "Mantenimiento · Rumbo Norte · Perito Moreno 360", "Mantenimiento preventivo y correctivo de locales e instalaciones con Rumbo Norte, para que tu negocio no pare.", "areas", "base", "mantenimiento", ("Mantenimiento", "Mantenimiento", "Pide presupuesto", "Déjanos tus datos y te contactaremos nosotros para preparar tu presupuesto, gratis y sin compromiso.")),
-    ("apps", "Desarrollo de apps · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?")),
+    ("apps", "Desarrollo de apps · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?", "Déjanos tus datos y te contactaremos nosotros.", True)),
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "areas", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
     ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "areas", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),

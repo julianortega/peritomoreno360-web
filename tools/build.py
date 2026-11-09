@@ -15,7 +15,7 @@ def _ver(rel):
     return hashlib.md5((OUT / rel).read_bytes()).hexdigest()[:10]
 
 import json
-ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Barrio El Urro 86, portal B", "postalCode": "39130", "addressLocality": "Marina de Cudeyo", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
+ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Urbanización Las Dalias 9", "postalCode": "39100", "addressLocality": "Santa Cruz de Bezana", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
 FD_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Flight Director", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Gestión de locales de hostelería: escandallos, cocina, equipo y turnos, checklists y APPCC, compras y cuenta de resultados en directo.", "url": "https://www.peritomoreno360.com/flight-director", "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
 
 FONTS_BASE = "family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800"  # las letras de la app Flight Director
@@ -88,7 +88,7 @@ FOOTER = '''<footer class="site-footer">
 <div class="foot-brand">
 <b>Perito Moreno 360</b>
 <span>Perito Moreno 360 SL · CIF B-21797493</span>
-<span>Barrio El Urro 86, portal B, 39130 Elechas, Marina de Cudeyo (Cantabria)</span>
+<span>Urbanización Las Dalias 9, 39100 Santa Cruz de Bezana (Cantabria)</span>
 <a href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a>
 ''' + SOCIAL_HTML + '''
 </div>

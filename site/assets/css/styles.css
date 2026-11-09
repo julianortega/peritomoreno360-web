@@ -597,3 +597,8 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
   .club-roles { grid-template-columns: minmax(0, 1fr); }
 }
 @media (min-width: 861px) { .dd:last-of-type .dd-menu { left: auto; right: -18px; } }
+
+/* Precio visible en las páginas de apps */
+.precio-pill { display: inline-block; align-self: flex-start; margin: 0; padding: 8px 18px; border-radius: 999px; background: #FFF3C9; color: var(--ink); font-size: 15px; line-height: 1.35; }
+.precio-pill b { font-family: var(--serif); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; margin-right: 4px; }
+@media (max-width: 860px) { .precio-pill { border-radius: 16px; font-size: 14px; } .precio-pill b { font-size: 17px; } }

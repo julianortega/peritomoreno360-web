@@ -48,7 +48,7 @@ def header(active, has_form=True):
 <div class="dd{' on' if active in ('fd','club') else ''}"><button class="dd-btn" type="button" aria-expanded="false">Apps{CARET}</button>
 <div class="dd-menu">
 <a class="dd-app" href="/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>La gestión 360 de tu local de hostelería</small></span></a>
-<a class="dd-app" href="/vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Vestuario<small>La app de tu club de fútbol</small></span></a>
+<a class="dd-app" href="/mi-vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Mi Vestuario<small>La app de tu club de fútbol</small></span></a>
 </div></div>
 <a class="btn btn-dark" href="{"#contacto" if has_form else "/#contacto"}">Hablemos</a>
 </nav>
@@ -95,7 +95,7 @@ FOOTER = '''<footer class="site-footer">
 <div class="foot-cols">
 <div><b>Áreas de negocio</b><a href="/restauracion">Restauración</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
-<div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/vestuario">Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
+<div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/mi-vestuario">Mi Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -210,7 +210,7 @@ PAGES = [
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "areas", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
     ("flight-director/empieza", "Empieza hoy con Flight Director · Date de alta · Perito Moreno 360", "Date de alta en Flight Director en dos minutos: 95 €/mes por local, todo incluido. Sin permanencia. Paga con tarjeta o Bizum.", "fd", "fd", "empieza", None),
-    ("vestuario", "Vestuario · La app de tu club de fútbol · Perito Moreno 360", "Convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings de tu club de fútbol en una sola app para dirección, entrenadores, jugadores y familias.", "club", "base", "vestuario", ("Vestuario", "Desarrollo de apps", "¿La probamos en tu club?", "Déjanos tus datos y te enseñamos Vestuario con los equipos de tu club.")),
+    ("mi-vestuario", "Mi Vestuario · La app de tu club de fútbol · Perito Moreno 360", "Convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings de tu club de fútbol en una sola app para dirección, entrenadores, jugadores y familias.", "club", "base", "mi-vestuario", ("Mi Vestuario", "Desarrollo de apps", "¿La probamos en tu club?", "Déjanos tus datos y te enseñamos Mi Vestuario con los equipos de tu club.")),
     ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "areas", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),
     ("franquicia-dark-kitchen", "Franquicia dark kitchen de burritos · Poca inversión · Bestial", "Franquicia dark kitchen: empieza solo con delivery en 15–50 m², valida tu zona con poca inversión y crece a local. Royalty del 2 % el primer año.", "areas", "base", "franquicia-dark-kitchen", ("Franquicia dark kitchen", "Franquicias", "¿Hablamos de tu dark kitchen?")),
     ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 %", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "areas", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),

@@ -12,6 +12,17 @@
     });
   }
 
+  document.querySelectorAll('.dd-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var dd = b.parentNode, open = !dd.classList.contains('open');
+      document.querySelectorAll('.dd.open').forEach(function (o) { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
+      if (open) { dd.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.dd')) document.querySelectorAll('.dd.open').forEach(function (o) { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
+  });
+
   var year = document.querySelectorAll('[data-year]');
   year.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 

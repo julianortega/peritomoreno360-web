@@ -25,6 +25,7 @@ FONTS = {
     "fd": FONTS_BASE,
 }
 
+CARET = '<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
 MENU_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
 
 def header(active, has_form=True):
@@ -37,8 +38,18 @@ def header(active, has_form=True):
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">{MENU_ICON}</button>
 <nav class="nav" id="menu" aria-label="Principal">
 {a("/#grupo", "El grupo", "home")}
-{a("/#areas", "Áreas de negocio", "areas")}
-<a class="nav-fd" href="/flight-director"{' aria-current="page"' if active == "fd" else ''}>Flight Director<img src="/assets/img/flightdirector-icono.png" alt="" width="22" height="22"></a>
+<div class="dd{' on' if active in ('areas',) else ''}"><button class="dd-btn" type="button" aria-expanded="false">Áreas de negocio{CARET}</button>
+<div class="dd-menu">
+<a href="/restauracion">Restauración<small>Bestial, La Sardinera y Lolita Bakery</small></a>
+<a href="/operaciones">Operaciones<small>Hacemos tu empresa más eficiente</small></a>
+<a href="/mantenimiento">Mantenimiento<small>Rumbo Norte, multiservicios</small></a>
+<a href="/apps">Desarrollo de apps<small>Apps a medida para empresas</small></a>
+</div></div>
+<div class="dd{' on' if active in ('fd','club') else ''}"><button class="dd-btn" type="button" aria-expanded="false">Apps{CARET}</button>
+<div class="dd-menu">
+<a class="dd-app" href="/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>La gestión 360 de tu local de hostelería</small></span></a>
+<a class="dd-app" href="/vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Vestuario<small>La app de tu club de fútbol</small></span></a>
+</div></div>
 <a class="btn btn-dark" href="{"#contacto" if has_form else "/#contacto"}">Hablemos</a>
 </nav>
 </div>
@@ -82,9 +93,9 @@ FOOTER = '''<footer class="site-footer">
 ''' + SOCIAL_HTML + '''
 </div>
 <div class="foot-cols">
-<div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
+<div><b>Áreas de negocio</b><a href="/restauracion">Restauración</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
-<div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
+<div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/vestuario">Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -94,7 +105,7 @@ FOOTER = '''<footer class="site-footer">
 </footer>'''
 
 def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros.", condiciones=False):
-    options = ["Hostelería", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Trabajar con vosotros", "Otro"]
+    options = ["Restauración", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Trabajar con vosotros", "Otro"]
     opts = "\n".join(
         f'<option{" selected" if o == interes_default else ""}>{o}</option>' for o in options
     )
@@ -192,13 +203,14 @@ def body(name):
 
 PAGES = [
     ("index", "Perito Moreno 360 · Grupo empresarial", "Grupo empresarial con marcas de restauración, consultoría de operaciones, mantenimiento y desarrollo de apps a medida.", "home", "base", "index", ("Inicio", "Otro")),
-    ("hosteleria", "Hostelería · Perito Moreno 360", "Marcas propias de restauración organizada: Bestial Burritos & Tacos, La Sardinera y Lolita Bakery.", "areas", "brands", "hosteleria", ("Hostelería", "Hostelería")),
+    ("restauracion", "Restauración · Perito Moreno 360", "Marcas propias de restauración organizada: Bestial Burritos & Tacos, La Sardinera y Lolita Bakery.", "areas", "brands", "restauracion", ("Restauración", "Restauración")),
     ("operaciones", "Operaciones · Perito Moreno 360", "Estudiamos tu empresa a fondo para hacerla más eficiente: manuales de operaciones, puntos débiles detectados y apoyo mensual.", "areas", "base", "operaciones", ("Operaciones", "Operaciones", "¿Quieres que tu empresa funcione mejor?")),
     ("mantenimiento", "Mantenimiento · Rumbo Norte · Perito Moreno 360", "Mantenimiento preventivo y correctivo de locales e instalaciones con Rumbo Norte, para que tu negocio no pare.", "areas", "base", "mantenimiento", ("Mantenimiento", "Mantenimiento", "Pide presupuesto", "Déjanos tus datos y te contactaremos nosotros para preparar tu presupuesto, gratis y sin compromiso.")),
     ("apps", "Desarrollo de apps · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?", "Déjanos tus datos y te contactaremos nosotros.", True)),
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "areas", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
     ("flight-director/empieza", "Empieza hoy con Flight Director · Date de alta · Perito Moreno 360", "Date de alta en Flight Director en dos minutos: 95 €/mes por local, todo incluido. Sin permanencia. Paga con tarjeta o Bizum.", "fd", "fd", "empieza", None),
+    ("vestuario", "Vestuario · La app de tu club de fútbol · Perito Moreno 360", "Convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings de tu club de fútbol en una sola app para dirección, entrenadores, jugadores y familias.", "club", "base", "vestuario", ("Vestuario", "Desarrollo de apps", "¿La probamos en tu club?", "Déjanos tus datos y te enseñamos Vestuario con los equipos de tu club.")),
     ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "areas", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),
     ("franquicia-dark-kitchen", "Franquicia dark kitchen de burritos · Poca inversión · Bestial", "Franquicia dark kitchen: empieza solo con delivery en 15–50 m², valida tu zona con poca inversión y crece a local. Royalty del 2 % el primer año.", "areas", "base", "franquicia-dark-kitchen", ("Franquicia dark kitchen", "Franquicias", "¿Hablamos de tu dark kitchen?")),
     ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 %", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "areas", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),

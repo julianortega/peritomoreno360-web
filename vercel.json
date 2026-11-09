@@ -36,6 +36,11 @@
       "source": "/empieza",
       "destination": "/flight-director/empieza",
       "permanent": true
+    },
+    {
+      "source": "/hosteleria",
+      "destination": "/restauracion",
+      "permanent": true
     }
   ]
 }

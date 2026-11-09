@@ -602,3 +602,18 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 .precio-pill { display: inline-block; align-self: flex-start; margin: 0; padding: 8px 18px; border-radius: 999px; background: #FFF3C9; color: var(--ink); font-size: 15px; line-height: 1.35; }
 .precio-pill b { font-family: var(--serif); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; margin-right: 4px; }
 @media (max-width: 860px) { .precio-pill { border-radius: 16px; font-size: 14px; } .precio-pill b { font-size: 17px; } }
+
+/* Mantenimiento: sectores, oficios y pasos */
+.mnt-ico { width: 52px; height: 52px; flex-shrink: 0; }
+.mnt-card { gap: 12px; }
+.mnt-card .mnt-ico { padding: 8px; width: 68px; height: 68px; border-radius: 20px; background: #FBF5E9; }
+.mnt-oficios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 40px; }
+.mnt-oficio { display: flex; align-items: flex-start; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.mnt-oficio h3 { font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+.mnt-oficio p { font-size: 15px; line-height: 1.55; color: var(--muted); }
+.mnt-pasos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; counter-reset: paso; }
+.mnt-pasos li { counter-increment: paso; display: flex; flex-direction: column; gap: 8px; padding: 28px 24px; border-radius: var(--radius); background: #1C2546; color: #F6F2EA; }
+.mnt-pasos li::before { content: counter(paso); font-family: var(--serif); font-weight: 800; font-size: 34px; color: #D9B26A; line-height: 1; }
+.mnt-pasos b { font-size: 19px; }
+.mnt-pasos span { font-size: 15px; line-height: 1.55; opacity: .85; }
+@media (max-width: 860px) { .mnt-oficios { grid-template-columns: minmax(0, 1fr); } .mnt-pasos { grid-template-columns: minmax(0, 1fr); } }

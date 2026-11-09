@@ -534,3 +534,5 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 @media (max-width: 1180px) { .fd-empieza { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 48px; } }
 @media (max-width: 720px) { .fd-empieza { padding: 32px 24px; } }
 .fd-empieza .alta-cifra b { color: #fff; }
+.alta-total-ok { grid-column: 1 / -1; list-style: none; padding: 10px 0 0; margin: 6px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; }
+.alta-total-ok li::before { content: "✓ "; color: var(--fd-pink); }

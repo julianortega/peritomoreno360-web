@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css?v=6bf9fa0df0">
+<link rel="stylesheet" href="/assets/css/styles.css?v=f227159e62">
 
 </head>
 <body>
@@ -30,8 +30,18 @@
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <nav class="nav" id="menu" aria-label="Principal">
 <a href="/#grupo">El grupo</a>
-<a href="/#areas">Áreas de negocio</a>
-<a class="nav-fd" href="/flight-director">Flight Director<img src="/assets/img/flightdirector-icono.png" alt="" width="22" height="22"></a>
+<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Áreas de negocio<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+<div class="dd-menu">
+<a href="/restauracion">Restauración<small>Bestial, La Sardinera y Lolita Bakery</small></a>
+<a href="/operaciones">Operaciones<small>Hacemos tu empresa más eficiente</small></a>
+<a href="/mantenimiento">Mantenimiento<small>Rumbo Norte, multiservicios</small></a>
+<a href="/apps">Desarrollo de apps<small>Apps a medida para empresas</small></a>
+</div></div>
+<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Apps<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+<div class="dd-menu">
+<a class="dd-app" href="/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>La gestión 360 de tu local de hostelería</small></span></a>
+<a class="dd-app" href="/vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Vestuario<small>La app de tu club de fútbol</small></span></a>
+</div></div>
 <a class="btn btn-dark" href="/#contacto">Hablemos</a>
 </nav>
 </div>
@@ -57,9 +67,9 @@
 <div class="foot-social"><span class="soon" title="Instagram · próximamente" aria-label="Instagram (próximamente)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="soon" title="LinkedIn · próximamente" aria-label="LinkedIn (próximamente)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span><span class="soon" title="Facebook · próximamente" aria-label="Facebook (próximamente)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M15 8h-1.5A2.5 2.5 0 0 0 11 10.5V21M9 13h5"/></svg></span></div>
 </div>
 <div class="foot-cols">
-<div><b>Áreas de negocio</b><a href="/hosteleria">Hostelería</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
+<div><b>Áreas de negocio</b><a href="/restauracion">Restauración</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
-<div><b>Flight Director</b><a href="/flight-director">La app</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
+<div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/vestuario">Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -67,6 +77,6 @@
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
 </div>
 </footer>
-<script src="/assets/js/main.js?v=d71caaa65a" defer></script>
+<script src="/assets/js/main.js?v=5abf36736d" defer></script>
 </body>
 </html>

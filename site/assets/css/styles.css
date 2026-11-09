@@ -73,6 +73,8 @@ h1, h2, h3, p, ul { margin: 0; }
 .wheel sup { font-size: 0.7em; margin-left: 1px; opacity: 0.8; }
 .wheel .q-t { display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding: 0 6px; white-space: nowrap; }
 .wheel .q-t b { font-weight: inherit; }
+.wheel .q-ico { width: 58px; height: 58px; margin-bottom: 8px; transition: transform .3s ease; }
+.wheel a:hover .q-ico { transform: rotate(-8deg) scale(1.12); }
 .wheel .q4 .q-t { transform: translate(-4%, -6%); }
 .wheel .q-note { position: relative; display: block; margin-top: 3px; font-size: 9px; font-weight: 500; line-height: 1.2; letter-spacing: 0.02em; opacity: 0.75; }
 .wheel .q-note i { position: absolute; right: 100%; margin-right: 2px; font-style: normal; }
@@ -422,6 +424,7 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
   .lead { font-size: 18px; }
   .brand img { height: 48px; }
   .wheel a { font-size: 12px; }
+  .wheel .q-ico { width: 34px; height: 34px; margin-bottom: 4px; }
   .wheel .q-note { font-size: 7px; margin-top: 2px; }
   .wheel .hub span { font-size: 9px; letter-spacing: 0.08em; }
   .site-header .wrap { height: 68px; }

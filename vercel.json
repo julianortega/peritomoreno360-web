@@ -41,6 +41,11 @@
       "source": "/hosteleria",
       "destination": "/restauracion",
       "permanent": true
+    },
+    {
+      "source": "/vestuario",
+      "destination": "/mi-vestuario",
+      "permanent": true
     }
   ]
 }

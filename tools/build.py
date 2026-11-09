@@ -182,6 +182,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{FONTS[fonts]}&display=swap">
 <link rel="stylesheet" href="/assets/css/styles.css?v={_ver("assets/css/styles.css")}">
 {ld}
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 {header(active, bool(form))}

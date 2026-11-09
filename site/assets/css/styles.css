@@ -485,3 +485,43 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 .pagos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
 .pagos .pago-logo { width: 56px; height: 35px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
 .site-footer .pagos { color: var(--dark-muted); padding: 0 0 24px; }
+
+/* Empieza (alta de Flight Director) */
+.alta-hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 72px; align-items: start; padding-top: 64px; padding-bottom: 112px; }
+.alta-ok { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; font-size: 17px; }
+.alta-ok li { display: flex; gap: 12px; align-items: baseline; }
+.alta-ok li::before { content: "✓"; color: var(--fd-pink); font-weight: 700; }
+.alta-form { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 30px 60px rgba(20,33,58,0.10); }
+.alta-form h2 { font-family: var(--serif); font-weight: 300; font-size: 36px; line-height: 1.05; letter-spacing: -0.02em; }
+.alta-form .btn { width: 100%; }
+.alta-form .form-note { font-size: 13px; line-height: 1.55; color: var(--muted); }
+.alta-form .form-note a { text-decoration: underline; }
+.alta-error { background: #FBE9E7; color: #8E1B10; border-radius: 12px; padding: 12px 16px; font-size: 15px; }
+.alta-total { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 12px; background: var(--bg); border-radius: 14px; padding: 14px 18px; }
+.alta-total span { font-weight: 600; }
+.alta-total b { font-family: var(--serif); font-weight: 400; font-size: 32px; }
+.alta-total small { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
+.alta-precio { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.alta-precio-card { background: #14213A; color: var(--bg); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; gap: 14px; }
+.alta-precio-card .cap { font-size: 26px; }
+.alta-cifra { display: flex; align-items: baseline; gap: 10px; }
+.alta-cifra b { font-family: var(--serif); font-weight: 300; font-size: 84px; line-height: 1; letter-spacing: -0.03em; }
+.alta-cifra span { font-size: 17px; color: #C9CFDA; }
+.alta-oferta { font-size: 18px; } .alta-oferta b { color: #FF8AD8; }
+.alta-iva { font-size: 14px; color: #C9CFDA; }
+.alta-precio-card .btn { align-self: flex-start; margin-top: 8px; }
+.alta-incluye { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 32px; font-size: 16px; }
+.alta-incluye li { display: flex; gap: 12px; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.alta-incluye li::before { content: "✓"; color: var(--fd-pink); font-weight: 700; }
+.alta-pasos .n { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--fd-pink); line-height: 1; }
+.nav .nav-alta { padding: 10px 18px; min-height: 0; font-size: 15px; }
+@media (max-width: 1180px) {
+  .alta-hero, .alta-precio { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 720px) {
+  .alta-hero { padding-top: 32px; padding-bottom: 72px; }
+  .alta-form { padding: 24px; }
+  .alta-incluye { grid-template-columns: minmax(0, 1fr); }
+  .alta-cifra b { font-size: 64px; }
+  .alta-precio-card { padding: 28px; }
+}

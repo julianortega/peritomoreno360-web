@@ -1,0 +1,78 @@
+<section class="wrap alta-hero">
+<div class="stack">
+<a class="back" href="/flight-director">← Flight Director</a>
+<span class="eyebrow">Empieza hoy</span>
+<h1 class="display">Da el primer paso con Flight Director.</h1>
+<p class="lead">Date de alta en dos minutos, paga el primer mes con tarjeta o Bizum y recibe tu usuario por correo al momento. Sin llamadas, sin instalaciones y sin permanencia.</p>
+<ul class="alta-ok">
+<li>Los 2 primeros meses a 50 €/mes por local</li>
+<li>Sin permanencia: te das de baja cuando quieras</li>
+<li>Funciona en el móvil, la tablet o el ordenador que ya tienes</li>
+<li>Te ayudamos a cargar tu carta y tus escandallos</li>
+</ul>
+</div>
+
+<form class="alta-form" method="post" action="https://flightdirector.peritomoreno360.com/alta">
+<h2>Crea tu cuenta</h2>
+<p class="alta-error" role="alert" hidden>Revisa tus datos: hacen falta tu nombre, el de tu negocio y un correo válido.</p>
+<div class="field"><label for="a-nombre">Tu nombre</label><input id="a-nombre" name="nombre" required maxlength="80" autocomplete="name"></div>
+<div class="field"><label for="a-empresa">Nombre de tu negocio</label><input id="a-empresa" name="empresa" required maxlength="80" autocomplete="organization"></div>
+<div class="field"><label for="a-email">Correo</label><input id="a-email" name="email" type="email" required maxlength="120" autocomplete="email"></div>
+<div class="field"><label for="a-tel">Teléfono</label><input id="a-tel" name="telefono" type="tel" required maxlength="20" autocomplete="tel"></div>
+<div class="hp" aria-hidden="true"><label for="a-web">No rellenar</label><input id="a-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
+<div class="alta-total"><span>Hoy pagas</span><b>50 €</b><small>primer mes, 1 local · IVA no incluido</small></div>
+<button class="btn btn-pink" type="submit">Continuar al pago</button>
+<p class="form-note">En el siguiente paso te pedimos los datos de facturación y pagas en la pasarela segura de nuestro banco. Al continuar aceptas las <a href="/condiciones-contratacion" target="_blank">condiciones de contratación</a> y la <a href="/privacidad" target="_blank">política de privacidad</a>.</p>
+{{PAGOS}}
+</form>
+</section>
+
+<section class="wrap section-tight stack" style="gap:40px">
+<div class="sec-head" style="border-top:1px solid var(--line);padding-top:64px">
+<h2 class="h2">Un precio, todo incluido</h2>
+<p style="font-size:15px">Todas las secciones de la app, todos los usuarios que necesites y las actualizaciones. Pagas por local.</p>
+</div>
+<div class="alta-precio">
+<div class="alta-precio-card">
+<span class="cap">Flight Director</span>
+<p class="alta-cifra"><b>125 €</b><span>/mes por local</span></p>
+<p class="alta-oferta">Los 2 primeros meses, <b>50 €/mes</b></p>
+<p class="alta-iva">Precios sin IVA. Sin permanencia.</p>
+<a class="btn btn-pink" href="#main">Empieza ahora</a>
+</div>
+<ul class="alta-incluye">
+<li>Carta y escandallos por marca, local y canal</li>
+<li>Cocina: producción, stock, inventario y mermas</li>
+<li>Horarios, fichajes, vacaciones y nóminas</li>
+<li>Checklists y APPCC con firma</li>
+<li>Compras, albaranes y facturas leídas por la IA</li>
+<li>Financiero en directo y PyG detallada</li>
+<li>TPV con comandas a cocina</li>
+<li>Proyectos, informes diarios y asistente por voz</li>
+<li>Usuarios ilimitados en cada local</li>
+<li>Hardware opcional: te sirve el móvil o una tablet</li>
+</ul>
+</div>
+</section>
+
+<section class="wrap section-tight stack" style="gap:40px">
+<h2 class="h2-s">Así de fácil</h2>
+<div class="grid-3 alta-pasos">
+<article class="card"><span class="n">1</span><h3>Tus datos</h3><p>Tu nombre, el de tu negocio y tu correo. En el pago te pedimos los datos para la factura.</p></article>
+<article class="card"><span class="n">2</span><h3>Pago seguro</h3><p>Con tarjeta o Bizum en la pasarela de nuestro banco. Te llega la factura por correo.</p></article>
+<article class="card"><span class="n">3</span><h3>Ya estás dentro</h3><p>Al momento recibes un correo para crear tu contraseña y entrar en Flight Director.</p></article>
+</div>
+</section>
+
+<section class="wrap section-tight stack faq" style="gap:24px">
+<h2 class="h2-s">Preguntas frecuentes</h2>
+<div>
+<details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y puedes darte de baja cuando quieras, sin penalización.</p></details>
+<details><summary>¿Qué pasa después de los dos primeros meses?</summary><p>A partir del tercer mes el precio es de 125 € al mes por local, más IVA. Te avisamos antes del cambio.</p></details>
+<details><summary>¿Y si tengo varios locales?</summary><p>Date de alta con el primero y te ayudamos a añadir el resto. Cada local cuesta lo mismo y todos se ven desde la misma cuenta.</p></details>
+<details><summary>¿Necesito comprar algún aparato?</summary><p>No. Flight Director funciona en el navegador del móvil, la tablet o el ordenador que ya tienes. Si quieres pantallas, impresoras o un TPV, te recomendamos lo que mejor funciona.</p></details>
+<details><summary>¿Cómo se paga cada mes?</summary><p>Con tarjeta o Bizum desde un enlace de pago que te llega cada mes, con su factura.</p></details>
+<details><summary>¿Puedo verla antes de pagar?</summary><p>Claro. Escríbenos a <a href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a> y te hacemos una demo con tus propios platos.</p></details>
+</div>
+</section>
+<script>if (/[?&]error=/.test(location.search)) { var e = document.querySelector(".alta-error"); if (e) e.hidden = false; }</script>

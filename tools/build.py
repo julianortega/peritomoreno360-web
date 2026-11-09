@@ -18,11 +18,11 @@ import json
 ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Barrio El Urro 86, portal B", "postalCode": "39130", "addressLocality": "Marina de Cudeyo", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
 FD_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Flight Director", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Gestión de locales de hostelería: escandallos, cocina, equipo y turnos, checklists y APPCC, compras y cuenta de resultados en directo.", "url": "https://www.peritomoreno360.com/flight-director", "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
 
-FONTS_BASE = "family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600;700"
+FONTS_BASE = "family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800"  # las letras de la app Flight Director
 FONTS = {
     "base": FONTS_BASE,
     "brands": "family=Anton&" + FONTS_BASE,
-    "fd": "family=Caprasimo&family=Noto+Sans:wght@400;600;700&" + FONTS_BASE,
+    "fd": FONTS_BASE,
 }
 
 MENU_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
@@ -39,7 +39,6 @@ def header(active, has_form=True):
 {a("/#grupo", "El grupo", "home")}
 {a("/#areas", "Áreas de negocio", "areas")}
 <a class="nav-fd" href="/flight-director"{' aria-current="page"' if active == "fd" else ''}>Flight Director<img src="/assets/img/flightdirector-icono.png" alt="" width="22" height="22"></a>
-<a class="btn btn-line nav-alta" href="/empieza">Empieza</a>
 <a class="btn btn-dark" href="{"#contacto" if has_form else "/#contacto"}">Hablemos</a>
 </nav>
 </div>
@@ -184,6 +183,7 @@ def page(slug, title, desc, active, fonts, body, form=None):
 </body>
 </html>
 '''
+    (OUT / f"{slug}.html").parent.mkdir(parents=True, exist_ok=True)
     (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
     print("ok", slug)
 
@@ -198,7 +198,7 @@ PAGES = [
     ("apps", "Desarrollo de apps · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?", "Déjanos tus datos y te contactaremos nosotros.", True)),
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "areas", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
-    ("empieza", "Empieza con Flight Director · Date de alta · Perito Moreno 360", "Date de alta en Flight Director en dos minutos: 95 €/mes por local, todo incluido. Sin permanencia. Paga con tarjeta o Bizum.", "fd", "fd", "empieza", None),
+    ("flight-director/empieza", "Empieza hoy con Flight Director · Date de alta · Perito Moreno 360", "Date de alta en Flight Director en dos minutos: 95 €/mes por local, todo incluido. Sin permanencia. Paga con tarjeta o Bizum.", "fd", "fd", "empieza", None),
     ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "areas", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),
     ("franquicia-dark-kitchen", "Franquicia dark kitchen de burritos · Poca inversión · Bestial", "Franquicia dark kitchen: empieza solo con delivery en 15–50 m², valida tu zona con poca inversión y crece a local. Royalty del 2 % el primer año.", "areas", "base", "franquicia-dark-kitchen", ("Franquicia dark kitchen", "Franquicias", "¿Hablamos de tu dark kitchen?")),
     ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 %", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "areas", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),
@@ -216,7 +216,7 @@ for slug, title, desc, active, fonts, b, form in PAGES:
     page(slug, title, desc, active, fonts, body(b), form)
 
 # Sitemap y robots
-PRIORITY = {"index": "1.0", "franquicias": "0.9", "flight-director": "0.9", "empieza": "0.9", "aviso-legal": "0.2", "privacidad": "0.2", "cookies": "0.2"}
+PRIORITY = {"index": "1.0", "franquicias": "0.9", "flight-director": "0.9", "flight-director/empieza": "0.9", "aviso-legal": "0.2", "privacidad": "0.2", "cookies": "0.2"}
 today = datetime.date.today().isoformat()
 urls = []
 for slug, *_ in PAGES:

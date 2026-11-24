@@ -617,3 +617,11 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 .mnt-pasos b { font-size: 19px; }
 .mnt-pasos span { font-size: 15px; line-height: 1.55; opacity: .85; }
 @media (max-width: 860px) { .mnt-oficios { grid-template-columns: minmax(0, 1fr); } .mnt-pasos { grid-template-columns: minmax(0, 1fr); } }
+
+/* Mini-webs de las apps (Flight Director, Mi Vestuario) */
+.prod-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink, #1f1d1a); }
+.prod-brand img { height: 40px; width: 40px; border-radius: 10px; }
+.prod-brand span { display: flex; flex-direction: column; font-weight: 800; font-size: 19px; line-height: 1.1; }
+.prod-brand small { font-weight: 500; font-size: 12px; opacity: .65; }
+.prod-header .prod-grupo { font-size: 14px; opacity: .7; }
+@media (max-width: 900px) { .prod-brand img { height: 34px; width: 34px; } .prod-brand span { font-size: 17px; } }

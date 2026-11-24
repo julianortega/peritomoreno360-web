@@ -16,7 +16,7 @@ def _ver(rel):
 
 import json
 ORG_LD = '{"@context": "https://schema.org", "@type": "Organization", "name": "Perito Moreno 360", "legalName": "Perito Moreno 360 SL", "taxID": "B-21797493", "url": "https://www.peritomoreno360.com/", "logo": "https://www.peritomoreno360.com/assets/img/pm360-logo.png", "email": "info@peritomoreno360.com", "address": {"@type": "PostalAddress", "streetAddress": "Urbanización Las Dalias 9", "postalCode": "39100", "addressLocality": "Santa Cruz de Bezana", "addressRegion": "Cantabria", "addressCountry": "ES"}, "brand": [{"@type": "Brand", "name": "Bestial Burritos & Tacos"}, {"@type": "Brand", "name": "La Sardinera"}, {"@type": "Brand", "name": "Lolita Bakery"}, {"@type": "Brand", "name": "Rumbo Norte"}, {"@type": "Brand", "name": "Flight Director"}]}'
-MV_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Mi Vestuario", "applicationCategory": "SportsApplication", "operatingSystem": "Web, iOS, Android", "description": "App para clubes de fútbol: convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings para dirección, entrenadores, jugadores y familias.", "url": "https://www.peritomoreno360.com/mi-vestuario", "offers": {"@type": "Offer", "price": "75", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
+MV_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Mi Vestuario", "applicationCategory": "SportsApplication", "operatingSystem": "Web", "description": "App para clubes de fútbol: convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings para dirección, entrenadores, jugadores y familias.", "url": "https://www.peritomoreno360.com/mi-vestuario", "offers": {"@type": "Offer", "price": "75", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
 MNT_LD = '{"@context": "https://schema.org", "@type": "Service", "name": "Mantenimiento y reparaciones", "serviceType": "Mantenimiento de edificios, oficinas, comercios, comunidades y restaurantes", "provider": {"@type": "Organization", "name": "Rumbo Norte", "parentOrganization": {"@type": "Organization", "name": "Perito Moreno 360"}}, "url": "https://www.peritomoreno360.com/mantenimiento", "areaServed": {"@type": "Country", "name": "España"}}'
 FD_LD = '{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Flight Director", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Gestión de locales de hostelería: escandallos, cocina, equipo y turnos, checklists y APPCC, compras y cuenta de resultados en directo.", "url": "https://www.peritomoreno360.com/flight-director", "publisher": {"@type": "Organization", "name": "Perito Moreno 360"}}'
 
@@ -30,7 +30,45 @@ FONTS = {
 CARET = '<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
 MENU_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
 
+# Mini-webs de las apps: Flight Director y Mi Vestuario llevan su propia cabecera y menú,
+# con un enlace de vuelta al grupo (Julián, 24/11/2026).
+PRODUCTOS = {
+    "fd": {"home": "/flight-director", "nombre": "Flight Director", "logo": "/assets/img/flightdirector-icono.png",
+           "menu": [("/flight-director#modulos", "Funciones"), ("/flight-director/empieza", "Precio"),
+                    ("dd", "Guías", [("/app-escandallos-hosteleria", "App de escandallos", "Coste y margen de cada plato"),
+                                      ("/control-food-cost-restaurante", "Control del food cost", "Guía paso a paso"),
+                                      ("/app-cuadrantes-hosteleria", "Cuadrantes y fichajes", "Turnos y registro de jornada")])],
+           "cta": ("/flight-director/empieza", "Empieza hoy")},
+    "club": {"home": "/mi-vestuario", "nombre": "Mi Vestuario", "logo": "/assets/img/club/icono.svg",
+             "menu": [("/mi-vestuario#pantallas", "La app"), ("/mi-vestuario#roles", "Para quién"),
+                      ("/mi-vestuario#precio", "Precio"), ("/mi-vestuario#preguntas", "Preguntas")],
+             "cta": ("/mi-vestuario#contacto", "Pide una demo")},
+}
+
+def header_producto(active):
+    p = PRODUCTOS[active]
+    items = []
+    for m in p["menu"]:
+        if m[0] == "dd":
+            links = "".join(f'<a href="{h}">{t}<small>{d}</small></a>' for h, t, d in m[2])
+            items.append(f'<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">{m[1]}{CARET}</button><div class="dd-menu">{links}</div></div>')
+        else:
+            items.append(f'<a href="{m[0]}">{m[1]}</a>')
+    return f'''<header class="site-header prod-header">
+<div class="wrap">
+<a class="brand prod-brand" href="{p["home"]}" aria-label="{p["nombre"]}, inicio"><img src="{p["logo"]}" alt="" width="40" height="40"><span>{p["nombre"]}<small>de Perito Moreno 360</small></span></a>
+<button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">{MENU_ICON}</button>
+<nav class="nav" id="menu" aria-label="{p["nombre"]}">
+{"".join(items)}
+<a class="prod-grupo" href="/">Perito Moreno 360</a>
+<a class="btn btn-dark" href="{p["cta"][0]}">{p["cta"][1]}</a>
+</nav>
+</div>
+</header>'''
+
 def header(active, has_form=True):
+    if active in PRODUCTOS:
+        return header_producto(active)
     def a(href, label, key):
         cur = ' aria-current="page"' if key == active else ''
         return f'<a href="{href}"{cur}>{label}</a>'

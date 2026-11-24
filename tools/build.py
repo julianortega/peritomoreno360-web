@@ -144,8 +144,14 @@ FOOTER = '''<footer class="site-footer">
 </div>
 </footer>'''
 
+# Preguntas extra del formulario cuando se pide una demo de una app (se envían dentro de «interés»).
+DEMO = {
+    "Flight Director": ("¿Cuántos locales tienes?", "Por ejemplo, 1"),
+    "Mi Vestuario": ("¿Cuántos equipos tiene el club?", "Por ejemplo, 8"),
+}
+
 def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros.", condiciones=False):
-    options = ["Restauración", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Trabajar con vosotros", "Otro"]
+    options = ["Restauración", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Mi Vestuario", "Trabajar con vosotros", "Otro"]
     opts = "\n".join(
         f'<option{" selected" if o == interes_default else ""}>{o}</option>' for o in options
     )
@@ -153,6 +159,15 @@ def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus da
                  '<a href="/condiciones-contratacion" target="_blank">condiciones de contratación</a>, incluidas las políticas de entrega, '
                  '<a href="/condiciones-contratacion#desistimiento" target="_blank">desistimiento</a> y '
                  '<a href="/condiciones-contratacion#devoluciones" target="_blank">devoluciones</a>.</span></label>') if condiciones else ""
+    demo = DEMO.get(interes_default)
+    demo_html = ""
+    if demo:
+        demo_html = (f'<div class="field"><label for="f-tamano">{demo[0]}</label><input id="f-tamano" name="tamano" type="text" inputmode="numeric" maxlength="20" placeholder="{demo[1]}"></div>\n'
+                     '<div class="field"><label for="f-cuando">¿Cuándo te viene mejor la demo?</label><select id="f-cuando" name="cuando">'
+                     '<option>Me da igual</option><option>Por la mañana</option><option>Por la tarde</option></select></div>\n')
+    boton = "Quiero mi demo" if demo else "Quiero que me contactéis"
+    gracias = ("Hemos recibido tu petición. Te escribimos en menos de 24 horas laborables para cerrar el día y la hora de la demo." if demo
+               else "Hemos recibido tus datos. Te contactaremos nosotros muy pronto.")
     return f'''<section id="contacto" class="wrap section-tight">
 <div class="contact-box">
 <div class="stack-s">
@@ -168,15 +183,15 @@ def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus da
 <div class="field"><label for="f-interes">Te interesa</label><select id="f-interes" name="interes">
 {opts}
 </select></div>
-<div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
+{demo_html}<div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
 <label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label>{cond_html}
 <p class="form-note">No hace falta que nos llames: te contactaremos nosotros por teléfono o por correo.</p>
-<button class="btn btn-dark" type="submit">Quiero que me contactéis</button>
+<button class="btn btn-dark" type="submit">{boton}</button>
 <p class="form-status" role="status" aria-live="polite"></p>
 </div>
 <div class="form-done" role="status">
 <b>¡Gracias, <span data-name></span>!</b>
-<p>Hemos recibido tus datos. Te contactaremos nosotros muy pronto.</p>
+<p>{gracias}</p>
 </div>
 </form>
 </div>
@@ -251,9 +266,9 @@ PAGES = [
     ("mantenimiento", "Mantenimiento de locales, oficinas y comunidades · Rumbo Norte", "Mantenimiento y reparaciones de edificios, oficinas, comercios, comunidades y restaurantes: electricidad, fontanería, climatización y más. Presupuesto gratis.", "areas", "base", "mantenimiento", ("Mantenimiento", "Mantenimiento", "Pide presupuesto", "Déjanos tus datos y te contactaremos nosotros para preparar tu presupuesto, gratis y sin compromiso.")),
     ("apps", "Desarrollo de apps a medida para empresas · Perito Moreno 360", "Apps web y móviles a medida para empresas, con precios claros: estudio sin coste, módulo de demostración y app completa con precio máximo.", "areas", "base", "apps", ("Desarrollo de apps", "Desarrollo de apps", "¿Tienes una idea para una app?", "Déjanos tus datos y te contactaremos nosotros.", True)),
     ("franquicias", "Franquicias · Perito Moreno 360", "Abre una de nuestras marcas con un royalty del 2 % el primer año y del 4 % después, sin subidas.", "areas", "base", "franquicias", ("Franquicias", "Franquicias", "¿Hablamos de tu franquicia?")),
-    ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "¿Lo probamos en tu local?", "Déjanos tus datos y te contactaremos nosotros para enseñarte Flight Director.")),
+    ("flight-director", "Flight Director · La gestión 360 de tu local de hostelería", "Escandallos, cocina, equipo, checklists, compras y cuenta de resultados en directo para locales de hostelería.", "fd", "fd", "flight-director", ("Flight Director", "Flight Director", "Pide una demo de Flight Director", "Déjanos tus datos y te enseñamos Flight Director en 30 minutos por videollamada, con tus propios platos. Si prefieres empezar ya, <a href=\"/flight-director/empieza\">date de alta aquí</a>.")),
     ("flight-director/empieza", "Empieza hoy con Flight Director · Date de alta · Perito Moreno 360", "Date de alta en Flight Director en dos minutos: 75 €/mes por local, todo incluido. Sin permanencia. Paga con tarjeta o Bizum.", "fd", "fd", "empieza", None),
-    ("mi-vestuario", "Mi Vestuario · La app de tu club de fútbol · Perito Moreno 360", "Convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings de tu club de fútbol en una sola app para dirección, entrenadores, jugadores y familias.", "club", "base", "mi-vestuario", ("Mi Vestuario", "Desarrollo de apps", "¿La probamos en tu club?", "Déjanos tus datos y te enseñamos Mi Vestuario con los equipos de tu club.")),
+    ("mi-vestuario", "Mi Vestuario · La app de tu club de fútbol · Perito Moreno 360", "Convocatorias, calendario, pasar lista, cuotas, ropa, liga y rankings de tu club de fútbol en una sola app para dirección, entrenadores, jugadores y familias.", "club", "base", "mi-vestuario", ("Mi Vestuario", "Mi Vestuario", "Pide una demo de Mi Vestuario", "Déjanos tus datos y te enseñamos Mi Vestuario en 30 minutos por videollamada, con los equipos de tu club.")),
     ("franquicia-burritos", "Franquicia de burritos y tacos · Bestial Burritos & Tacos", "Abre una franquicia de burritos y tacos Bestial: fast casual mexicano 100 % natural, en formato dark kitchen, local o flagship. Royalty del 2 % el primer año.", "areas", "base", "franquicia-burritos", ("Franquicia de burritos", "Franquicias", "¿Abrimos un Bestial en tu ciudad?")),
     ("franquicia-dark-kitchen", "Franquicia dark kitchen de burritos · Poca inversión · Bestial", "Franquicia dark kitchen: empieza solo con delivery en 15–50 m², valida tu zona con poca inversión y crece a local. Royalty del 2 % el primer año.", "areas", "base", "franquicia-dark-kitchen", ("Franquicia dark kitchen", "Franquicias", "¿Hablamos de tu dark kitchen?")),
     ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 %", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "areas", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),

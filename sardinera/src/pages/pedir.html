@@ -1,0 +1,42 @@
+{{CONFIG_JS}}
+<section class="page-hero pedir-hero">
+<div class="wrap">
+<span class="eyebrow">Pide online · Majadahonda</span>
+<h1>¡Que no falte la tortilla!</h1>
+<p>Pide a domicilio por Majadahonda o para recoger en el local. Pago seguro con tarjeta o Bizum.</p>
+<div class="mode" role="group" aria-label="Cómo lo quieres"><button type="button" data-mode="domicilio" aria-pressed="true">🛵 A domicilio</button><button type="button" data-mode="recoger" aria-pressed="false">🛍️ Recoger</button></div>
+<p class="mode-info" data-mode-info></p>
+</div>
+<div class="hero-waves" aria-hidden="true"></div>
+</section>
+{{SUBNAV_SHOP}}
+<div class="wrap shop">
+<div class="shop-menu" data-shop>
+{{CARTA_SHOP}}
+</div>
+<aside id="cesta" class="cart" aria-label="Tu pedido">
+<h2 class="display">Tu pedido</h2>
+<div data-lines><p class="mut">Todavía no has añadido nada. ¡Empieza por un pincho de tortilla!</p></div>
+<div class="totals"><div><span>Productos</span><b data-subtotal>0,00 €</b></div><div data-ship-row><span>Envío</span><b data-ship>{{ENVIO}}</b></div></div>
+<div class="total"><span>Total</span><b data-total>0,00 €</b></div>
+<p class="warn" data-warn hidden></p>
+<form class="form" data-checkout novalidate>
+<div class="field"><label for="p-nombre">Nombre</label><input id="p-nombre" name="nombre" autocomplete="name" required></div>
+<div class="field"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required></div>
+<div class="field"><label for="p-email">Correo (para la confirmación)</label><input id="p-email" name="email" type="email" autocomplete="email"></div>
+<div class="field" data-only="domicilio"><label for="p-dir">Dirección, piso y puerta</label><input id="p-dir" name="direccion" autocomplete="street-address"></div>
+<div class="field" data-only="domicilio"><label for="p-cp">Código postal</label><input id="p-cp" name="cp" inputmode="numeric" maxlength="5" autocomplete="postal-code"></div>
+<div class="field"><label for="p-hora">¿Para cuándo?</label><select id="p-hora" name="hora"><option value="">Lo antes posible</option></select></div>
+<div class="field"><label for="p-alergia">Alergias o intolerancias</label><input id="p-alergia" name="alergia" placeholder="Si no hay, déjalo en blanco"></div>
+<div class="field"><label for="p-nota">Notas</label><textarea id="p-nota" name="nota" rows="2" placeholder="Timbre, portal, sin cebolla…"></textarea></div>
+<label class="check"><input type="checkbox" name="acepto" required> Acepto las <a class="link" href="/condiciones-contratacion" target="_blank">condiciones de venta</a> y la <a class="link" href="/privacidad" target="_blank">privacidad</a>.</label>
+<div class="pay">
+<button class="btn btn-red" type="submit" data-pay="tarjeta">Pagar con tarjeta · <span data-total>0,00 €</span></button>
+<button class="btn btn-line" type="submit" data-pay="bizum">Pagar con Bizum</button>
+</div>
+<p class="err" data-err role="alert" hidden></p>
+<p class="mut small">Vende y cobra Perito Moreno 360 S.L. El pago se hace en la página segura del banco.</p>
+</form>
+</aside>
+</div>
+<a class="cartbar" href="#cesta" data-cartbar hidden><span data-bar-count></span><span data-bar-total></span></a>

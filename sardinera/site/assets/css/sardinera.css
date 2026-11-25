@@ -170,3 +170,96 @@ section{scroll-margin-top:90px}
 .foot-cols div{display:flex;flex-direction:column;gap:8px;font-size:15px}
 .foot-cols b{color:#fff;font-weight:600;margin-bottom:4px}
 .foot-bottom{margin-top:44px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}
+
+/* ---------- Toque alegre: sol, rayas marineras y sardinas ---------- */
+:root{--sol:#FFC83D;--sol-2:#FFE39A;--mar:#9AD8EA;--coral:#FF7A6B}
+.hero{background:
+  radial-gradient(circle at 88% 12%,var(--sol) 0 70px,transparent 71px),
+  radial-gradient(circle at 6% 92%,rgba(154,216,234,.22) 0 140px,transparent 141px),var(--azul)}
+.hero h1 em{color:var(--sol);position:relative;white-space:nowrap}
+.hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:-.06em;height:.12em;border-radius:99px;background:var(--coral);transform:rotate(-1.5deg)}
+.hero .eyebrow,.page-hero .eyebrow{color:var(--sol)}
+.sticker{border:6px dashed var(--rojo);outline:10px solid var(--arena);animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-10px)}}
+.fish{position:absolute;width:64px;height:28px;opacity:.9;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 28'%3E%3Cpath d='M4 14C14 2 38 2 50 14 38 26 14 26 4 14Z' fill='%23C6D9E4'/%3E%3Cpath d='M48 14l14-11v22z' fill='%23C6D9E4'/%3E%3Cpath d='M10 14c10-5 26-5 36 0' stroke='%230D4765' stroke-width='1.6' fill='none' opacity='.35'/%3E%3Ccircle cx='13' cy='12' r='2.3' fill='%230D4765'/%3E%3C/svg%3E") center/contain no-repeat;
+  animation:swim 9s ease-in-out infinite}
+.fish.f1{top:16%;left:52%}.fish.f2{top:80%;left:62%;width:44px;animation-delay:-3s;animation-duration:11s}.fish.f3{top:34%;right:4%;width:52px;animation-delay:-6s}
+@keyframes swim{0%,100%{transform:translateX(0) rotate(0)}50%{transform:translateX(-26px) rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.fish,.sticker,.marquee span{animation:none}}
+@media (max-width:860px){.fish.f1,.fish.f3{display:none}}
+.stripes{height:14px;background:repeating-linear-gradient(90deg,var(--azul) 0 18px,#fff 18px 36px)}
+.marquee{background:var(--sol);color:var(--azul);border-top:3px solid var(--azul);border-bottom:3px solid var(--azul)}
+.cat{box-shadow:0 6px 0 rgba(13,71,101,.12)}
+.cat:hover{transform:translateY(-4px) rotate(-1deg)}
+.cat.c4{background:var(--sol-2)}
+.cat.c6{background:var(--mar);border-color:var(--mar)}
+.board{box-shadow:10px 10px 0 var(--sol)}
+.board:before{content:"✱";position:absolute;top:-22px;right:14px;width:58px;height:58px;border-radius:50%;background:var(--rojo);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;transform:rotate(12deg)}
+.quote p{position:relative}
+.waves-bg{background-color:#E9F5F9}
+.pide-band{background:var(--rojo);color:#fff;border-radius:var(--r);padding:clamp(26px,4vw,48px);display:grid;grid-template-columns:1.3fr auto;gap:24px;align-items:center;position:relative;overflow:hidden}
+.pide-band:after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,200,61,.35)}
+.pide-band h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.05}
+.pide-band p{margin-top:10px;color:#FFE4E8;font-size:17px}
+.pide-band .ctas{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.btn-sol{background:var(--sol);color:var(--azul)}.btn-sol:hover{background:#FFB800}
+@media (max-width:760px){.pide-band{grid-template-columns:1fr}}
+
+/* ---------- Pide online ---------- */
+.pedir-hero{padding-bottom:clamp(60px,7vw,96px)}
+.mode{display:inline-flex;gap:6px;background:rgba(255,255,255,.12);padding:6px;border-radius:999px;margin-top:26px;flex-wrap:wrap}
+.mode button{border:0;background:transparent;color:#fff;padding:11px 20px;border-radius:999px;font-weight:600;cursor:pointer;font-size:15px}
+.mode button[aria-pressed="true"]{background:var(--sol);color:var(--azul)}
+.mode-info{font-size:15px!important;margin-top:14px!important;color:#DCE7EE}
+.shop{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(24px,3vw,44px);align-items:start;padding-bottom:80px}
+.shop-menu .menu-sec{padding:clamp(28px,4vw,48px) 0}
+.shop-menu .grps{grid-template-columns:1fr;gap:18px}
+.shop-menu .grp li{align-items:center;gap:12px;padding:12px 10px;border-radius:14px;border-bottom:1px dashed var(--line);transition:background .15s}
+.shop-menu .grp li>div{flex:1;min-width:0}
+.shop-menu .grp li:hover{background:#fff}
+.shop-menu .grp li.in{background:#fff;box-shadow:inset 4px 0 0 var(--rojo)}
+.shop-menu .grp li.off{opacity:.45}
+.shop-menu .grp li.off .add{pointer-events:none;background:var(--line)}
+.only{display:inline-block;font-style:normal;font-size:12px;font-weight:600;color:var(--rojo);background:#FCE6E9;border-radius:99px;padding:2px 9px;margin-top:4px}
+.add{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--rojo);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 3px 0 #8E0B20;transition:transform .1s}
+.add:active{transform:translateY(2px);box-shadow:0 1px 0 #8E0B20}
+li.pop .add{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.25) rotate(10deg)}100%{transform:scale(1)}}
+.cart{position:sticky;top:140px;background:#fff;border:2px solid var(--azul);border-radius:var(--r);padding:24px;box-shadow:8px 8px 0 var(--sol);max-height:calc(100vh - 160px);overflow:auto}
+.cart h2{font-size:34px;margin-bottom:12px}
+.line{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.line .q{display:inline-flex;align-items:center;gap:6px;background:var(--arena);border-radius:99px;padding:3px}
+.line .q button{width:28px;height:28px;border-radius:50%;border:0;background:#fff;color:var(--azul);font-weight:700;cursor:pointer}
+.line .q b{min-width:16px;text-align:center}
+.line .nm{color:var(--azul);font-weight:500;line-height:1.3}
+.line .pr{font-weight:600;white-space:nowrap}
+.totals{margin-top:12px;display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--mut)}
+.totals div,.total{display:flex;justify-content:space-between}
+.total{margin-top:8px;padding-top:10px;border-top:2px solid var(--azul);font-size:20px;color:var(--azul)}
+.warn{margin-top:12px;background:var(--sol-2);color:var(--azul);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:500}
+.err{margin-top:12px;background:#FCE6E9;color:#8E0B20;border-radius:12px;padding:10px 14px;font-size:14px;font-weight:500}
+.form{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:13px;font-weight:600;color:var(--azul)}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--arena);color:var(--ink);width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--azul);background:#fff}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45}
+.check input{margin-top:3px;width:18px;height:18px;accent-color:var(--rojo);flex:none}
+.pay{display:flex;flex-direction:column;gap:8px}
+.pay .btn{width:100%}
+.small{font-size:12.5px}
+.cartbar{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;display:none;justify-content:space-between;align-items:center;gap:12px;background:var(--rojo);color:#fff;padding:15px 22px;border-radius:999px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.cartbar[hidden]{display:none!important}
+@media (max-width:980px){
+  .shop{grid-template-columns:1fr}
+  .cart{position:static;max-height:none}
+  .cartbar{display:flex}
+}
+
+/* ---------- Vuelta del pago ---------- */
+.estado{text-align:center;max-width:720px;display:flex;flex-direction:column;align-items:center}
+.estado>div{display:flex;flex-direction:column;align-items:center;gap:20px}
+.estado>div[hidden]{display:none}
+.sardinas-fiesta{font-size:56px;animation:bob 3s ease-in-out infinite}
+@media (max-width:560px){.hero h1 em{white-space:normal}}

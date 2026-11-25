@@ -8,20 +8,29 @@ cabecera, pie, carta y datos para Google. Para cambiar dominio, teléfono, horar
 toca solo el bloque CONFIG y vuelve a ejecutar.
 """
 import json, pathlib, re, hashlib, html as _html
-from carta import CARTA
+from carta import CARTA, plato
 
 # ============================== CONFIG ==============================
 MARCA = "La Sardinera"
 LEMA = "Del norte a la mesa"
 DOMINIO = ""                            # p. ej. "https://www.lasardinera.es" (vacío mientras no haya dominio)
-EMAIL = ""                              # correo de contacto público; vacío = se contacta por teléfono
+EMAIL = "info@peritomoreno360.com"      # correo de contacto público (el del grupo)
 TELEFONO = "619 91 59 18"               # provisional hasta tener el del local
 INSTAGRAM = "https://www.instagram.com/lasardinera_sdr/"
 GRUPO_URL = "https://www.peritomoreno360.com"
-# Empresa que opera el local de Majadahonda y vende (aviso legal y pie). La marca es de Perito Moreno 360 S.L.
-TITULAR = "Simbasona S.L."
-CIF = "B05816426"
-DOMICILIO = "Calle Zuloaga 14, 3º D, 28222 Majadahonda (Madrid)"
+# Titular de la web y de la marca, y quien vende y cobra los pedidos online: siempre Perito Moreno 360 (Julián, 25/11).
+TITULAR = "Perito Moreno 360 S.L."
+CIF = "B-21797493"
+DOMICILIO = "Urbanización Las Dalias 9, 39100 Santa Cruz de Bezana (Cantabria)"
+# Pedidos online: los recibe y cobra Flight Director (TPV virtual Redsys) y entran en el KDS del local.
+# Los precios, el envío, el mínimo y los códigos postales los vuelve a comprobar el servidor (lib/pedidos-web.ts):
+# si cambias algo aquí, cámbialo también allí.
+PEDIDOS_API = "https://flightdirector.peritomoreno360.com"
+PEDIDOS_ONLINE = True
+DOMICILIO_ON = True                     # reparto con flota externa
+ENVIO = 2.50
+MINIMO_DOMICILIO = 15.0
+CPS = ["28220", "28221", "28222"]
 APERTURA = "2026-12-03"                 # día de apertura (para el aviso y para Google)
 APERTURA_TXT = "3 de diciembre"
 # Horario por días para Google y para la web. Vacío = «Horario muy pronto».
@@ -103,17 +112,18 @@ def header(active):
 <nav class="nav" id="menu" aria-label="Principal">
 {a("/carta", "Carta", "carta")}
 {a("/locales/" + LOCAL["slug"], "Majadahonda", "local")}
-{a("/encargos", "Para llevar", "encargos")}
+{a("/encargos", "Encargos", "encargos")}
 {a("/nosotros", "Del norte", "nosotros")}
 {a("/franquicias", "Franquicias", "franquicias")}
-<div class="nav-actions"><a class="btn btn-blue" href="/carta">Ver la carta</a></div>
+<div class="nav-actions"><a class="btn btn-red" href="/pedir">Pide online</a></div>
 </nav>
 </div>
 </header>'''
 
 def footer():
     ig = f'<a href="{INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram de {e(MARCA)}">{svg("ig")}</a>' if INSTAGRAM else ""
-    return f'''<footer class="site-footer">
+    return f'''<div class="stripes" aria-hidden="true"></div>
+<footer class="site-footer">
 <div class="wrap">
 <div class="foot-top">
 <div class="foot-brand">
@@ -123,16 +133,16 @@ def footer():
 <div class="social">{ig}</div>
 </div>
 <div class="foot-cols">
-<div><b>Comer</b><a href="/carta">Carta</a><a href="/locales/{LOCAL["slug"]}">Majadahonda</a><a href="/encargos">Para llevar y encargos</a></div>
+<div><b>Comer</b><a href="/pedir">Pide online</a><a href="/carta">Carta</a><a href="/locales/{LOCAL["slug"]}">Majadahonda</a><a href="/encargos">Para llevar y encargos</a></div>
 <div><b>{e(MARCA)}</b><a href="/nosotros">Del norte</a><a href="/franquicias">Franquicias</a><a href="{contacto_href()}">Contacto</a></div>
-<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
+<div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de venta</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
 <div class="foot-bottom"><span>© <span data-year>2026</span> {e(MARCA)} · {e(TITULAR)} · {CIF}</span><a href="{GRUPO_URL}" target="_blank" rel="noopener">Una marca de Perito Moreno 360</a></div>
 </div>
 </footer>'''
 
-NOINDEX = {"404"}
+NOINDEX = {"404", "pedido"}
 
 def page(name, body, title, desc, active):
     path = "" if name == "index" else name
@@ -172,28 +182,51 @@ def page(name, body, title, desc, active):
 '''
 
 # ---------- carta ----------
-def carta_html():
+def items():
+    for sid, title, sub, gs in CARTA:
+        for g, its in gs:
+            for n, d, ref in its:
+                yield sid, n, d, ref
+
+def carta_html(shop=False):
     out = []
     for sid, title, sub, grupos in CARTA:
         gs = []
-        for gname, items in grupos:
-            rows = "".join(
-                f'<li><div><h4>{e(n)}</h4>{f"<p>{e(d)}</p>" if d else ""}</div><span class="p">{eur(p)}</span></li>' for n, d, p in items)
+        for gname, its in grupos:
+            rows = []
+            for n, d, ref in its:
+                sala, pid, dom = plato(ref)
+                if shop and not pid:
+                    continue
+                attrs = f' data-id="{pid}" data-sala="{sala:.2f}" data-dom="{"" if dom is None else f"{dom:.2f}"}"' if shop else ""
+                btn = f'<button class="add" type="button" aria-label="Añadir {e(n)}">+</button>' if shop else ""
+                only = '<em class="only">Solo para recoger</em>' if shop and dom is None else ""
+                rows.append(f'<li{attrs}><div><h4>{e(n)}</h4>{f"<p>{e(d)}</p>" if d else ""}{only}</div><span class="p">{eur(sala)}</span>{btn}</li>')
+            if not rows:
+                continue
             h = f'<h3>{e(gname)}</h3>' if gname else ""
-            gs.append(f'<div class="grp">{h}<ul>{rows}</ul></div>')
-        s = f'<p class="sub">{e(sub)}</p>' if sub else ""
-        out.append(f'<section id="{sid}" class="menu-sec"><div class="menu-head"><h2 class="display">{e(title)}</h2>{s}</div><div class="grps">{"".join(gs)}</div></section>')
+            gs.append(f'<div class="grp">{h}<ul>{"".join(rows)}</ul></div>')
+        if not gs:
+            continue
+        s_ = f'<p class="sub">{e(sub)}</p>' if sub else ""
+        out.append(f'<section id="{"p-" if shop else ""}{sid}" class="menu-sec"><div class="menu-head"><h2 class="display">{e(title)}</h2>{s_}</div><div class="grps">{"".join(gs)}</div></section>')
     return "\n".join(out)
 
-def subnav():
+def subnav(shop=False):
+    secs = [(sid, t) for sid, t, _, gs in CARTA if not shop or any(plato(r)[1] for _, its in gs for _, _, r in its)]
     return '<nav class="subnav" aria-label="Secciones de la carta"><div class="wrap">' + "".join(
-        f'<a href="#{sid}">{e(t)}</a>' for sid, t, _, _ in CARTA) + '</div></nav>'
+        f'<a href="#{"p-" if shop else ""}{sid}">{e(t)}</a>' for sid, t in secs) + '</div></nav>'
 
 def destacados():
-    """Lo más nuestro, para la portada (nombres exactos de la carta)."""
-    want = ["Tortilla con cebolla", "Gilda de anchoa", "Sardinera", "Ración de anchoas", "Ventresca con mantequilla", "Coca de sardinas con queso feta", "Vermut rojo de grifo"]
-    idx = {n: p for _, _, _, gs in CARTA for _, its in gs for n, _d, p in its}
+    """Lo más nuestro, para la portada (nombres de la web)."""
+    want = ["Pincho de tortilla con cebolla", "Gilda de anchoa", "Sardinera", "Ración de anchoas", "Ventresca con mantequilla", "Coca de sardinas con queso feta", "Vermut rojo de grifo"]
+    idx = {n: plato(r)[0] for _, n, _, r in items()}
     return "".join(f'<li><span>{e(n)}</span><i></i><b>{eur(idx[n])}</b></li>' for n in want if n in idx)
+
+def config_js():
+    cfg = {"api": PEDIDOS_API, "marca": "sardinera", "online": PEDIDOS_ONLINE, "domicilio": DOMICILIO_ON,
+           "envio": ENVIO, "minimo": MINIMO_DOMICILIO, "cps": CPS}
+    return '<script>window.SARDINERA=' + json.dumps(cfg) + ';</script>'
 
 # ---------- datos estructurados (schema.org) ----------
 def url(p=""):
@@ -223,7 +256,7 @@ def restaurante():
 def carta_ld():
     secs = [{"@type": "MenuSection", "name": t, "hasMenuItem": [
         {"@type": "MenuItem", "name": n, **({"description": d} if d else {}),
-         "offers": {"@type": "Offer", "price": f"{p:.2f}", "priceCurrency": "EUR"}} for _, its in gs for n, d, p in its]}
+         "offers": {"@type": "Offer", "price": f"{plato(r)[0]:.2f}", "priceCurrency": "EUR"}} for _, its in gs for n, d, r in its]}
         for _, t, _, gs in CARTA]
     return {"@type": "Menu", "@id": url("carta#menu"), "name": f"Carta de {MARCA}", "url": url("carta"), "inLanguage": "es", "hasMenuSection": secs}
 
@@ -254,6 +287,8 @@ def tokens(s):
         "CONTACTO_HREF": contacto_href(), "CONTACTO": contacto_txt(),
         "TITULAR": e(TITULAR), "CIF": CIF, "DOMICILIO": e(DOMICILIO), "GRUPO_URL": GRUPO_URL,
         "CARTA": carta_html(), "SUBNAV": subnav(), "DESTACADOS": destacados(),
+        "CARTA_SHOP": carta_html(True), "SUBNAV_SHOP": subnav(True), "CONFIG_JS": config_js(),
+        "ENVIO": eur(ENVIO), "MINIMO": eur(MINIMO_DOMICILIO), "CPS": ", ".join(CPS), "EMAIL": EMAIL,
         "DIRECCION": e(dir_completa()), "MAPS_Q": maps_q(), "HORARIO": e(horario_txt()),
         "APERTURA_TXT": APERTURA_TXT, "LOCAL_TEXTO": e(LOCAL["texto"]), "LOCAL_SLUG": LOCAL["slug"],
         "DOMINIO_O_WEB": DOMINIO.replace("https://", "") if DOMINIO else "esta web", "INSTAGRAM": INSTAGRAM,
@@ -270,6 +305,10 @@ PAGES = {
     "encargos": (f"Tortilla de Santander para llevar · {MARCA}", "Tortilla entera por encargo, pinchos y conservas para llevar desde nuestro local de Majadahonda.", "encargos"),
     "nosotros": (f"Del norte a la mesa · {MARCA}", "Qué es La Sardinera: la barra de pinchos de Santander, con tortilla poco hecha, gildas y conservas del Cantábrico.", "nosotros"),
     "franquicias": (f"Franquicias · {MARCA}", "Abre una Sardinera: un concepto de barra del norte, pequeño y muy afinado, del Grupo Perito Moreno 360.", "franquicias"),
+    "pedir": (f"Pide online · Tortilla y pinchos a domicilio en Majadahonda · {MARCA}",
+              f"Pide online a {MARCA}: tortilla de Santander, gildas, conservas y raciones a domicilio en Majadahonda o para recoger. Pago seguro con tarjeta o Bizum.", "pedir"),
+    "pedido": (f"Tu pedido · {MARCA}", "Estado de tu pedido.", ""),
+    "condiciones-contratacion": (f"Condiciones de venta online · {MARCA}", "Condiciones de los pedidos online: precios, pago, entrega y cancelaciones.", ""),
     "aviso-legal": (f"Aviso legal · {MARCA}", "Aviso legal.", ""),
     "privacidad": (f"Privacidad · {MARCA}", "Política de privacidad.", ""),
     "cookies": (f"Cookies · {MARCA}", "Política de cookies.", ""),
@@ -283,7 +322,7 @@ def main():
         dest = OUT / f"{name}.html"
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(page(name, body, title, desc, active))
-    pub = ("index", "carta", f'locales/{LOCAL["slug"]}', "encargos", "nosotros", "franquicias")
+    pub = ("index", "carta", "pedir", f'locales/{LOCAL["slug"]}', "encargos", "nosotros", "franquicias")
     if DOMINIO:
         urls = "".join(f"<url><loc>{DOMINIO}/{'' if n == 'index' else n}</loc></url>" for n in pub)
         (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')

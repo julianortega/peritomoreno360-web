@@ -37,7 +37,9 @@ PRODUCTOS = {
            "menu": [("/flight-director#modulos", "Funciones"), ("/flight-director/empieza", "Precio"),
                     ("dd", "Guías", [("/app-escandallos-hosteleria", "App de escandallos", "Coste y margen de cada plato"),
                                       ("/control-food-cost-restaurante", "Control del food cost", "Guía paso a paso"),
-                                      ("/app-cuadrantes-hosteleria", "Cuadrantes y fichajes", "Turnos y registro de jornada")])],
+                                      ("/como-hacer-escandallo", "Cómo hacer un escandallo", "Método y ejemplo completo"),
+                                      ("/app-cuadrantes-hosteleria", "Cuadrantes y fichajes", "Turnos y registro de jornada"),
+                                      ("/guias", "Todas las guías", "Gestión de restaurantes")])],
            "cta": ("/flight-director/empieza", "Empieza hoy")},
     "club": {"home": "/mi-vestuario", "nombre": "Mi Vestuario", "logo": "/assets/img/club/icono.svg",
              "menu": [("/mi-vestuario#pantallas", "La app"), ("/mi-vestuario#roles", "Para quién"),
@@ -136,6 +138,7 @@ FOOTER = '''<footer class="site-footer">
 <div><b>Áreas de negocio</b><a href="/restauracion">Restauración</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
 <div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/mi-vestuario">Mi Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
+<div><b>Guías</b><a href="/guias">Todas las guías</a><a href="/como-hacer-escandallo">Escandallos</a><a href="/control-food-cost-restaurante">Food cost</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty de franquicia</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -274,6 +277,8 @@ PAGES = [
     ("franquicias-hosteleria-royalty-bajo", "Franquicias de hostelería con royalty bajo: 2 % y 4 %", "Franquicias de hostelería con uno de los royalties más bajos: 2 % el primer año y 4 % después, fijo y sin subidas. Condiciones claras y sin letra pequeña.", "areas", "brands", "franquicias-hosteleria-royalty-bajo", ("Royalty bajo", "Franquicias", "¿Hablamos de tu franquicia?")),
     ("app-escandallos-hosteleria", "App de escandallos para hostelería · Flight Director", "Escandallos que se recalculan solos: coste por ración, food cost y margen en sala y en delivery, con la comisión de la plataforma.", "fd", "fd", "app-escandallos-hosteleria", ("App de escandallos", "Flight Director", "¿Te enseñamos tus escandallos en Flight Director?", "Déjanos tus datos y te contactaremos nosotros para hacerte una demo.")),
     ("control-food-cost-restaurante", "Cómo calcular y controlar el food cost de un restaurante · Guía", "Qué es el food cost, cómo se calcula con un ejemplo, qué porcentaje es bueno y 7 formas de controlarlo en tu restaurante.", "fd", "fd", "control-food-cost-restaurante", ("Guía food cost", "Flight Director", "¿Quieres controlar tu food cost sin Excel?", "Déjanos tus datos y te enseñamos cómo lo hace Flight Director.")),
+    ("como-hacer-escandallo", "Cómo hacer un escandallo paso a paso, con ejemplo · Guía", "Qué es un escandallo, cómo calcular el coste por ración con la merma, un ejemplo completo y los errores más habituales en sala y delivery.", "fd", "fd", "como-hacer-escandallo", ("Guía escandallo", "Flight Director", "¿Quieres tus escandallos sin Excel?", "Déjanos tus datos y te enseñamos cómo lo hace Flight Director.")),
+    ("guias", "Guías de gestión para restaurantes · Perito Moreno 360", "Guías prácticas para gestionar un restaurante: escandallos, food cost, cuadrantes de personal y franquicias, escritas desde nuestros propios locales.", "fd", "fd", "guias", None),
     ("app-cuadrantes-hosteleria", "App de cuadrantes y fichajes para hostelería · Flight Director", "Cuadrantes de turnos según la venta prevista, coste de personal antes de publicar y fichajes para el registro de jornada. App para restaurantes.", "fd", "fd", "app-cuadrantes-hosteleria", ("App de cuadrantes", "Flight Director", "¿Te enseñamos tus cuadrantes en Flight Director?", "Déjanos tus datos y te contactaremos nosotros para hacerte una demo.")),
     ("aviso-legal", "Aviso legal · Perito Moreno 360", "Aviso legal del sitio web de Perito Moreno 360 SL.", "", "base", "aviso-legal", None),
     ("condiciones-contratacion", "Condiciones de contratación · Perito Moreno 360", "Condiciones de contratación de los servicios de Perito Moreno 360 SL: precios, forma de pago, plazos, desistimiento y devoluciones.", "", "base", "condiciones-contratacion", None),

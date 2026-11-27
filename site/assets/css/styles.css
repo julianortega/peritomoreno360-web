@@ -629,3 +629,12 @@ a.brand-card:hover { color: inherit; box-shadow: 0 16px 40px rgba(23,25,31,0.08)
 @media (max-width: 1100px) and (min-width: 861px) { .nav { gap: 20px; } .site-header .wrap { gap: 16px; } .lang a { padding: 4px 8px; } }
 @media (max-width: 860px) { .lang { margin-left: auto; order: 2; } .nav-toggle { order: 3; } }
 @media (max-width: 400px) { .lang a { padding: 4px 8px; gap: 5px; } .site-header .wrap { gap: 12px; } }
+
+/* Cabecera de las mini-webs (Flight Director y Mi Vestuario) */
+.prod-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.prod-brand img, .brand.prod-brand img { width: 40px; height: 40px; border-radius: 10px; }
+.prod-brand span { display: flex; flex-direction: column; font-family: var(--display, inherit); font-size: 18px; font-weight: 700; line-height: 1.15; white-space: nowrap; }
+.prod-brand small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.nav .prod-grupo { color: var(--muted); }
+@media (max-width: 1100px) and (min-width: 861px) { .nav .prod-grupo { display: none; } }
+@media (max-width: 1180px) and (min-width: 861px) { .foot-cols { flex-wrap: wrap; gap: 32px 48px; } }

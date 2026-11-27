@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipe costing app for hospitality · Flight Director</title>
+<meta name="description" content="Recipe costs that update themselves: cost per portion, food cost and margin for dine-in and delivery, including the platform commission.">
+
+<link rel="canonical" href="https://www.peritomoreno360.com/en/app-escandallos-hosteleria">
+<link rel="alternate" hreflang="es" href="https://www.peritomoreno360.com/app-escandallos-hosteleria">
+<link rel="alternate" hreflang="en" href="https://www.peritomoreno360.com/en/app-escandallos-hosteleria">
+<link rel="alternate" hreflang="x-default" href="https://www.peritomoreno360.com/app-escandallos-hosteleria">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Recipe costing app for hospitality · Flight Director">
+<meta property="og:description" content="Recipe costs that update themselves: cost per portion, food cost and margin for dine-in and delivery, including the platform commission.">
+<meta property="og:url" content="https://www.peritomoreno360.com/en/app-escandallos-hosteleria">
+<meta property="og:image" content="https://www.peritomoreno360.com/assets/img/pm360-logo.png">
+<meta name="theme-color" content="#F6F2EA">
+<meta name="google-site-verification" content="K6yYI_6NLHTueWK6bNe2ToRdarshQfltA1QFdewTcZE">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/css/styles.css?v=485c8ac856">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is recipe costing in hospitality?", "acceptedAnswer": {"@type": "Answer", "text": "It's the sheet that calculates the cost of a dish from its ingredients and quantities. It's used to set the selling price and know the margin on each dish."}}, {"@type": "Question", "name": "How do you calculate the cost of a dish?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply the quantity of each ingredient by its price (allowing for trimming or cooking loss) and add them all up. The result is the cost per portion."}}, {"@type": "Question", "name": "Does Flight Director account for delivery commissions?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each dish shows the dine-in and delivery calculations separately, with the platform commission deducted."}}, {"@type": "Question", "name": "Does it work for several locations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Flight Director is multi-location and multi-brand: you can share recipes between locations and have different prices at each one."}}]}</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="site-header">
+<div class="wrap">
+<a class="brand" href="/en" aria-label="Perito Moreno 360, home"><img src="/assets/img/pm360-logo-transparente.png" alt="Perito Moreno 360" width="137" height="64"></a>
+<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="nav" id="menu" aria-label="Main">
+<a href="/en#grupo">The group</a>
+<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Business areas<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+<div class="dd-menu">
+<a href="/en/restauracion">Restaurants<small>Bestial, La Sardinera and Lolita Bakery</small></a>
+<a href="/en/operaciones">Operations<small>We make your business more efficient</small></a>
+<a href="/en/mantenimiento">Maintenance<small>Rumbo Norte, multi-service</small></a>
+<a href="/en/apps">App development<small>Custom apps for businesses</small></a>
+</div></div>
+<div class="dd on"><button class="dd-btn" type="button" aria-expanded="false">Apps<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+<div class="dd-menu">
+<a class="dd-app" href="/en/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>360° management for your hospitality business</small></span></a>
+<a class="dd-app" href="/en/mi-vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Mi Vestuario<small>The app for your football club</small></span></a>
+</div></div>
+<a class="btn btn-dark" href="#contacto">Let's talk</a>
+</nav>
+<div class="lang" role="group" aria-label="Language"><a href="/app-escandallos-hosteleria" hreflang="es" lang="es" title="Español"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg><span>ES</span></a><a href="/en/app-escandallos-hosteleria" hreflang="en" lang="en" aria-current="true" title="English"><svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg><span>EN</span></a></div>
+</div>
+</header>
+<main id="main">
+<section class="wrap fd-hero">
+<div class="stack">
+<a class="back" href="/en/flight-director">← Flight Director</a>
+<p class="eyebrow">Recipe costing app for hospitality</p>
+<h1 class="display">Recipe costs that update themselves, for dine-in and delivery.</h1>
+<p class="lead">With Flight Director every dish has a full recipe costing: ingredients, quantities, cost per portion, VAT, platform commission and margin. If an ingredient's price goes up, every dish that uses it is recalculated instantly.</p>
+<div class="btns">
+<a class="btn btn-pink" href="#contacto">Request a demo</a>
+<a class="btn btn-line" href="/en/flight-director">See the whole app</a>
+</div>
+</div>
+<div class="win" role="img" aria-label="Recipe costing for a dish in Flight Director with sample data">
+<div class="win-bar"><i></i><i></i><i></i><span>flightdirector.app/cocina/carta</span></div>
+<div class="win-body">
+<div class="fd-side"><span class="loc">CENTRO</span><span>Today</span><span class="grp">OPS</span><span class="on">Kitchen</span><span>Checklists</span><span>Purchasing</span><span>Team</span><span class="grp">SALES AND CUSTOMERS</span><span>POS</span><span>Sales</span><span>Club</span><span class="grp">NUMBERS</span><span>Finance</span><span>Reports</span><span class="talk">Talk</span></div>
+<div class="fd-main">
+<span class="fd-crumb">‹ Menu · <b>CENTRO · Burritos</b></span>
+<span class="fd-title" style="font-size:26px;line-height:1.08">El Norteño · Slow-cooked beef burrito</span>
+<div class="pl">
+<div class="box"><div class="r" style="margin-bottom:4px;align-items:center"><span class="cap" style="font-size:16px">Dine-in</span><span class="pill-g">FC 24%</span></div><div class="r"><b>Price</b><b>€12.90</b></div><div class="r"><span>− VAT 10%</span><span>−€1.17</span></div><div class="r"><span>= Net</span><span>€11.73</span></div><div class="r"><span>− Cost</span><span>−€2.84</span></div><div class="r"><b>= Margin</b><b>€8.89</b></div></div>
+<div class="box"><div class="r" style="margin-bottom:4px;align-items:center"><span class="cap" style="font-size:16px">Delivery</span><span class="pill-g">FC 21%</span></div><div class="r"><b>Price</b><b>€14.90</b></div><div class="r"><span>− VAT 10%</span><span>−€1.35</span></div><div class="r"><span>= Net</span><span>€13.55</span></div><div class="r"><span>− Commission 20%</span><span>−€2.98</span></div><div class="r"><span>− Cost</span><span>−€2.84</span></div><div class="r"><b>= Margin</b><b>€7.73</b></div></div>
+</div>
+<div class="note-b">1 ingredient has no cost: the food cost shows lower than it really is.</div>
+<div class="chips"><span class="on">Brand A</span><span>Brand B</span><span>Brand C</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap section-tight about">
+<div class="stack-s">
+<h2 class="h2-s">What recipe costing is</h2>
+</div>
+<div class="stack-s">
+<p class="body">A recipe costing (in Spain, an «escandallo») is the sheet that breaks down everything that goes into a dish and what it costs: each ingredient, its quantity, its price and, at the end, the cost per portion. With that figure you set the selling price and know how much each dish leaves you.</p>
+<p class="body">The problem is keeping them up to date. Supplier prices change every week, recipes evolve and for delivery you have to subtract the platform commission. A spreadsheet forgotten in a folder stops being useful within a few months. That's why we build them inside the app the kitchen uses every day.</p>
+</div>
+</section>
+
+<section class="dark">
+<div class="wrap section stack" style="gap:48px">
+<h2 class="h2">What Flight Director does with your recipe costs</h2>
+<div class="grid-3">
+<div class="point"><span class="num">01</span><h3>Cost to the cent</h3><p>Ingredients and sub-recipes (sauces, bases, marinades) with their cost per kilo, unit or portion.</p></div>
+<div class="point"><span class="num">02</span><h3>Prices always up to date</h3><p>Change an ingredient's price and every dish that uses it is recalculated, without touching each costing.</p></div>
+<div class="point"><span class="num">03</span><h3>Dine-in and delivery separately</h3><p>The same dish with two calculations: VAT and no commission for dine-in; VAT and platform commission for delivery.</p></div>
+<div class="point"><span class="num">04</span><h3>Error warnings</h3><p>If an ingredient is missing a price, the app warns you that the real food cost is higher than it looks.</p></div>
+<div class="point"><span class="num">05</span><h3>Several brands, one kitchen</h3><p>The same dish can be sold under several brands or locations, each at its own price.</p></div>
+<div class="point"><span class="num">06</span><h3>Kitchen spec sheets</h3><p>A printable spec sheet with quantities and allergens so the whole team makes the dish the same way.</p></div>
+</div>
+</div>
+</section>
+
+<section class="wrap section stack" style="gap:24px">
+<h2 class="h2-s">An example with numbers</h2>
+<p class="body" style="max-width:820px">A burrito sold for €12.90 dine-in includes 10% VAT, so the net price is €11.73. If the ingredients cost €2.84, the food cost is 24% and the gross margin is €8.89.</p>
+<p class="body" style="max-width:820px">The same burrito at €14.90 on a delivery platform with a 20% commission leaves a net price of €13.55, of which €2.98 goes on commission. Subtracting the same €2.84 cost, the margin ends up at €7.73: more than a euro less than dine-in, even though the price is two euros higher. Without costing per channel, you can't see that difference.</p>
+<a style="font-weight:600;color:var(--accent)" href="/en/control-food-cost-restaurante">How to calculate and control food cost →</a>
+</section>
+
+<section class="wrap section-tight stack faq" style="gap:24px">
+<h2 class="h2-s">Frequently asked questions</h2>
+<details><summary>What is recipe costing in hospitality?</summary><p>It's the sheet that calculates the cost of a dish from its ingredients and quantities. It's used to set the selling price and know the margin on each dish.</p></details>
+<details><summary>How do you calculate the cost of a dish?</summary><p>Multiply the quantity of each ingredient by its price (allowing for trimming or cooking loss) and add them all up. The result is the cost per portion.</p></details>
+<details><summary>Does Flight Director account for delivery commissions?</summary><p>Yes. Each dish shows the dine-in and delivery calculations separately, with the platform commission deducted.</p></details>
+<details><summary>Does it work for several locations?</summary><p>Yes. Flight Director is multi-location and multi-brand: you can share recipes between locations and have different prices at each one.</p></details>
+</section>
+
+<section id="contacto" class="wrap section-tight">
+<div class="contact-box">
+<div class="stack-s">
+<h2>Shall we show you your recipe costs in Flight Director?</h2>
+<p class="intro">Leave us your details and we'll get in touch to give you a demo.</p>
+<p class="intro">If you prefer, email us at <a class="mail" href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a></p>
+</div>
+<form class="form" data-contact data-origen="App de escandallos · EN" novalidate>
+<div class="form-fields stack-s">
+<div class="field"><label for="f-nombre">Name</label><input id="f-nombre" name="nombre" type="text" autocomplete="name" required maxlength="120"></div>
+<div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
+<div class="field"><label for="f-tel">Phone</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required pattern="[+0-9 ()\-]{6,}" maxlength="40"></div>
+<div class="field"><label for="f-interes">I'm interested in</label><select id="f-interes" name="interes">
+<option value="Restauración">Restaurants</option>
+<option value="Franquicias">Franchises</option>
+<option value="Operaciones">Operations</option>
+<option value="Mantenimiento">Maintenance</option>
+<option value="Desarrollo de apps">App development</option>
+<option value="Flight Director" selected>Flight Director</option>
+<option value="Trabajar con vosotros">Working with you</option>
+<option value="Otro">Other</option>
+</select></div>
+<div class="hp" aria-hidden="true"><label for="f-web">Leave blank</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
+<label class="check"><input type="checkbox" name="acepto" required><span>I have read and accept the <a href="/en/privacidad" target="_blank">privacy policy</a>.</span></label>
+<p class="form-note">No need to call us: we'll get in touch by phone or email.</p>
+<button class="btn btn-dark" type="submit">Please contact me</button>
+<p class="form-status" role="status" aria-live="polite"></p>
+</div>
+<div class="form-done" role="status">
+<b>Thank you, <span data-name></span>!</b>
+<p>We've received your details. We'll be in touch very soon.</p>
+</div>
+</form>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="foot-top">
+<div class="foot-brand">
+<b>Perito Moreno 360</b>
+<span>Perito Moreno 360 SL · CIF B-21797493</span>
+<span>Urbanización Las Dalias 9, 39100 Santa Cruz de Bezana (Cantabria, Spain)</span>
+<a href="mailto:info@peritomoreno360.com">info@peritomoreno360.com</a>
+<div class="foot-social"><span class="soon" title="Instagram · coming soon" aria-label="Instagram (coming soon)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="soon" title="LinkedIn · coming soon" aria-label="LinkedIn (coming soon)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span><span class="soon" title="Facebook · coming soon" aria-label="Facebook (coming soon)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M15 8h-1.5A2.5 2.5 0 0 0 11 10.5V21M9 13h5"/></svg></span></div>
+</div>
+<div class="foot-cols">
+<div><b>Business areas</b><a href="/en/restauracion">Restaurants</a><a href="/en/operaciones">Operations</a><a href="/en/mantenimiento">Maintenance</a><a href="/en/apps">App development</a></div>
+<div><b>Franchises</b><a href="/en/franquicias">Terms</a><a href="/en/franquicia-burritos">Burrito franchise</a><a href="/en/franquicia-dark-kitchen">Dark kitchen franchise</a><a href="/en/franquicias-hosteleria-royalty-bajo">Low royalty</a></div>
+<div><b>Apps</b><a href="/en/flight-director">Flight Director</a><a href="/en/mi-vestuario">Mi Vestuario</a><a href="/en/app-escandallos-hosteleria">Recipe costing</a><a href="/en/control-food-cost-restaurante">Food cost control</a><a href="/en/app-cuadrantes-hosteleria">Rotas and clock-ins</a></div>
+<div><b>Legal</b><a href="/en/aviso-legal">Legal notice</a><a href="/en/condiciones-contratacion">Terms of sale</a><a href="/en/condiciones-contratacion#envio">Shipping and delivery</a><a href="/en/condiciones-contratacion#desistimiento">Withdrawal and refunds</a><a href="/en/privacidad">Privacy</a><a href="/en/cookies">Cookies</a></div>
+</div>
+</div>
+<div class="pagos" aria-label="Accepted payment methods"><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Visa"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Mastercard"><rect width="64" height="40" rx="6" fill="#fff"/><circle cx="26" cy="20" r="11" fill="#EB001B"/><circle cx="38" cy="20" r="11" fill="#F79E1B"/><path d="M32 10.8a11 11 0 0 1 0 18.4 11 11 0 0 1 0-18.4z" fill="#FF5F00"/></svg><svg class="pago-logo" viewBox="0 0 64 40" role="img" aria-label="Bizum"><rect width="64" height="40" rx="6" fill="#fff"/><text x="32" y="26" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#05C3DD">bizum</text></svg><span>Secure payment by card or Bizum · Prices in euros (EUR)</span></div>
+<div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
+</div>
+</footer>
+<script src="/assets/js/main.js?v=deebb4450e" defer></script>
+</body>
+</html>

@@ -27,6 +27,16 @@
   year.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   var MAIL = 'info@peritomoreno360.com';
+  var EN = document.documentElement.lang === 'en';
+  var T = EN ? {
+    sending: 'Sending…', name: 'Name', phone: 'Phone', interest: 'Interest',
+    ask: 'I would like you to contact me.', subject: 'Contact from the website (EN)',
+    fail: function (href) { return 'We couldn\'t send the form. <a href="' + href + '">Send it to us by email</a> or write to us at <a href="mailto:' + MAIL + '">' + MAIL + '</a>.'; }
+  } : {
+    sending: 'Enviando…', name: 'Nombre', phone: 'Teléfono', interest: 'Interés',
+    ask: 'Me gustaría que me contactéis.', subject: 'Contacto desde la web',
+    fail: function (href) { return 'No hemos podido enviar el formulario. <a href="' + href + '">Envíanoslo por email</a> o escríbenos a <a href="mailto:' + MAIL + '">' + MAIL + '</a>.'; }
+  };
 
   document.querySelectorAll('form[data-contact]').forEach(function (form) {
     var status = form.querySelector('.form-status');
@@ -52,7 +62,7 @@
 
       btn.disabled = true;
       var label = btn.textContent;
-      btn.textContent = 'Enviando…';
+      btn.textContent = T.sending;
       setStatus('', '');
 
       fetch('/api/contacto', {
@@ -67,11 +77,11 @@
           form.classList.add('sent');
         })
         .catch(function () {
-          var body = 'Nombre: ' + data.nombre + '\nEmail: ' + data.email + '\nTeléfono: ' + data.telefono +
-            (data.interes ? '\nInterés: ' + data.interes : '') + '\n\nMe gustaría que me contactéis.';
-          var href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Contacto desde la web' + (data.interes ? ' · ' + data.interes : '')) +
+          var body = T.name + ': ' + data.nombre + '\nEmail: ' + data.email + '\n' + T.phone + ': ' + data.telefono +
+            (data.interes ? '\n' + T.interest + ': ' + data.interes : '') + '\n\n' + T.ask;
+          var href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(T.subject + (data.interes ? ' · ' + data.interes : '')) +
             '&body=' + encodeURIComponent(body);
-          setStatus('No hemos podido enviar el formulario. <a href="' + href + '">Envíanoslo por email</a> o escríbenos a <a href="mailto:' + MAIL + '">' + MAIL + '</a>.', 'err');
+          setStatus(T.fail(href), 'err');
         })
         .finally(function () { btn.disabled = false; btn.textContent = label; });
     });

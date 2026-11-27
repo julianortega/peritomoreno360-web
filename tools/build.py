@@ -68,6 +68,7 @@ def header_producto(active):
 <a class="prod-grupo" href="/">Perito Moreno 360</a>
 <a class="btn btn-dark" href="{p["cta"][0]}">{p["cta"][1]}</a>
 </nav>
+{{LANG}}
 </div>
 </header>'''
 
@@ -251,8 +252,8 @@ def page(slug, title, desc, active, fonts, body, form=None, lang="es"):
     ld = ""
     if slug == "index": ld = f'<script type="application/ld+json">{ORG_LD}</script>'
     if slug == "flight-director": ld = f'<script type="application/ld+json">{FD_LD if lang == "es" else FD_LD.replace(json.loads(FD_LD)["description"], EN.FD_DESC).replace("/flight-director", "/en/flight-director")}</script>'
-    if slug == "mi-vestuario": ld = f'<script type="application/ld+json">{MV_LD}</script>'
-    if slug == "mantenimiento": ld = f'<script type="application/ld+json">{MNT_LD}</script>'
+    if slug == "mi-vestuario": ld = f'<script type="application/ld+json">{MV_LD if lang == "es" else EN.ld(MV_LD)}</script>'
+    if slug == "mantenimiento": ld = f'<script type="application/ld+json">{MNT_LD if lang == "es" else EN.ld(MNT_LD)}</script>'
     ld += faq_ld(body)
     robots = '<meta name="robots" content="noindex">\n' if slug == "404" else ""
     alternates = "" if (slug == "404" or slug not in EN.PAGES) else (f'<link rel="alternate" hreflang="es" href="{SITE}{path_es(slug)}">\n'

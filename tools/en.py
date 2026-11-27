@@ -7,7 +7,7 @@ en español, cambia también su versión en inglés.
 # Opciones del formulario: el valor que llega al correo sigue en español.
 OPTIONS = {
     "Restauración": "Restaurants", "Franquicias": "Franchises", "Operaciones": "Operations",
-    "Mantenimiento": "Maintenance", "Desarrollo de apps": "App development", "Flight Director": "Flight Director",
+    "Mantenimiento": "Maintenance", "Desarrollo de apps": "App development", "Flight Director": "Flight Director", "Mi Vestuario": "Mi Vestuario",
     "Trabajar con vosotros": "Working with you", "Otro": "Other",
 }
 

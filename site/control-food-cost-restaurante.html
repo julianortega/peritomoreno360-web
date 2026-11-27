@@ -28,32 +28,20 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<header class="site-header">
+<header class="site-header prod-header">
 <div class="wrap">
-<a class="brand" href="/" aria-label="Perito Moreno 360, inicio"><img src="/assets/img/pm360-logo-transparente.png" alt="Perito Moreno 360" width="137" height="64"></a>
+<a class="brand prod-brand" href="/flight-director" aria-label="Flight Director, inicio"><img src="/assets/img/flightdirector-icono.png" alt="" width="40" height="40"><span>Flight Director<small>de Perito Moreno 360</small></span></a>
 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<nav class="nav" id="menu" aria-label="Principal">
-<a href="/#grupo">El grupo</a>
-<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Áreas de negocio<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-<div class="dd-menu">
-<a href="/restauracion">Restauración<small>Bestial, La Sardinera y Lolita Bakery</small></a>
-<a href="/operaciones">Operaciones<small>Hacemos tu empresa más eficiente</small></a>
-<a href="/mantenimiento">Mantenimiento<small>Rumbo Norte, multiservicios</small></a>
-<a href="/apps">Desarrollo de apps<small>Apps a medida para empresas</small></a>
-</div></div>
-<div class="dd on"><button class="dd-btn" type="button" aria-expanded="false">Apps<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-<div class="dd-menu">
-<a class="dd-app" href="/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>La gestión 360 de tu local de hostelería</small></span></a>
-<a class="dd-app" href="/mi-vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Mi Vestuario<small>La app de tu club de fútbol</small></span></a>
-</div></div>
-<a class="btn btn-dark" href="#contacto">Hablemos</a>
+<nav class="nav" id="menu" aria-label="Flight Director">
+<a href="/flight-director#modulos">Funciones</a><a href="/flight-director/empieza">Precio</a><div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Guías<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><div class="dd-menu"><a href="/app-escandallos-hosteleria">App de escandallos<small>Coste y margen de cada plato</small></a><a href="/control-food-cost-restaurante">Control del food cost<small>Guía paso a paso</small></a><a href="/como-hacer-escandallo">Cómo hacer un escandallo<small>Método y ejemplo completo</small></a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes<small>Turnos y registro de jornada</small></a><a href="/guias">Todas las guías<small>Gestión de restaurantes</small></a></div></div>
+<a class="prod-grupo" href="/">Perito Moreno 360</a>
+<a class="btn btn-dark" href="/flight-director/empieza">Empieza hoy</a>
 </nav>
-<div class="lang" role="group" aria-label="Idioma"><a href="/control-food-cost-restaurante" hreflang="es" lang="es" aria-current="true" title="Español"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg><span>ES</span></a><a href="/en/control-food-cost-restaurante" hreflang="en" lang="en" title="English"><svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg><span>EN</span></a></div>
 </div>
 </header>
 <main id="main">
 <section class="wrap stack" style="padding-top:72px;padding-bottom:72px">
-<a class="back" href="/flight-director">← Flight Director</a>
+<a class="back" href="/guias">← Guías de hostelería</a>
 <p class="eyebrow">Guía práctica</p>
 <h1 class="display" style="max-width:1080px">Cómo calcular y controlar el food cost de un restaurante</h1>
 <p class="lead">El food cost es el porcentaje de cada venta que se va en materia prima. Es uno de los dos grandes costes de un restaurante, junto con el personal, y uno de los más fáciles de descontrolar sin darse cuenta. Aquí te explicamos cómo calcularlo, qué cifra buscar y cómo mantenerlo a raya.</p>
@@ -152,18 +140,21 @@
 <option>Mantenimiento</option>
 <option>Desarrollo de apps</option>
 <option selected>Flight Director</option>
+<option>Mi Vestuario</option>
 <option>Trabajar con vosotros</option>
 <option>Otro</option>
 </select></div>
+<div class="field"><label for="f-tamano">¿Cuántos locales tienes?</label><input id="f-tamano" name="tamano" type="text" inputmode="numeric" maxlength="20" placeholder="Por ejemplo, 1"></div>
+<div class="field"><label for="f-cuando">¿Cuándo te viene mejor la demo?</label><select id="f-cuando" name="cuando"><option>Me da igual</option><option>Por la mañana</option><option>Por la tarde</option></select></div>
 <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
 <label class="check"><input type="checkbox" name="acepto" required><span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a>.</span></label>
 <p class="form-note">No hace falta que nos llames: te contactaremos nosotros por teléfono o por correo.</p>
-<button class="btn btn-dark" type="submit">Quiero que me contactéis</button>
+<button class="btn btn-dark" type="submit">Quiero mi demo</button>
 <p class="form-status" role="status" aria-live="polite"></p>
 </div>
 <div class="form-done" role="status">
 <b>¡Gracias, <span data-name></span>!</b>
-<p>Hemos recibido tus datos. Te contactaremos nosotros muy pronto.</p>
+<p>Hemos recibido tu petición. Te escribimos en menos de 24 horas laborables para cerrar el día y la hora de la demo.</p>
 </div>
 </form>
 </div>
@@ -183,6 +174,7 @@
 <div><b>Áreas de negocio</b><a href="/restauracion">Restauración</a><a href="/operaciones">Operaciones</a><a href="/mantenimiento">Mantenimiento</a><a href="/apps">Desarrollo de apps</a></div>
 <div><b>Franquicias</b><a href="/franquicias">Condiciones</a><a href="/franquicia-burritos">Franquicia de burritos</a><a href="/franquicia-dark-kitchen">Franquicia dark kitchen</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty bajo</a></div>
 <div><b>Apps</b><a href="/flight-director">Flight Director</a><a href="/mi-vestuario">Mi Vestuario</a><a href="/app-escandallos-hosteleria">Escandallos</a><a href="/control-food-cost-restaurante">Control del food cost</a><a href="/app-cuadrantes-hosteleria">Cuadrantes y fichajes</a></div>
+<div><b>Guías</b><a href="/guias">Todas las guías</a><a href="/como-hacer-escandallo">Escandallos</a><a href="/control-food-cost-restaurante">Food cost</a><a href="/franquicias-hosteleria-royalty-bajo">Royalty de franquicia</a></div>
 <div><b>Legal</b><a href="/aviso-legal">Aviso legal</a><a href="/condiciones-contratacion">Condiciones de contratación</a><a href="/condiciones-contratacion#envio">Envío y entrega</a><a href="/condiciones-contratacion#desistimiento">Desistimiento y devoluciones</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div>
 </div>
 </div>
@@ -190,6 +182,6 @@
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
 </div>
 </footer>
-<script src="/assets/js/main.js?v=deebb4450e" defer></script>
+<script src="/assets/js/main.js?v=de2a8cc34a" defer></script>
 </body>
 </html>

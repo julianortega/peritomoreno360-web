@@ -17,6 +17,9 @@ const CLAVE = '';
 // en tu bandeja los correos que tú mismo envías a un grupo del que eres miembro.
 const DESTINO = 'info@peritomoreno360.com, julian.ortega@peritomoreno360.com';
 const HOJA = 'Contactos';
+// Enlace de la agenda de citas de Google Calendar para que la persona elija el hueco de su demo.
+// Vacío: el correo de confirmación dice que le escribiremos para cerrar día y hora.
+const RESERVA_URL = '';
 // ID de la hoja "Contactos web" (en una aplicación web no hay hoja "activa").
 const HOJA_ID = '1RZMOGTY2ckHdPPu0vZnSqJdbL06eXdlbj0BiLHvMb9Y';
 
@@ -73,11 +76,28 @@ function doPost(e) {
       body: `Nueva persona interesada\n\nNombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono}\nInterés: ${interes}\nPágina: ${origen}\nFecha: ${fecha}`
     });
 
+    // 3) Si ha pedido una demo de una app, le confirmamos que la hemos recibido.
+    if (/demo:/.test(interes)) {
+      try { confirmarDemo_(nombre, email, interes); } catch (err) { console.error('Confirmación demo', err); }
+    }
+
     return json_({ ok: true });
   } catch (err) {
     console.error(err);
     return json_({ ok: false, error: 'interno', detalle: String(err && err.message || err) });
   }
+}
+
+function confirmarDemo_(nombre, email, interes) {
+  const app = /Mi Vestuario/.test(interes) ? 'Mi Vestuario' : 'Flight Director';
+  const con = app === 'Mi Vestuario' ? 'con los equipos de tu club' : 'con tus propios platos';
+  const pila = nombre.split(' ')[0];
+  const paso = RESERVA_URL
+    ? `Elige aquí el día y la hora que mejor te vengan: ${RESERVA_URL}`
+    : 'Te escribimos en menos de 24 horas laborables para cerrar el día y la hora.';
+  const texto = `Hola, ${pila}:\n\nGracias por pedir una demo de ${app}. Son 30 minutos por videollamada y te la enseñamos ${con}.\n\n${paso}\n\n` +
+    'Si tienes cualquier duda, responde a este correo.\n\nUn saludo,\nPerito Moreno 360\nwww.peritomoreno360.com';
+  MailApp.sendEmail({ to: email, replyTo: 'info@peritomoreno360.com', name: 'Perito Moreno 360', subject: `Tu demo de ${app}`, body: texto });
 }
 
 function limpia_(s, n) {

@@ -55,7 +55,9 @@
         nombre: form.nombre.value.trim(),
         email: form.email.value.trim(),
         telefono: form.telefono.value.trim(),
-        interes: form.interes ? form.interes.value : '',
+        interes: [form.interes ? form.interes.value : '',
+          form.tamano && form.tamano.value.trim() ? (form.tamano.labels[0].textContent.indexOf('equipos') > -1 ? 'equipos: ' : 'locales: ') + form.tamano.value.trim() : '',
+          form.cuando ? 'demo: ' + form.cuando.value.toLowerCase() : ''].filter(Boolean).join(' · '),
         origen: form.dataset.origen || location.pathname,
         web: form.web ? form.web.value : ''
       };

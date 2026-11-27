@@ -1,0 +1,119 @@
+# id|nombre en Flight Director|precio sala|precio domicilio (- = no se vende a domicilio)
+066efd83-98c6-4f2a-bb2b-e14656612a08|Caña|2.20|2.20
+2bf74fb2-f5b3-4510-9cb1-b9a0eeec1e80|Doble|3.20|3.20
+832887ee-264c-4e0e-b82c-87983f271909|Clara|2.40|2.40
+4038e496-a6d4-4888-8432-6fbba8918316|Tercio|3.00|3.00
+c9d80f1b-aaac-47c7-8452-7cf13e18b990|Cerveza sin alcohol 0,0|3.00|3.00
+b49c9c13-104f-41b7-bc48-ccdfb1bd9fbc|Bestial Session IPA sin gluten|3.95|3.95
+84882a20-f9e6-414d-9615-a3bed1be4de7|Botellín 18/70 La Rubia|3.50|3.50
+b3f753aa-2bbf-421d-b170-dcb6b0e9b553|Chupito de orujo de hierbas|2.50|2.50
+75d3d2a5-4013-4a59-8609-3d0bf75dd396|Chupito de crema de orujo|2.50|2.50
+175593a4-3f62-4c11-a76e-352ea03005b7|Chupito de pacharán|2.50|2.50
+567491d8-ccc6-4ad6-b454-0e49f0b2421b|Chupito de orujo blanco|2.50|2.50
+450cca0f-2131-4558-a164-a7725ae84982|Chupito de licor de café|2.50|2.50
+3046a52b-a8d7-48d6-b56a-0e308e44e3e9|Chupito de limoncello|2.50|2.50
+e8213c79-4c82-45ff-ac1a-38b285235960|Gin tonic|8.50|8.50
+a75f111b-9909-4144-9165-2fcd056b40ec|Ron cola|8.00|8.00
+98901969-4963-430d-99ac-511d403c8c44|Whisky cola|8.00|8.00
+458ba488-5042-4b18-a031-79820a1dce27|Vodka naranja o limón|8.00|8.00
+cfece974-3874-4f7c-8675-3e7b89a8b6d6|Coca-Cola|2.50|2.50
+5952e14a-89df-4714-bd41-8fb6e82906d8|Coca-Cola Zero|2.50|2.50
+4b50deae-b161-4955-928b-b1b72ca1dd32|Fanta Naranja|2.50|2.50
+f0dacf38-bc56-4d08-9d51-ba18968125c5|Fanta Limón|2.50|2.50
+34748eec-cf3a-4468-8149-bb7f5259daac|Sprite|2.50|2.50
+0d9dcfaf-7ba0-418e-97e6-20527980aba5|Fuze Tea|2.50|2.50
+ca30ee79-1229-42e9-bf8d-d3ff1a5fe26c|Aquarius limón|2.50|2.50
+7f25aa48-7c03-4011-9ba9-ec01dcabb59f|Tónica|2.50|2.50
+36099c60-bcb3-48be-9099-a8ba4b8bf09b|Red Bull|3.50|3.50
+eacc90e9-e74f-4792-8683-7902846e0c18|Mosto|2.20|2.20
+bb4f2df1-9d98-47e8-9b0d-a04d2d2ebbcf|Agua mineral 50 cl|1.80|1.80
+14c19860-550a-4d46-bf5c-dd8ed1e3cd73|Agua con gas|2.50|2.50
+e09c5dce-fde1-4195-8cff-fedcceaec925|Zumo de melocotón|2.50|2.50
+63e7087a-6c90-4bd4-8c6f-dc7b3508cf64|Zumo de piña|2.50|2.50
+66bad958-a08e-4515-ab47-9e3ce5d01460|Zumo de tomate|2.50|2.50
+1b7c6507-d9c4-4630-90fd-f12dcf25ca07|Vermut rojo de grifo|2.80|2.80
+0b6ef9cf-e356-4c6b-a624-00d87f31eaee|Vermut Doña Tomasa|3.80|3.80
+58b84134-b765-4c9d-afc4-4afb223360f7|Tinto de verano|3.00|3.00
+e2f5e7ad-d6b6-4799-a985-daf5239285f3|Copa de fino|2.80|2.80
+65a57180-afcd-42ff-a4cd-66aa0159937a|Pedro Ximénez|3.50|3.50
+fccf646a-1c42-44d0-ab79-4dfe6bc86c16|Copa de tinto de la casa|2.80|2.80
+a7532c27-8d9d-4863-8639-d9c604cdcd8c|Copa de blanco de la casa|2.80|2.80
+174e9557-f1fb-480b-bfc3-29dd1c690b90|Copa de Rioja|3.50|3.50
+68e86c33-8d4a-4454-9cfd-dc7210f088ca|Copa de Ribera roble|3.50|3.50
+55a4fc2c-ed64-46bc-8dc5-3effbcfbed64|Copa de Verdejo|3.20|3.20
+426df001-cf8f-4976-bca6-c9af5cc7585a|Copa de Albariño|3.80|3.80
+f03fd895-f5f9-40d9-9af8-8ef0615b5a92|Copa de rosado|3.00|3.00
+b3e5355f-022b-49bd-b999-0b3e7bd1ec6a|Copa de cava|3.50|3.50
+ece46ff5-d1f4-4010-a775-6e22e7a3d18f|Botella de Rioja crianza|22.00|22.00
+53a6b4da-f0b0-47ca-8585-da3a03a40c21|Botella de Ribera roble|20.00|20.00
+48117594-9444-413d-b47f-6fc08b11e6b2|Botella de Verdejo|18.00|18.00
+9f607c44-b0f4-4478-901d-84ed7b498038|Botella de rosado|16.00|16.00
+235d1697-8d16-4d6f-a9b6-6b2e48d80e7a|Botella de Albariño|24.00|24.00
+2397d148-5a33-4b82-a637-eed0f049d624|Botella de cava|20.00|20.00
+6940ed63-e6cf-452f-8185-165b27ccdf32|Coca de sardinas con queso feta|7.50|7.50
+eaeb7fbd-b6ee-428c-b774-f4ee96674ccd|Montadito de barra|2.80|2.80
+19b6fb6d-1807-479f-9e3f-71add5096ddc|Café solo|1.50|1.50
+e24a1bba-aba5-4bb0-9469-8617bb2b2b3f|Café cortado|1.60|1.60
+3226ca34-7dad-48b1-8161-f9060aaa484e|Café con leche|1.80|1.80
+e2c64914-fe47-4195-889b-58f33f0f2832|Café americano|1.70|1.70
+962a3925-9218-4b4b-acfb-b8d17ad3fdca|Capuchino|2.50|2.50
+a6587722-1970-4b38-b8fe-bdb661793dc7|Flat white|2.80|2.80
+8d9d4c34-8262-451d-b376-c2112df5922e|Matcha latte|3.50|3.50
+a7bec904-4e17-4315-925e-f9d221508e7d|Chai latte|3.50|3.50
+ae9711c3-296a-4db3-b746-235904cc113e|ColaCao|2.20|2.20
+6a35efe5-94a9-43f9-a288-cd8fe738b3f8|Vaso de leche|1.30|1.30
+fc15c2d9-4127-4679-9d39-d066f72728f7|Zumo de naranja natural|3.50|3.50
+9ff90a7c-0a0c-4711-a61b-bbf19b9a8c50|Tostada de mantequilla y mermelada|2.80|-
+2a7edede-4530-465f-9b97-13906cdc0b44|Tostada de tomate|3.00|-
+84e554de-b213-4df6-a7b7-b6fcb471e6c5|Tostada de aguacate y semillas|3.90|-
+82726340-e3bc-4641-b526-2cc18ecaa7ba|Tostada de jamón ibérico y tomate|7.00|-
+fe73955e-a2c8-44cd-bb4c-2cd2dcac58c2|Cesta especial desayuno|8.95|-
+c4fd6acf-b400-45ba-94b6-05c9218396df|Bowl de yogur con granola|4.90|4.90
+d86f6541-d194-4db4-aca8-4b00179af77b|Manzanilla|1.80|1.80
+f4ac7316-e136-4d29-98f7-bd4d503129b7|Poleo menta|1.80|1.80
+95a3f381-f2a8-449c-96e0-734aa9619df3|Tila|1.80|1.80
+4e123062-8e11-48a4-ae7e-5fd006310dd8|Té negro|1.80|1.80
+ceefbf29-3144-4afd-82b2-32672a4efb55|Té Earl Grey|1.80|1.80
+27a055ab-154f-4586-a68b-52833a005684|Té verde|1.80|1.80
+3180f542-3c1d-4e73-9ba9-ee95b0762ba0|Té rojo (pu-erh)|1.80|1.80
+dba8adfc-a534-452e-b39f-8503b21bf040|Rooibos|1.80|1.80
+e5f1d546-20d5-4158-9dee-3e77cbf66005|Ración de empanada gallega|4.50|4.50
+41e35804-989e-4a17-8c38-0da9b440e6e5|Ración de ensaladilla|8.50|8.50
+53c750b0-5666-4078-b1e1-bec7a467cbc9|Tortilla entera (mediana)|14.00|14.00
+42a575cb-a3f1-4e78-93de-2338fa45c10c|Ensalada de tomate con ventresca|12.50|12.50
+8886c62b-2fdc-4be6-b6b6-1756a4bc5c37|Pastel de cabracho|7.50|7.50
+41d83e99-c81a-4053-a099-af2636591969|Foie|12.00|12.00
+c3390f15-0a23-40b2-af1a-7908f553df20|Untable de morcilla con queso|6.50|6.50
+4523475e-f21e-4e55-a786-9a5ae77bd550|Ración de jamón de cebo ibérico|18.00|18.00
+a8291a37-61b8-4909-8a2c-a0ee3a9e5c71|Ración de cecina de León|13.00|13.00
+7e513523-488c-4775-a12a-15286ad128f9|Tabla de embutidos mixta|16.00|16.00
+f84ef7b1-a786-4858-aacd-58b6ce8ba529|Ración de anchoas|14.00|14.00
+464e2213-4d38-4244-8519-d7e1973d7a4a|Ración de boquerones en vinagre|7.50|7.50
+c78ef23c-d75b-4fe4-a8ec-f8c696749b2d|Ración de ventresca con pimientos confitados|13.50|13.50
+8497bfea-e162-468c-9d0a-0b3d0ca91a1c|Tabla de quesos|14.00|14.00
+372863a5-c22d-4db0-9d4d-fc2dc00378a2|Queso de cabra horneado especial para mojar|9.50|9.50
+7b8d9eca-3aff-485f-8826-e030869456ee|Gilda de anchoa|2.80|-
+da6e1a27-d5ed-4f20-a2c0-5667262abd4a|Gilda de boquerón|2.20|2.20
+48372054-eae3-44de-babc-5829ea7677bd|Gilda con queso|2.20|2.20
+bef84c41-972e-4d1d-a974-1ac10fd41b94|Gilda con gambas|2.80|2.80
+036cb9dd-db95-4fd2-8f82-a963d9e618e4|Gilda con huevo de codorniz|2.30|2.30
+5641f1e3-793d-4190-bbf5-64ee91e9ca41|Cesta de pan con mantequilla ahumada|4.50|4.50
+b622ff78-d1d6-4237-b32a-7301237fe6bb|Sardina Picantona|4.50|-
+d8e2efba-50dd-451e-9536-f6d68e6805ad|Bocatín de tortilla en pan de cristal|2.80|-
+d55a5a2e-10ac-4cc1-8ef5-53385f9d0822|Tortilla con cebolla|3.00|3.00
+bf717223-99c0-409a-be2a-b002b728cc67|Tortilla con bonito y mayonesa|3.50|3.50
+a0409314-799d-4411-8f1a-6ce27faf68a4|Tortilla con jamón y queso|3.50|3.50
+cdd8cdc0-3d2d-4a44-9cb7-bb8ebc86a284|Tiradito de sobao pasiego con anchoa|3.20|3.20
+b093532c-cd32-4566-a5e2-af0f2a05dab7|Tosta de anchoa con mantequilla ahumada|3.50|3.50
+81ab8897-5a24-4d77-a02e-538070b220c1|Sardinera|3.50|3.50
+152702f1-aad1-4066-a8d3-5ce959ed8b47|Sardinero|3.20|3.20
+393b8d22-6ecc-4758-8765-4fc689fb62b2|Helado de nata|3.50|3.50
+528eabfe-a78e-423c-9930-35d41c2bbefc|Helado de chocolate|3.50|3.50
+dc5910ec-1279-4d24-b360-6eb917da19cb|Helado mantecado|3.50|3.50
+9df2af11-bb82-494e-a576-2458ecb76ade|Tarta de queso|4.50|4.50
+180e93fb-59f1-42ba-9446-7e8d70fc81b6|Zamburiñas ajo-guindilla|12.00|12.00
+2b5cbe2b-4ab8-45a1-aabf-b966f6221963|Mejillones en oliva|7.50|7.50
+a4de3b4c-9926-42ca-983d-47084c01cfdf|Mejillones picantes|8.50|8.50
+c846a09f-272c-433c-ab93-d708e67f49b3|Berberechos en oliva|12.00|12.00
+5ef3cc17-6907-4344-899f-93ff548e0aaa|Ventresca con mantequilla|12.50|12.50
+75e74d8a-083b-48f9-8845-c40426fd5897|Octavillo de anchoas|9.50|9.50

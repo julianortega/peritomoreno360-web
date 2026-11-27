@@ -1,0 +1,20 @@
+<section class="sec">
+<div class="wrap estado" data-estado>
+<div class="estado-ok" hidden>
+<div class="sardinas-fiesta" aria-hidden="true">🐟 🎉 🐟</div>
+<h1 class="display h-xl">¡Pedido recibido!</h1>
+<p class="lead">Ya está en nuestra cocina. Si nos dejaste correo, te hemos mandado la confirmación. Si necesitas algo, llámanos al <a class="link" href="{{TEL_HREF}}">{{TELEFONO}}</a>.</p>
+<a class="btn btn-blue" href="/">Volver al inicio</a>
+</div>
+<div class="estado-espera" hidden>
+<h1 class="display h-l">Estamos confirmando el pago…</h1>
+<p class="lead">El banco nos ha dicho que sí y estamos esperando la confirmación final. En unos segundos recarga esta página.</p>
+<button class="btn btn-blue" type="button" onclick="location.reload()">Recargar</button>
+</div>
+<div class="estado-ko" hidden>
+<h1 class="display h-l">El pago no se ha completado</h1>
+<p class="lead">No te hemos cobrado nada. Puedes volver a intentarlo o cambiar de tarjeta.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><a class="btn btn-red" data-retry href="/pedir">Intentarlo otra vez</a><a class="btn btn-line" href="/pedir">Cambiar el pedido</a></div>
+</div>
+</div>
+</section>

@@ -28,27 +28,15 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<header class="site-header">
+<header class="site-header prod-header">
 <div class="wrap">
-<a class="brand" href="/en" aria-label="Perito Moreno 360, home"><img src="/assets/img/pm360-logo-transparente.png" alt="Perito Moreno 360" width="137" height="64"></a>
+<a class="brand prod-brand" href="/en/flight-director" aria-label="Flight Director, inicio"><img src="/assets/img/flightdirector-icono.png" alt="" width="40" height="40"><span>Flight Director<small>de Perito Moreno 360</small></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<nav class="nav" id="menu" aria-label="Main">
-<a href="/en#grupo">The group</a>
-<div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Business areas<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-<div class="dd-menu">
-<a href="/en/restauracion">Restaurants<small>Bestial, La Sardinera and Lolita Bakery</small></a>
-<a href="/en/operaciones">Operations<small>We make your business more efficient</small></a>
-<a href="/en/mantenimiento">Maintenance<small>Rumbo Norte, multi-service</small></a>
-<a href="/en/apps">App development<small>Custom apps for businesses</small></a>
-</div></div>
-<div class="dd on"><button class="dd-btn" type="button" aria-expanded="false">Apps<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-<div class="dd-menu">
-<a class="dd-app" href="/en/flight-director"><img src="/assets/img/flightdirector-icono.png" alt="" width="28" height="28"><span>Flight Director<small>360° management for your hospitality business</small></span></a>
-<a class="dd-app" href="/en/mi-vestuario"><img src="/assets/img/club/icono.svg" alt="" width="28" height="28"><span>Mi Vestuario<small>The app for your football club</small></span></a>
-</div></div>
-<a class="btn btn-dark" href="#contacto">Let's talk</a>
+<nav class="nav" id="menu" aria-label="Flight Director">
+<a href="/en/flight-director#modulos">Funciones</a><a href="/en/flight-director/empieza">Precio</a><div class="dd"><button class="dd-btn" type="button" aria-expanded="false">Guías<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><div class="dd-menu"><a href="/en/app-escandallos-hosteleria">App de escandallos<small>Coste y margen de cada plato</small></a><a href="/en/control-food-cost-restaurante">Control del food cost<small>Guía paso a paso</small></a><a href="/como-hacer-escandallo">Cómo hacer un escandallo<small>Método y ejemplo completo</small></a><a href="/en/app-cuadrantes-hosteleria">Cuadrantes y fichajes<small>Turnos y registro de jornada</small></a><a href="/guias">Todas las guías<small>Gestión de restaurantes</small></a></div></div>
+<a class="prod-grupo" href="/en">Perito Moreno 360</a>
+<a class="btn btn-dark" href="/en/flight-director/empieza">Empieza hoy</a>
 </nav>
-<div class="lang" role="group" aria-label="Language"><a href="/app-cuadrantes-hosteleria" hreflang="es" lang="es" title="Español"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg><span>ES</span></a><a href="/en/app-cuadrantes-hosteleria" hreflang="en" lang="en" aria-current="true" title="English"><svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg><span>EN</span></a></div>
 </div>
 </header>
 <main id="main">
@@ -149,18 +137,21 @@
 <option value="Mantenimiento">Maintenance</option>
 <option value="Desarrollo de apps">App development</option>
 <option value="Flight Director" selected>Flight Director</option>
+<option value="Mi Vestuario">Mi Vestuario</option>
 <option value="Trabajar con vosotros">Working with you</option>
 <option value="Otro">Other</option>
 </select></div>
+<div class="field"><label for="f-tamano">¿Cuántos locales tienes?</label><input id="f-tamano" name="tamano" type="text" inputmode="numeric" maxlength="20" placeholder="Por ejemplo, 1"></div>
+<div class="field"><label for="f-cuando">¿Cuándo te viene mejor la demo?</label><select id="f-cuando" name="cuando"><option>Me da igual</option><option>Por la mañana</option><option>Por la tarde</option></select></div>
 <div class="hp" aria-hidden="true"><label for="f-web">Leave blank</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
 <label class="check"><input type="checkbox" name="acepto" required><span>I have read and accept the <a href="/en/privacidad" target="_blank">privacy policy</a>.</span></label>
 <p class="form-note">No need to call us: we'll get in touch by phone or email.</p>
-<button class="btn btn-dark" type="submit">Please contact me</button>
+<button class="btn btn-dark" type="submit">Quiero mi demo</button>
 <p class="form-status" role="status" aria-live="polite"></p>
 </div>
 <div class="form-done" role="status">
 <b>Thank you, <span data-name></span>!</b>
-<p>We've received your details. We'll be in touch very soon.</p>
+<p>Hemos recibido tu petición. Te escribimos en menos de 24 horas laborables para cerrar el día y la hora de la demo.</p>
 </div>
 </form>
 </div>
@@ -180,6 +171,7 @@
 <div><b>Business areas</b><a href="/en/restauracion">Restaurants</a><a href="/en/operaciones">Operations</a><a href="/en/mantenimiento">Maintenance</a><a href="/en/apps">App development</a></div>
 <div><b>Franchises</b><a href="/en/franquicias">Terms</a><a href="/en/franquicia-burritos">Burrito franchise</a><a href="/en/franquicia-dark-kitchen">Dark kitchen franchise</a><a href="/en/franquicias-hosteleria-royalty-bajo">Low royalty</a></div>
 <div><b>Apps</b><a href="/en/flight-director">Flight Director</a><a href="/en/mi-vestuario">Mi Vestuario</a><a href="/en/app-escandallos-hosteleria">Recipe costing</a><a href="/en/control-food-cost-restaurante">Food cost control</a><a href="/en/app-cuadrantes-hosteleria">Rotas and clock-ins</a></div>
+<div><b>Guías</b><a href="/guias">Todas las guías</a><a href="/como-hacer-escandallo">Escandallos</a><a href="/en/control-food-cost-restaurante">Food cost</a><a href="/en/franquicias-hosteleria-royalty-bajo">Royalty de franquicia</a></div>
 <div><b>Legal</b><a href="/en/aviso-legal">Legal notice</a><a href="/en/condiciones-contratacion">Terms of sale</a><a href="/en/condiciones-contratacion#envio">Shipping and delivery</a><a href="/en/condiciones-contratacion#desistimiento">Withdrawal and refunds</a><a href="/en/privacidad">Privacy</a><a href="/en/cookies">Cookies</a></div>
 </div>
 </div>
@@ -187,6 +179,6 @@
 <div class="foot-bottom">© <span data-year>2026</span> Perito Moreno 360 SL</div>
 </div>
 </footer>
-<script src="/assets/js/main.js?v=deebb4450e" defer></script>
+<script src="/assets/js/main.js?v=de2a8cc34a" defer></script>
 </body>
 </html>

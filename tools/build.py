@@ -5,10 +5,13 @@ Uso:  python3 tools/build.py
 Edita el contenido en src/pages/ y la cabecera, el pie o el formulario aquí.
 """
 import pathlib, sys, re, html as _html, datetime, hashlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import en as EN
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 BODIES = ROOT / "src" / "pages"
+BODIES_EN = ROOT / "src" / "pages-en"
 SITE = "https://www.peritomoreno360.com"
 
 def _ver(rel):
@@ -94,6 +97,7 @@ def header(active, has_form=True):
 </div></div>
 <a class="btn btn-dark" href="{"#contacto" if has_form else "/#contacto"}">Hablemos</a>
 </nav>
+{{LANG}}
 </div>
 </header>'''
 
@@ -153,10 +157,11 @@ DEMO = {
     "Mi Vestuario": ("¿Cuántos equipos tiene el club?", "Por ejemplo, 8"),
 }
 
-def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros.", condiciones=False):
+def contact(origen, interes_default, title="¿Hablamos?", intro="Déjanos tus datos y te contactaremos nosotros.", condiciones=False, lang="es"):
     options = ["Restauración", "Franquicias", "Operaciones", "Mantenimiento", "Desarrollo de apps", "Flight Director", "Mi Vestuario", "Trabajar con vosotros", "Otro"]
     opts = "\n".join(
-        f'<option{" selected" if o == interes_default else ""}>{o}</option>' for o in options
+        (f'<option{" selected" if o == interes_default else ""}>{o}</option>' if lang == "es" else
+         f'<option value="{o}"{" selected" if o == interes_default else ""}>{EN.OPTIONS[o]}</option>') for o in options
     )
     cond_html = ('<label class="check"><input type="checkbox" name="acepto_condiciones" required><span>He leído y acepto las '
                  '<a href="/condiciones-contratacion" target="_blank">condiciones de contratación</a>, incluidas las políticas de entrega, '
@@ -209,18 +214,58 @@ def faq_ld(body):
         {"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in items]}
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
 
-def page(slug, title, desc, active, fonts, body, form=None):
-    canonical = SITE + ("/" if slug == "index" else "/" + slug)
-    form_html = contact(*form) if form else ""
+def path_es(slug):
+    return "/" if slug == "index" else "/" + slug
+
+def path_en(slug):
+    return "/en" if slug == "index" else "/en/" + slug
+
+def tr_chrome(s):
+    for es, en in EN.CHROME:
+        s = s.replace(es, en)
+    return s
+
+def en_links(s):
+    """En las páginas en inglés, los enlaces internos apuntan a /en/…"""
+    def f(m):
+        path, frag = m.group(1), m.group(2) or ""
+        if path == "":
+            return f'href="/en{frag}"'
+        if path in EN.PAGES and path != "404":
+            return f'href="/en/{path}{frag}"'
+        return m.group(0)
+    return re.sub(r'href="/([A-Za-z0-9/-]*)(#[^"]*)?"(?! lang="es")', f, s)  # lang="es": enlace a la versión en español
+
+def lang_switch(slug, lang):
+    def item(code, label, href, flag, name):
+        cur = ' aria-current="true"' if code == lang else ''
+        return f'<a href="{href}" hreflang="{code}" lang="{code}"{cur} title="{name}">{flag}<span>{label}</span></a>'
+    aria = "Idioma" if lang == "es" else "Language"
+    return (f'<div class="lang" role="group" aria-label="{aria}">'
+            + item("es", "ES", path_es(slug), EN.FLAG_ES, "Español")
+            + item("en", "EN", path_en(slug) if slug in EN.PAGES else path_en("index"), EN.FLAG_EN, "English") + '</div>')
+
+def page(slug, title, desc, active, fonts, body, form=None, lang="es"):
+    canonical = SITE + (path_es(slug) if lang == "es" else path_en(slug))
+    form_html = contact(*form, lang=lang) if form else ""
     ld = ""
     if slug == "index": ld = f'<script type="application/ld+json">{ORG_LD}</script>'
-    if slug == "flight-director": ld = f'<script type="application/ld+json">{FD_LD}</script>'
+    if slug == "flight-director": ld = f'<script type="application/ld+json">{FD_LD if lang == "es" else FD_LD.replace(json.loads(FD_LD)["description"], EN.FD_DESC).replace("/flight-director", "/en/flight-director")}</script>'
     if slug == "mi-vestuario": ld = f'<script type="application/ld+json">{MV_LD}</script>'
     if slug == "mantenimiento": ld = f'<script type="application/ld+json">{MNT_LD}</script>'
     ld += faq_ld(body)
     robots = '<meta name="robots" content="noindex">\n' if slug == "404" else ""
+    alternates = "" if (slug == "404" or slug not in EN.PAGES) else (f'<link rel="alternate" hreflang="es" href="{SITE}{path_es(slug)}">\n'
+        f'<link rel="alternate" hreflang="en" href="{SITE}{path_en(slug)}">\n'
+        f'<link rel="alternate" hreflang="x-default" href="{SITE}{path_es(slug)}">')
+    head = header(active, bool(form))
+    foot = FOOTER
+    if lang == "en":
+        head, foot, form_html = (en_links(tr_chrome(x)) for x in (head, foot, form_html))
+        body = en_links(body)
+    head = head.replace("{LANG}", lang_switch(slug, lang))
     html = f'''<!doctype html>
-<html lang="es">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -228,7 +273,9 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <meta name="description" content="{desc}">
 {robots}
 <link rel="canonical" href="{canonical}">
+{alternates}
 <meta property="og:type" content="website">
+<meta property="og:locale" content="{"es_ES" if lang == "es" else "en_GB"}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
@@ -245,22 +292,24 @@ def page(slug, title, desc, active, fonts, body, form=None):
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-{header(active, bool(form))}
+{head}
 <main id="main">
 {body}
 {form_html}
 </main>
-{FOOTER}
+{foot}
 <script src="/assets/js/main.js?v={_ver("assets/js/main.js")}" defer></script>
 </body>
 </html>
 '''
-    (OUT / f"{slug}.html").parent.mkdir(parents=True, exist_ok=True)
-    (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
-    print("ok", slug)
+    rel = f"{slug}.html" if lang == "es" else ("en.html" if slug == "index" else f"en/{slug}.html")
+    (OUT / rel).parent.mkdir(parents=True, exist_ok=True)
+    (OUT / rel).write_text(html, encoding="utf-8")
+    print("ok", lang, slug)
 
-def body(name):
-    return (BODIES / f"{name}.html").read_text(encoding="utf-8").replace("{{PAGOS}}", PAGOS)
+def body(name, lang="es"):
+    src = BODIES if lang == "es" else BODIES_EN
+    return (src / f"{name}.html").read_text(encoding="utf-8").replace("{{PAGOS}}", PAGOS if lang == "es" else tr_chrome(PAGOS))
 
 PAGES = [
     ("index", "Perito Moreno 360 · Grupo empresarial", "Grupo empresarial con marcas de restauración, consultoría de operaciones, mantenimiento y desarrollo de apps a medida.", "home", "base", "index", ("Inicio", "Otro")),
@@ -287,8 +336,15 @@ PAGES = [
     ("404", "Página no encontrada · Perito Moreno 360", "La página que buscas no existe.", "", "base", "404", None),
 ]
 
+SLUGS = {slug for slug, *_ in PAGES}
+assert set(EN.PAGES) <= SLUGS, set(EN.PAGES) - SLUGS  # páginas solo en español (guías): sin versión /en
+
 for slug, title, desc, active, fonts, b, form in PAGES:
     page(slug, title, desc, active, fonts, body(b), form)
+    if slug not in EN.PAGES:
+        continue
+    t_en, d_en, f_en = EN.PAGES[slug]
+    page(slug, t_en, d_en, active, fonts, body(b, "en"), f_en, "en")
 
 # Sitemap y robots
 PRIORITY = {"index": "1.0", "franquicias": "0.9", "flight-director": "0.9", "flight-director/empieza": "0.9", "aviso-legal": "0.2", "privacidad": "0.2", "cookies": "0.2"}
@@ -297,8 +353,11 @@ urls = []
 for slug, *_ in PAGES:
     if slug == "404":
         continue
-    loc = SITE + "/" + ("" if slug == "index" else slug)
-    urls.append(f"  <url><loc>{loc}</loc><lastmod>{today}</lastmod><priority>{PRIORITY.get(slug, '0.8')}</priority></url>")
-(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n", encoding="utf-8")
+    has_en = slug in EN.PAGES
+    alt = (f'<xhtml:link rel="alternate" hreflang="es" href="{SITE}{path_es(slug)}"/>'
+           f'<xhtml:link rel="alternate" hreflang="en" href="{SITE}{path_en(slug)}"/>') if has_en else ""
+    for loc in ((SITE + path_es(slug), SITE + path_en(slug)) if has_en else (SITE + path_es(slug),)):
+        urls.append(f"  <url><loc>{loc}</loc>{alt}<lastmod>{today}</lastmod><priority>{PRIORITY.get(slug, '0.8')}</priority></url>")
+(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(urls) + "\n</urlset>\n", encoding="utf-8")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 print("ok sitemap", len(urls))
